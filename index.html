@@ -1,6 +1,333 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perlora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: #020817;
+    }
+
+    /* Fond animé */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.45;
+      z-index: -1;
+      animation: mouvement 9s infinite alternate ease-in-out;
+    }
+
+    body::before {
+      background: #0066ff;
+      top: -150px;
+      left: -150px;
+    }
+
+    body::after {
+      background: #00bfff;
+      right: -150px;
+      bottom: -150px;
+      animation-delay: 2s;
+    }
+
+    @keyframes mouvement {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(100px, 60px) scale(1.2);
+      }
+
+      100% {
+        transform: translate(-60px, -40px) scale(0.9);
+      }
+    }
+
+    header {
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 8, 23, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #159cff;
+      box-shadow: 0 0 18px rgba(21,156,255,0.6);
+    }
+
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #159cff;
+      box-shadow:
+        0 0 25px rgba(21,156,255,0.8),
+        0 0 70px rgba(0,102,255,0.4);
+      animation: flottement 4s infinite ease-in-out;
+    }
+
+    @keyframes flottement {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    h1 {
+      margin-top: 25px;
+      font-size: 48px;
+      background: linear-gradient(90deg, #ffffff, #48b8ff, #ffffff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      margin-top: 15px;
+      max-width: 650px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #c9ddf5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      background: linear-gradient(135deg, #007bff, #00bfff);
+      box-shadow: 0 8px 25px rgba(0,123,255,0.35);
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,191,255,0.5);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #159cff;
+    }
+
+    .card .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      color: #4dbaff;
+    }
+
+    .card p {
+      color: #c9ddf5;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #8da9c5;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 50px;
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 38px;
+      }
+
+      .logo {
+        width: 125px;
+        height: 125px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="brand">
+      <img src="perlora_github_profile.jpg" alt="Logo Perlora">
+      <span>Perlora</span>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <img
+        class="logo"
+        src="perlora_github_profile.jpg"
+        alt="Logo Perlora"
+      >
+
+      <h1>Bienvenue sur Perlora</h1>
+
+      <p class="subtitle">
+        La plateforme qui permet de découvrir, vendre et regarder
+        des objets fabriqués en perles.
+      </p>
+
+      <div class="buttons">
+        <a class="button" href="#decouvrir">
+          Découvrir Perlora
+        </a>
+
+        <a class="button secondary" href="#apropos">
+          En savoir plus
+        </a>
+      </div>
+
+    </section>
+
+    <section class="cards" id="decouvrir">
+
+      <div class="card">
+        <div class="icon">💎</div>
+        <h2>Découvrir</h2>
+        <p>
+          Explore des créations originales fabriquées
+          avec passion en perles.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛍️</div>
+        <h2>Vendre</h2>
+        <p>
+          Présente tes créations et prépare-toi à les
+          proposer aux utilisateurs de Perlora.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">✨</div>
+        <h2>Créer</h2>
+        <p>
+          Donne vie à tes idées et partage ton univers
+          créatif avec la communauté.
+        </p>
+      </div>
+
+    </section>
+
+    <section class="hero" id="apropos" style="min-height: auto;">
+
+      <h1>Perlora arrive</h1>
+
+      <p class="subtitle">
+        Ceci est le prototype officiel de Perlora.
+        La plateforme évoluera progressivement avec de
+        nouvelles fonctionnalités.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Perlora — Créons quelque chose de magnifique.
+  </footer>
+
+</body>
+</html>
+<html lang="fr">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perlora</title>
