@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perlora</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fffaf7;
+  color:#332b2b;
+}
+header{
+  background:#fff;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 2px 10px #0001;
+}
+.logo{
+  font-size:27px;
+  font-weight:bold;
+  color:#b76e79;
+}
+.cart{
+  background:#b76e79;
+  color:white;
+  border:0;
+  border-radius:20px;
+  padding:10px 15px;
+}
+.hero{
+  padding:35px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#f9e4e8,#fff5e9);
+}
+.hero h1{
+  font-size:34px;
+  margin:5px;
+}
+.hero p{
+  font-size:16px;
+  color:#665;
+}
+.products{
+  padding:25px 15px;
+}
+.products h2{
+  text-align:center;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.card{
+  background:white;
+  border-radius:18px;
+  padding:12px;
+  box-shadow:0 3px 12px #0001;
+}
+.photo{
+  height:140px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:55px;
+  background:#f4e8df;
+}
+.card h3{
+  margin:10px 0 5px;
+}
+.price{
+  color:#b76e79;
+  font-weight:bold;
+  font-size:18px;
+}
+.card button{
+  width:100%;
+  border:0;
+  background:#b76e79;
+  color:white;
+  padding:10px;
+  border-radius:12px;
+  margin-top:9px;
+}
+.about{
+  margin:20px 15px;
+  padding:25px;
+  background:#fff;
+  border-radius:18px;
+  text-align:center;
+}
+footer{
+  background:#332b2b;
+  color:white;
+  text-align:center;
+  padding:25px;
+  margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Perlora ✨</div>
+  <button class="cart" onclick="commander()">🛒 Commander</button>
+</header>
+
+<section class="hero">
+  <h1>Bienvenue chez Perlora</h1>
+  <p>De magnifiques créations faites avec passion et des perles.</p>
+</section>
+
+<section class="products">
+  <h2>Nos créations 💎</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="photo">📿</div>
+      <h3>Bracelet Perle</h3>
+      <div class="price">2 000 FCFA</div>
+      <button onclick="commander('Bracelet Perle - 2 000 FCFA')">
+        Commander
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="photo">💎</div>
+      <h3>Bracelet Premium</h3>
+      <div class="price">3 000 FCFA</div>
+      <button onclick="commander('Bracelet Premium - 3 000 FCFA')">
+        Commander
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="photo">🔑</div>
+      <h3>Porte-clés Perle</h3>
+      <div class="price">2 000 FCFA</div>
+      <button onclick="commander('Porte-clés Perle - 2 000 FCFA')">
+        Commander
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="photo">👜</div>
+      <h3>Accessoire Perlé</h3>
+      <div class="price">3 000 FCFA</div>
+      <button onclick="commander('Accessoire Perlé - 3 000 FCFA')">
+        Commander
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section class="about">
+  <h2>À propos de Perlora</h2>
+  <p>
+    Perlora est une plateforme dédiée aux créations artisanales
+    réalisées avec des perles. Découvrez nos produits et commandez
+    facilement depuis votre téléphone.
+  </p>
+</section>
+
+<footer>
+  <strong>Perlora</strong>
+  <p>Créations en perles • Côte d'Ivoire 🇨🇮</p>
+</footer>
+
+<script>
+function commander(produit){
+  let message = produit
+    ? "Bonjour Perlora, je souhaite commander : " + produit
+    : "Bonjour Perlora, je souhaite voir vos produits.";
+    
+  let url = "https://wa.me/2250556074077?text=" +
+            encodeURIComponent(message);
+
+  window.open(url,"_blank");
+}
+</script>
+
+</body>
+  </html>
