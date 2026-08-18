@@ -1,524 +1,420 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perlora</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: #020817;
-    }
-
-    /* Fond animé */
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.45;
-      z-index: -1;
-      animation: mouvement 9s infinite alternate ease-in-out;
-    }
-
-    body::before {
-      background: #0066ff;
-      top: -150px;
-      left: -150px;
-    }
-
-    body::after {
-      background: #00bfff;
-      right: -150px;
-      bottom: -150px;
-      animation-delay: 2s;
-    }
-
-    @keyframes mouvement {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate(100px, 60px) scale(1.2);
-      }
-
-      100% {
-        transform: translate(-60px, -40px) scale(0.9);
-      }
-    }
-
-    header {
-      padding: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(2, 8, 23, 0.75);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .brand img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #159cff;
-      box-shadow: 0 0 18px rgba(21,156,255,0.6);
-    }
-
-    .hero {
-      min-height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 50px 20px;
-    }
-
-    .logo {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #159cff;
-      box-shadow:
-        0 0 25px rgba(21,156,255,0.8),
-        0 0 70px rgba(0,102,255,0.4);
-      animation: flottement 4s infinite ease-in-out;
-    }
-
-    @keyframes flottement {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-
-    h1 {
-      margin-top: 25px;
-      font-size: 48px;
-      background: linear-gradient(90deg, #ffffff, #48b8ff, #ffffff);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .subtitle {
-      margin-top: 15px;
-      max-width: 650px;
-      font-size: 18px;
-      line-height: 1.7;
-      color: #c9ddf5;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 30px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 14px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      background: linear-gradient(135deg, #007bff, #00bfff);
-      box-shadow: 0 8px 25px rgba(0,123,255,0.35);
-      transition: 0.3s;
-    }
-
-    .button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,191,255,0.5);
-    }
-
-    .button.secondary {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .card {
-      padding: 30px 20px;
-      text-align: center;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(12px);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: #159cff;
-    }
-
-    .card .icon {
-      font-size: 40px;
-      margin-bottom: 15px;
-    }
-
-    .card h2 {
-      margin-bottom: 10px;
-      color: #4dbaff;
-    }
-
-    .card p {
-      color: #c9ddf5;
-      line-height: 1.6;
-    }
-
-    footer {
-      text-align: center;
-      padding: 35px 20px;
-      color: #8da9c5;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 50px;
-    }
-
-    @media (max-width: 700px) {
-      h1 {
-        font-size: 38px;
-      }
-
-      .logo {
-        width: 125px;
-        height: 125px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .subtitle {
-        font-size: 16px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="brand">
-      <img src="perlora_github_profile.jpg" alt="Logo Perlora">
-      <span>Perlora</span>
-    </div>
-  </header>
-
-  <main>
-
-    <section class="hero">
-
-      <img
-        class="logo"
-        src="perlora_github_profile.jpg"
-        alt="Logo Perlora"
-      >
-
-      <h1>Bienvenue sur Perlora</h1>
-
-      <p class="subtitle">
-        La plateforme qui permet de découvrir, vendre et regarder
-        des objets fabriqués en perles.
-      </p>
-
-      <div class="buttons">
-        <a class="button" href="#decouvrir">
-          Découvrir Perlora
-        </a>
-
-        <a class="button secondary" href="#apropos">
-          En savoir plus
-        </a>
-      </div>
-
-    </section>
-
-    <section class="cards" id="decouvrir">
-
-      <div class="card">
-        <div class="icon">💎</div>
-        <h2>Découvrir</h2>
-        <p>
-          Explore des créations originales fabriquées
-          avec passion en perles.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🛍️</div>
-        <h2>Vendre</h2>
-        <p>
-          Présente tes créations et prépare-toi à les
-          proposer aux utilisateurs de Perlora.
-        </p>
-      </div>
-
-      
-        
-      <div class="card">
-  <div class="icon">✨</div>
-  <h2>Collections</h2>
-  <p>
-    Découvre nos collections de créations en perles, soigneusement sélectionnées.
-  </p>
-      </div>
-
-    </section>
-
-    <section class="hero" id="apropos" style="min-height: auto;">
-
-      <h1>Perlora arrive</h1>
-
-      <p class="subtitle">
-        Ceci est le prototype officiel de Perlora.
-        La plateforme évoluera progressivement avec de
-        nouvelles fonctionnalités.
-      </p>
-
-    </section>
-
-  </main>
-
-  <footer>
-    © 2026 Perlora — Créons quelque chose de magnifique.
-  </footer>
-
-</body>
-</html>
-<html lang="fr">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perlora</title>
+<title>Perlora — Créations en perles</title>
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
-  margin:0;
   font-family:Arial,sans-serif;
-  background:#fffaf7;
-  color:#332b2b;
+  background:#020b20;
+  color:#fff;
+  min-height:100vh;
 }
+
+.app{
+  max-width:1200px;
+  margin:auto;
+  background:linear-gradient(135deg,#020b20,#062c78,#020b20);
+  min-height:100vh;
+}
+
 header{
-  background:#fff;
-  padding:18px 20px;
+  padding:18px 25px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #1c5bd6;
+  background:rgba(2,11,32,.9);
   position:sticky;
   top:0;
   z-index:10;
-  box-shadow:0 2px 10px #0001;
 }
+
+.menu,.cart{
+  font-size:28px;
+  cursor:pointer;
+}
+
 .logo{
-  font-size:27px;
-  font-weight:bold;
-  color:#b76e79;
+  text-align:center;
 }
-.cart{
-  background:#b76e79;
-  color:white;
-  border:0;
-  border-radius:20px;
-  padding:10px 15px;
+
+.logo strong{
+  display:block;
+  font-family:Georgia,serif;
+  font-size:38px;
+  letter-spacing:3px;
 }
+
+.logo span{
+  font-size:12px;
+  letter-spacing:4px;
+  color:#a9dfff;
+}
+
 .hero{
-  padding:35px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#f9e4e8,#fff5e9);
-}
-.hero h1{
-  font-size:34px;
-  margin:5px;
-}
-.hero p{
-  font-size:16px;
-  color:#665;
-}
-.products{
-  padding:25px 15px;
-}
-.products h2{
-  text-align:center;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-.card{
-  background:white;
-  border-radius:18px;
-  padding:12px;
-  box-shadow:0 3px 12px #0001;
-}
-.photo{
-  height:140px;
-  border-radius:14px;
+  margin:20px;
+  padding:35px;
+  min-height:360px;
+  border-radius:28px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-size:55px;
-  background:#f4e8df;
+  justify-content:space-between;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 50%,#168cff 0,#063d9a 20%,transparent 45%),
+    linear-gradient(120deg,#03143b,#075ee5,#021537);
+  box-shadow:0 15px 50px #00153f;
 }
-.card h3{
-  margin:10px 0 5px;
+
+.hero-text{
+  max-width:520px;
 }
+
+.hero h1{
+  font-size:46px;
+  line-height:1.05;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:#18aaff;
+}
+
+.hero p{
+  font-size:19px;
+  color:#dbeaff;
+  margin-bottom:28px;
+}
+
+.btn{
+  display:inline-block;
+  padding:15px 25px;
+  border-radius:14px;
+  background:#0787ff;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 8px 25px #001f5c;
+}
+
+.pearl{
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  border:28px dotted #f4f8ff;
+  box-shadow:0 0 45px #6dbbff;
+  position:relative;
+}
+
+.pearl:after{
+  content:"P";
+  position:absolute;
+  inset:85px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#00aaff,#003d99);
+  display:grid;
+  place-items:center;
+  font:70px Georgia;
+  color:white;
+  box-shadow:0 0 30px #00aaff;
+}
+
+.search{
+  margin:20px;
+  padding:16px 20px;
+  border-radius:30px;
+  background:white;
+  color:#53627c;
+  font-size:17px;
+}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin:20px;
+}
+
+.category{
+  background:white;
+  color:#07183c;
+  padding:18px 8px;
+  border-radius:18px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.category .icon{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.promo{
+  margin:20px;
+  padding:25px;
+  border-radius:22px;
+  background:linear-gradient(110deg,#03245f,#007cff,#03245f);
+  border:1px solid #1baaff;
+}
+
+.promo h2{
+  font-size:32px;
+  color:#8bdcff;
+}
+
+.promo p{
+  margin:8px 0 18px;
+  font-size:18px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  margin:30px 20px 15px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  padding:0 20px 30px;
+}
+
+.product{
+  background:white;
+  color:#07183c;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 8px 25px #001338;
+}
+
+.product-img{
+  height:180px;
+  background:
+    radial-gradient(circle,#fff 0 9%,transparent 10%),
+    radial-gradient(circle,#d9ecff 0 14%,transparent 15%),
+    linear-gradient(135deg,#eaf6ff,#b9d8ef);
+  background-size:55px 55px,80px 80px,100% 100%;
+}
+
+.product-info{
+  padding:14px;
+}
+
+.product h3{
+  margin-bottom:8px;
+}
+
 .price{
-  color:#b76e79;
+  color:#0074e8;
   font-weight:bold;
   font-size:18px;
 }
-.card button{
-  width:100%;
+
+.buy{
+  float:right;
+  background:#087df2;
+  color:white;
   border:0;
-  background:#b76e79;
-  color:white;
-  padding:10px;
-  border-radius:12px;
-  margin-top:9px;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  font-size:19px;
 }
-.about{
-  margin:20px 15px;
+
+.qr{
+  margin:20px;
   padding:25px;
-  background:#fff;
+  border-radius:22px;
+  background:#031b48;
+  border:1px solid #087df2;
+  text-align:center;
+}
+
+.qr-box{
+  width:180px;
+  height:180px;
+  margin:20px auto;
+  background:
+    repeating-linear-gradient(45deg,#000 0 5px,#fff 5px 10px);
+  border:12px solid white;
+  display:grid;
+  place-items:center;
+}
+
+.qr-box span{
+  background:#06245f;
+  padding:18px;
+  border-radius:50%;
+  font:bold 30px Georgia;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  padding:0 20px 100px;
+}
+
+.service{
+  text-align:center;
+  padding:20px 10px;
+  border:1px solid #1765c9;
   border-radius:18px;
-  text-align:center;
+  background:#031943;
 }
-footer{
-  background:#332b2b;
+
+.service b{
+  display:block;
+  margin-top:8px;
+}
+
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#020d29ee;
+  border-top:1px solid #145dcc;
+  padding:12px 5px;
+  z-index:20;
+}
+
+nav a{
   color:white;
   text-align:center;
-  padding:25px;
-  margin-top:30px;
+  text-decoration:none;
+  font-size:13px;
+}
+
+nav span{
+  display:block;
+  font-size:25px;
+  margin-bottom:3px;
+}
+
+@media(max-width:700px){
+  .hero{min-height:470px;padding:25px;flex-direction:column;text-align:center}
+  .hero h1{font-size:34px}
+  .pearl{width:220px;height:220px}
+  .pearl:after{inset:62px;font-size:50px}
+  .categories{grid-template-columns:repeat(3,1fr)}
+  .products{grid-template-columns:1fr}
+  .services{grid-template-columns:1fr}
+  .logo strong{font-size:25px}
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
 <header>
-  <div class="logo">Perlora ✨</div>
-  <button class="cart" onclick="commander()">🛒 Commander</button>
+  <div class="menu">☰</div>
+
+  <div class="logo">
+    <strong>PERLORA</strong>
+    <span>CRÉATIONS EN PERLES</span>
+  </div>
+
+  <div class="cart">🛒</div>
 </header>
 
 <section class="hero">
-  <h1>Bienvenue chez Perlora</h1>
-  <p>De magnifiques créations faites avec passion et des perles.</p>
-</section>
-
-<section class="products">
-  <h2>Nos créations 💎</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <div class="photo">📿</div>
-      <h3>Bracelet Perle</h3>
-      <div class="price">2 000 FCFA</div>
-      <button onclick="commander('Bracelet Perle - 2 000 FCFA')">
-        Commander
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="photo">💎</div>
-      <h3>Bracelet Premium</h3>
-      <div class="price">3 000 FCFA</div>
-      <button onclick="commander('Bracelet Premium - 3 000 FCFA')">
-        Commander
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="photo">🔑</div>
-      <h3>Porte-clés Perle</h3>
-      <div class="price">2 000 FCFA</div>
-      <button onclick="commander('Porte-clés Perle - 2 000 FCFA')">
-        Commander
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="photo">👜</div>
-      <h3>Accessoire Perlé</h3>
-      <div class="price">3 000 FCFA</div>
-      <button onclick="commander('Accessoire Perlé - 3 000 FCFA')">
-        Commander
-      </button>
-    </div>
-
+  <div class="hero-text">
+    <h1>L’éclat des perles,<br>l’art de l’<span>élégance.</span></h1>
+    <p>Des créations uniques faites à la main avec passion.</p>
+    <a class="btn" href="#boutique">Découvrir nos créations ✨</a>
   </div>
+
+  <div class="pearl"></div>
 </section>
 
-<section class="about">
-  <h2>À propos de Perlora</h2>
-  <p>
-    Perlora est une plateforme dédiée aux créations artisanales
-    réalisées avec des perles. Découvrez nos produits et commandez
-    facilement depuis votre téléphone.
-  </p>
+<div class="search">🔎 &nbsp; Rechercher une création...</div>
+
+<div class="categories">
+  <div class="category"><div class="icon">📿</div>Bracelets</div>
+  <div class="category"><div class="icon">📿</div>Colliers</div>
+  <div class="category"><div class="icon">🔑</div>Porte-clés</div>
+  <div class="category"><div class="icon">💎</div>Boucles</div>
+  <div class="category"><div class="icon">♡</div>Autres</div>
+</div>
+
+<section class="promo">
+  <h2>OFFRE SPÉCIALE —20%</h2>
+  <p>Sur toute la boutique pendant la promotion.</p>
+  <a class="btn" href="#boutique">Profiter maintenant →</a>
 </section>
 
-<footer>
-  <strong>Perlora</strong>
-  <p>Créations en perles • Côte d'Ivoire 🇨🇮</p>
-</footer>
+<div class="section-title" id="boutique">
+  <h2>Nos créations en vedette</h2>
+  <a href="#" style="color:#38aaff">Voir tout →</a>
+</div>
 
-<script>
-function commander(produit){
-  let message = produit
-    ? "Bonjour Perlora, je souhaite commander : " + produit
-    : "Bonjour Perlora, je souhaite voir vos produits.";
-    
-  let url = "https://wa.me/2250556074077?text=" +
-            encodeURIComponent(message);
+<div class="products">
 
-  window.open(url,"_blank");
-}
-</script>
+  <article class="product">
+    <div class="product-img"></div>
+    <div class="product-info">
+      <h3>Bracelet Royal</h3>
+      <span class="price">2 000 FCFA</span>
+      <button class="buy">🛒</button>
+    </div>
+  </article>
 
+  <article class="product">
+    <div class="product-img"></div>
+    <div class="product-info">
+      <h3>Collier Éclat Bleu</h3>
+      <span class="price">3 000 FCFA</span>
+      <button class="buy">🛒</button>
+    </div>
+  </article>
+
+  <article class="product">
+    <div class="product-img"></div>
+    <div class="product-info">
+      <h3>Porte-clés Perlora</h3>
+      <span class="price">1 000 FCFA</span>
+      <button class="buy">🛒</button>
+    </div>
+  </article>
+
+</div>
+
+<section class="qr">
+  <h2>📱 Paiement facile</h2>
+  <p>Scannez et payez en toute sécurité</p>
+
+  <div class="qr-box">
+    <span>P</span>
+  </div>
+
+  <p>Merci pour votre confiance ! 💙</p>
+</section>
+
+<div class="services">
+  <div class="service">🤲<b>Fait main</b>avec amour</div>
+  <div class="service">👍<b>Qualité</b>premium</div>
+  <div class="service">🚚<b>Livraison</b>rapide</div>
+</div>
+
+<nav>
+  <a href="#"><span>⌂</span>Accueil</a>
+  <a href="#boutique"><span>🛍</span>Boutique</a>
+  <a href="#"><span>♡</span>Favoris</a>
+  <a href="#"><span>♙</span>Compte</a>
+</nav>
+
+</div>
 </body>
   </html>
