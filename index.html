@@ -526,5 +526,242 @@ nav span{
    style="position:fixed; right:20px; bottom:85px; z-index:9999; background:#25D366; color:white; padding:14px 18px; border-radius:30px; text-decoration:none; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
    💬 WhatsApp
 </a>
-</body>
+<style>
+#cartButton{
+  position:fixed;
+  left:20px;
+  bottom:85px;
+  z-index:9999;
+  background:#1683ff;
+  color:white;
+  border:none;
+  padding:14px 18px;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:bold;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+
+#cartPanel{
+  display:none;
+  position:fixed;
+  left:10px;
+  right:10px;
+  bottom:145px;
+  max-height:65vh;
+  overflow-y:auto;
+  z-index:10000;
+  background:white;
+  color:#111;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+}
+
+#cartPanel h2{
+  margin-top:0;
+}
+
+.cartItem{
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+
+.cartControls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:8px;
+}
+
+.cartControls button{
+  border:none;
+  background:#1683ff;
+  color:white;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  font-size:18px;
+}
+
+.removeItem{
+  background:#e53935 !important;
+}
+
+#whatsappOrder{
+  display:block;
+  width:100%;
+  margin-top:15px;
+  padding:14px;
+  background:#25D366;
+  color:white;
+  text-align:center;
+  text-decoration:none;
+  border-radius:25px;
+  font-weight:bold;
+  box-sizing:border-box;
+}
+</style>
+
+<button id="cartButton">🛒 Panier (<span id="cartCount">0</span>)</button>
+
+<div id="cartPanel">
+  <h2>🛒 Mon panier</h2>
+
+  <div id="cartItems">
+    <p>Votre panier est vide.</p>
+  </div>
+
+  <h3>Total : <span id="cartTotal">0 FCFA</span></h3>
+
+  <a id="whatsappOrder"
+     href="#"
+     target="_blank"
+     rel="noopener">
+     💬 Commander sur WhatsApp
+  </a>
+</div>
+
+<script>
+let cart = [];
+
+const cartButton = document.getElementById("cartButton");
+const cartPanel = document.getElementById("cartPanel");
+const cartItems = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+const whatsappOrder = document.getElementById("whatsappOrder");
+
+cartButton.addEventListener("click", function(){
+  cartPanel.style.display =
+    cartPanel.style.display === "block" ? "none" : "block";
+});
+
+document.querySelectorAll(".product").forEach(function(product){
+
+  const buyButton = product.querySelector(".buy");
+  const nameElement = product.querySelector("h3");
+  const priceElement = product.querySelector(".price");
+
+  if(!buyButton || !nameElement || !priceElement) return;
+
+  buyButton.addEventListener("click", function(){
+
+    const name = nameElement.textContent.trim();
+    const priceText = priceElement.textContent.trim();
+
+    const existing = cart.find(item => item.name === name);
+
+    if(existing){
+      existing.quantity++;
+    }else{
+      const priceMatch = priceText.replace(/\s/g,"").match(/\d+/);
+      const price = priceMatch ? parseInt(priceMatch[0]) : 0;
+
+      cart.push({
+        name:name,
+        price:price,
+        priceText:priceText,
+        quantity:1
+      });
+    }
+
+    updateCart();
+
+    cartPanel.style.display = "block";
+  });
+});
+
+function updateCart(){
+
+  cartCount.textContent =
+    cart.reduce((total,item) => total + item.quantity, 0);
+
+  if(cart.length === 0){
+    cartItems.innerHTML = "<p>Votre panier est vide.</p>";
+    cartTotal.textContent = "0 FCFA";
+    whatsappOrder.href = "#";
+    return;
+  }
+
+  cartItems.innerHTML = "";
+
+  let total = 0;
+  let hasPriceToDefine = false;
+
+  cart.forEach(function(item,index){
+
+    total += item.price * item.quantity;
+
+    if(item.price === 0){
+      hasPriceToDefine = true;
+    }
+
+    const div = document.createElement("div");
+    div.className = "cartItem";
+
+    div.innerHTML = `
+      <strong>${item.name}</strong><br>
+      ${item.priceText}
+
+      <div class="cartControls">
+        <button onclick="changeQuantity(${index},-1)">−</button>
+        <span>${item.quantity}</span>
+        <button onclick="changeQuantity(${index},1)">+</button>
+        <button class="removeItem" onclick="removeItem(${index})">🗑️</button>
+      </div>
+    `;
+
+    cartItems.appendChild(div);
+  });
+
+  cartTotal.textContent =
+    total.toLocaleString("fr-FR") + " FCFA";
+
+  let message =
+    "Bonjour Perlora, je voudrais passer une commande :%0A%0A";
+
+  cart.forEach(function(item){
+
+    message +=
+      "• " + item.name +
+      " — " + item.priceText +
+      " × " + item.quantity +
+      "%0A";
+  });
+
+  message +=
+    "%0ATotal : " +
+    total.toLocaleString("fr-FR") +
+    " FCFA";
+
+  if(hasPriceToDefine){
+    message +=
+      "%0A%0A*Certains prix sont encore à définir.*";
+  }
+
+  whatsappOrder.href =
+    "https://wa.me/2250556074077?text=" + message;
+}
+
+function changeQuantity(index,change){
+
+  cart[index].quantity += change;
+
+  if(cart[index].quantity <= 0){
+    cart.splice(index,1);
+  }
+
+  updateCart();
+}
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  updateCart();
+}
+
+updateCart();
+</script></body>
   </html>
