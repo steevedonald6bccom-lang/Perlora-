@@ -763,5 +763,26 @@ function removeItem(index){
 }
 
 updateCart();
-</script></body>
+// 🔎 Recherche des articles Perlora
+const searchInput = document.getElementById("search");
+
+if (searchInput) {
+  searchInput.addEventListener("input", function () {
+    const searchText = this.value.toLowerCase().trim();
+
+    document.querySelectorAll(".product").forEach(function (product) {
+      const nameElement = product.querySelector("h3");
+
+      if (!nameElement) return;
+
+      const productName = nameElement.textContent.toLowerCase();
+
+      if (productName.includes(searchText)) {
+        product.style.display = "";
+      } else {
+        product.style.display = "none";
+      }
+    });
+  });
+  }</script></body>
   </html>
