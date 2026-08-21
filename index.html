@@ -339,7 +339,10 @@ nav span{
   <div class="pearl"></div>
 </section>
 
-<div class="search">🔎 &nbsp; Rechercher une création...</div>
+<div class="search">
+  🔎
+  <input type="text" id="searchInput" placeholder="Rechercher un article...">
+</div>
 
 <div class="categories">
   <div class="category"><div class="icon">📿</div>Bracelets</div>
@@ -765,5 +768,22 @@ function removeItem(index){
 updateCart();
 });
 </script>
-</body>
+<script>
+const searchInput = document.querySelector('input[type="search"], input[type="text"]');
+
+if (searchInput) {
+  searchInput.addEventListener("input", function () {
+    const recherche = this.value.toLowerCase().trim();
+
+    document.querySelectorAll(".product").forEach(function(product) {
+      const nom = product.querySelector("h3");
+
+      if (nom) {
+        const texte = nom.textContent.toLowerCase();
+        product.style.display = texte.includes(recherche) ? "" : "none";
+      }
+    });
+  });
+}
+</script></body>
 </html>
