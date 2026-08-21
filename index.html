@@ -967,5 +967,95 @@ cartButton.addEventListener("click", function() {
   }
 
 });
+</script><script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const cartButton = document.getElementById("cartButton");
+  const cartPanel = document.getElementById("cartPanel");
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const cartTotal = document.getElementById("cartTotal");
+
+  let panier = [];
+
+  // Ouvrir / fermer le panier
+  if (cartButton && cartPanel) {
+    cartButton.addEventListener("click", function () {
+      cartPanel.style.display =
+        cartPanel.style.display === "block" ? "none" : "block";
+    });
+  }
+
+  // Ajouter les produits au panier
+  document.querySelectorAll(".product").forEach(function (product) {
+
+    const bouton = product.querySelector(".buy");
+    const nom = product.querySelector("h3");
+    const prix = product.querySelector(".price");
+
+    if (!bouton || !nom || !prix) return;
+
+    bouton.addEventListener("click", function () {
+
+      const nomProduit = nom.textContent.trim();
+      const textePrix = prix.textContent.trim();
+
+      let prixProduit =
+        parseInt(textePrix.replace(/[^\d]/g, "")) || 0;
+
+      panier.push({
+        nom: nomProduit,
+        prix: prixProduit
+      });
+
+      afficherPanier();
+      cartPanel.style.display = "block";
+    });
+  });
+
+  function afficherPanier() {
+
+    if (!cartItems) return;
+
+    cartItems.innerHTML = "";
+
+    if (panier.length === 0) {
+      cartItems.innerHTML = "<p>Votre panier est vide.</p>";
+      cartCount.textContent = "0";
+      cartTotal.textContent = "0 FCFA";
+      return;
+    }
+
+    let total = 0;
+
+    panier.forEach(function (produit, index) {
+
+      total += produit.prix;
+
+      const article = document.createElement("div");
+
+      article.innerHTML = `
+        <p>
+          <strong>${produit.nom}</strong><br>
+          ${produit.prix > 0 ? produit.prix + " FCFA" : "Prix à définir"}
+          <button onclick="supprimerProduit(${index})">
+            ❌
+          </button>
+        </p>
+      `;
+
+      cartItems.appendChild(article);
+    });
+
+    cartCount.textContent = panier.length;
+    cartTotal.textContent = total + " FCFA";
+  }
+
+  window.supprimerProduit = function (index) {
+    panier.splice(index, 1);
+    afficherPanier();
+  };
+
+});
 </script></body>
 </html>
