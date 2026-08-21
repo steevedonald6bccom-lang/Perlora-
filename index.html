@@ -313,7 +313,23 @@ nav span{
   .logo strong{font-size:25px}
 }
 </style>
-</head>
+</head><div id="cartPanel">
+  <h2>🛒 Mon panier</h2>
+
+  <div id="cartItems">
+    <p>Votre panier est vide.</p>
+  </div>
+
+  <h3>Total : <span id="cartTotal">0 FCFA</span></h3>
+
+  <a id="whatsappOrder" href="#" target="_blank">
+    📱 Commander sur WhatsApp
+  </a>
+
+  <p id="thankYou" style="display:none;">
+    Merci beaucoup pour votre achat ! 🥰💙✨
+  </p>
+  </div>
 
 <body>
 <div class="app">
@@ -781,5 +797,175 @@ if (searchInput) {
     });
   });
 }
+</script><script>
+let cart = [];
+
+const cartButton = document.getElementById("cartButton");
+const cartPanel = document.getElementById("cartPanel");
+const cartItems = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+const whatsappOrder = document.getElementById("whatsappOrder");
+const thankYou = document.getElementById("thankYou");
+
+document.querySelectorAll(".buy").forEach(function(button) {
+
+  button.addEventListener("click", function() {
+
+    const product = button.closest(".product");
+    const name = product.querySelector("h3").textContent.trim();
+    const priceText = product.querySelector(".price").textContent;
+
+    const price = parseInt(
+      priceText.replace(/\s/g, "").replace("FCFA", ""),
+      10
+    );
+
+    if (isNaN(price)) {
+      alert("Le prix de cet article n'est pas encore défini.");
+      return;
+    }
+
+    const existing = cart.find(item => item.name === name);
+
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({
+        name: name,
+        price: price,
+        quantity: 1
+      });
+    }
+
+    updateCart();
+
+    cartPanel.style.display = "block";
+  });
+
+});
+
+function updateCart() {
+
+  cartItems.innerHTML = "";
+
+  let total = 0;
+  let count = 0;
+
+  cart.forEach(function(item, index) {
+
+    total += item.price * item.quantity;
+    count += item.quantity;
+
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+      <div style="margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ddd;">
+        <strong>${item.name}</strong><br>
+
+        ${item.price.toLocaleString("fr-FR")} FCFA × ${item.quantity}
+
+        <div style="margin-top:8px;">
+          <button onclick="decreaseQuantity(${index})">➖</button>
+
+          <span style="margin:0 10px;font-weight:bold;">
+            ${item.quantity}
+          </span>
+
+          <button onclick="increaseQuantity(${index})">➕</button>
+
+          <button onclick="removeItem(${index})">
+            🗑️
+          </button>
+        </div>
+      </div>
+    `;
+
+    cartItems.appendChild(div);
+  });
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = "<p>Votre panier est vide.</p>";
+  }
+
+  cartCount.textContent = count;
+  cartTotal.textContent =
+    total.toLocaleString("fr-FR") + " FCFA";
+
+  updateWhatsApp();
+}
+
+function increaseQuantity(index) {
+  cart[index].quantity++;
+  updateCart();
+}
+
+function decreaseQuantity(index) {
+
+  if (cart[index].quantity > 1) {
+    cart[index].quantity--;
+  } else {
+    cart.splice(index, 1);
+  }
+
+  updateCart();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function updateWhatsApp() {
+
+  let message =
+    "Bonjour Perlora 👋%0A%0A" +
+    "Je souhaite commander :%0A%0A";
+
+  let total = 0;
+
+  cart.forEach(function(item) {
+
+    const sousTotal = item.price * item.quantity;
+    total += sousTotal;
+
+    message +=
+      "🛍️ " + item.name +
+      "%0AQuantité : " + item.quantity +
+      "%0ASous-total : " +
+      sousTotal.toLocaleString("fr-FR") +
+      " FCFA%0A%0A";
+  });
+
+  message +=
+    "💰 TOTAL : " +
+    total.toLocaleString("fr-FR") +
+    " FCFA%0A%0A";
+
+  message +=
+    "Merci Perlora 🥰💙";
+
+  /*
+  
+    
+  */
+
+  whatsappOrder.href =
+    "https://wa.me/2250556074077?text=" + message;
+}
+
+cartButton.addEventListener("click", function() {
+
+  if (cartPanel.style.display === "none" ||
+      cartPanel.style.display === "") {
+
+    cartPanel.style.display = "block";
+
+  } else {
+
+    cartPanel.style.display = "none";
+  }
+
+});
 </script></body>
 </html>
