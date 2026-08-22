@@ -3,799 +3,544 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PERLORA — Boutique en ligne</title>
 
 <style>
-
-/* =========================
-   BASE
-========================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html {
-  scroll-behavior: smooth;
+html{
+  scroll-behavior:smooth;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
-  color: #172033;
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
 }
 
-button {
-  cursor: pointer;
+button{
+  cursor:pointer;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 12px 15px;
-
-  background: #0b5ed7;
-  color: white;
-
-  box-shadow: 0 3px 15px rgba(0,0,0,.18);
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 15px;
+  background:#0b5ed7;
+  color:white;
+  box-shadow:0 3px 15px rgba(0,0,0,.18);
 }
 
-.logo {
-  text-align: center;
+.logo{
+  text-align:center;
 }
 
-.logo strong {
-  display: block;
-  font-size: 24px;
-  letter-spacing: 3px;
+.logo strong{
+  display:block;
+  font-size:24px;
+  letter-spacing:3px;
 }
 
-.logo span {
-  font-size: 8px;
-  letter-spacing: 1px;
+.logo span{
+  font-size:8px;
+  letter-spacing:1px;
 }
 
-.menu {
-  font-size: 25px;
+.menu{
+  font-size:25px;
 }
 
-.cart-top {
-  border: none;
-  background: white;
-  color: #0b5ed7;
-
-  padding: 9px 12px;
-  border-radius: 25px;
-
-  font-weight: bold;
+.cart-top{
+  border:none;
+  background:white;
+  color:#0b5ed7;
+  padding:9px 12px;
+  border-radius:25px;
+  font-weight:bold;
 }
 
-/* =========================
-   ACCUEIL
-========================= */
-
-.home {
-  position: relative;
-  overflow: hidden;
-
-  min-height: 430px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #63c8ff 0%,
-      #a9e4ff 55%,
-      #e8f8ff 100%
-    );
-
-  padding: 35px 18px 30px;
-
-  text-align: center;
+/* ACCUEIL */
+.home{
+  position:relative;
+  overflow:hidden;
+  min-height:430px;
+  background:linear-gradient(180deg,#63c8ff 0%,#a9e4ff 55%,#e8f8ff 100%);
+  padding:35px 18px 30px;
+  text-align:center;
 }
 
-/* SOLEIL */
-
-.sun {
-  position: absolute;
-
-  width: 70px;
-  height: 70px;
-
-  background: #ffd43b;
-
-  border-radius: 50%;
-
-  top: 30px;
-  right: 30px;
-
-  box-shadow: 0 0 35px rgba(255,212,59,.7);
+.sun{
+  position:absolute;
+  width:70px;
+  height:70px;
+  background:#ffd43b;
+  border-radius:50%;
+  top:30px;
+  right:30px;
+  box-shadow:0 0 35px rgba(255,212,59,.7);
 }
 
-/* NUAGE */
-
-.cloud {
-  position: absolute;
-
-  width: 110px;
-  height: 35px;
-
-  background: white;
-
-  border-radius: 50px;
-
-  opacity: .9;
-
-  animation: moveCloud 18s linear infinite;
+.cloud{
+  position:absolute;
+  width:110px;
+  height:35px;
+  background:white;
+  border-radius:50px;
+  opacity:.9;
+  animation:moveCloud 18s linear infinite;
 }
 
 .cloud::before,
-.cloud::after {
-  content: "";
-
-  position: absolute;
-
-  background: white;
-
-  border-radius: 50%;
+.cloud::after{
+  content:"";
+  position:absolute;
+  background:white;
+  border-radius:50%;
 }
 
-.cloud::before {
-  width: 45px;
-  height: 45px;
-  left: 20px;
-  top: -20px;
+.cloud::before{
+  width:45px;
+  height:45px;
+  left:20px;
+  top:-20px;
 }
 
-.cloud::after {
-  width: 55px;
-  height: 55px;
-  right: 15px;
-  top: -28px;
+.cloud::after{
+  width:55px;
+  height:55px;
+  right:15px;
+  top:-28px;
 }
 
-.cloud1 {
-  top: 80px;
-  left: -130px;
+.cloud1{
+  top:80px;
+  left:-130px;
 }
 
-.cloud2 {
-  top: 160px;
-  left: -200px;
-  animation-delay: 5s;
-  transform: scale(.75);
+.cloud2{
+  top:160px;
+  left:-200px;
+  animation-delay:5s;
+  transform:scale(.75);
 }
 
-.cloud3 {
-  top: 230px;
-  left: -160px;
-  animation-delay: 10s;
-  transform: scale(.9);
+.cloud3{
+  top:230px;
+  left:-160px;
+  animation-delay:10s;
+  transform:scale(.9);
 }
 
-@keyframes moveCloud {
+@keyframes moveCloud{
+  from{
+    transform:translateX(-150px);
+  }
+  to{
+    transform:translateX(calc(100vw + 200px));
+  }
+}
 
-  from {
-    transform: translateX(-150px);
+.children{
+  position:relative;
+  margin-top:65px;
+  font-size:48px;
+  animation:childrenBounce 2s ease-in-out infinite;
+}
+
+@keyframes childrenBounce{
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-8px);
+  }
+}
+
+.laugh{
+  margin-top:5px;
+  font-size:15px;
+  font-weight:bold;
+  color:#185a8d;
+}
+
+.welcome{
+  position:relative;
+  margin-top:15px;
+  background:rgba(255,255,255,.78);
+  padding:20px;
+  border-radius:22px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.welcome h1{
+  color:#0b5ed7;
+  font-size:29px;
+  margin-bottom:12px;
+}
+
+.welcome p{
+  line-height:1.6;
+  font-size:15px;
+}
+
+/* INFORMATIONS */
+.info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  padding:15px;
+}
+
+.info-card{
+  background:white;
+  border-radius:13px;
+  padding:12px 5px;
+  text-align:center;
+  box-shadow:0 3px 10px rgba(0,0,0,.07);
+  font-size:12px;
+}
+
+.info-card strong{
+  display:block;
+  margin-top:5px;
+  color:#0b5ed7;
+}
+
+/* NAVIGATION */
+.navigation{
+  display:flex;
+  gap:10px;
+  padding:12px 15px;
+}
+
+.nav-button{
+  flex:1;
+  border:none;
+  padding:14px 8px;
+  border-radius:12px;
+  background:#0b5ed7;
+  color:white;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.nav-button.other{
+  background:#172033;
+}
+
+/* RECHERCHE */
+.search-area{
+  padding:15px;
+  background:white;
+}
+
+.search-input{
+  width:100%;
+  padding:14px 18px;
+  border:2px solid #dbe5f2;
+  border-radius:30px;
+  font-size:16px;
+  outline:none;
+}
+
+.search-input:focus{
+  border-color:#0b5ed7;
+}
+
+/* TITRES */
+.section-title{
+  text-align:center;
+  padding:25px 15px 12px;
+}
+
+.section-title h2{
+  color:#0b5ed7;
+  margin-bottom:5px;
+}
+
+.section-title p{
+  color:#667085;
+  font-size:14px;
+}
+
+/* PRODUITS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  padding:15px;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  transition:.2s;
+}
+
+.product:active{
+  transform:scale(.98);
+}
+
+.product-image{
+  height:165px;
+  background:linear-gradient(135deg,#e8f2ff,#d7e9ff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:55px;
+}
+
+.product-info{
+  padding:12px;
+}
+
+.product-info h3{
+  font-size:15px;
+  min-height:38px;
+  margin-bottom:7px;
+}
+
+.price{
+  color:#0b5ed7;
+  font-weight:bold;
+  display:block;
+  margin-bottom:10px;
+}
+
+.add-button{
+  width:100%;
+  border:none;
+  background:#0b5ed7;
+  color:white;
+  padding:10px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+/* PAGE AUTRES */
+#otherPage{
+  display:none;
+  min-height:100vh;
+  background:#f5f7fb;
+}
+
+.other-header{
+  background:#172033;
+  color:white;
+  padding:20px 15px;
+  text-align:center;
+}
+
+.other-header h2{
+  margin-bottom:6px;
+}
+
+.other-header p{
+  font-size:13px;
+  color:#dce4f0;
+}
+
+.categories{
+  display:flex;
+  overflow-x:auto;
+  gap:10px;
+  padding:12px 15px;
+  background:white;
+}
+
+.category{
+  flex:0 0 auto;
+  border:1px solid #ddd;
+  background:white;
+  border-radius:20px;
+  padding:9px 14px;
+  font-size:13px;
+}
+
+.category.active{
+  background:#0b5ed7;
+  color:white;
+  border-color:#0b5ed7;
+}
+
+.back-button{
+  margin:15px;
+  border:none;
+  background:#0b5ed7;
+  color:white;
+  padding:11px 16px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+/* PANIER */
+#cartPanel{
+  display:none;
+  position:fixed;
+  top:0;
+  right:0;
+  width:94%;
+  max-width:430px;
+  height:100vh;
+  background:white;
+  z-index:3000;
+  box-shadow:-5px 0 25px rgba(0,0,0,.25);
+  padding:20px;
+  overflow-y:auto;
+}
+
+.cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.close-cart{
+  border:none;
+  background:#eee;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  font-size:19px;
+}
+
+.cart-item{
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
+
+.cart-item h4{
+  margin-bottom:7px;
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:10px;
+}
+
+.quantity button{
+  border:none;
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:#0b5ed7;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.remove-item{
+  margin-top:10px;
+  border:none;
+  background:#ffe5e5;
+  color:#d00000;
+  padding:7px 10px;
+  border-radius:7px;
+}
+
+.cart-bottom{
+  margin-top:20px;
+  padding-top:15px;
+  border-top:2px solid #eee;
+}
+
+.total{
+  display:flex;
+  justify-content:space-between;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.clear-cart{
+  width:100%;
+  border:none;
+  background:#e53935;
+  color:white;
+  padding:12px;
+  border-radius:10px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.whatsapp{
+  display:block;
+  width:100%;
+  text-align:center;
+  text-decoration:none;
+  background:#25D366;
+  color:white;
+  padding:14px;
+  border-radius:11px;
+  font-weight:bold;
+}
+
+/* REMERCIEMENT */
+#thankYou{
+  display:none;
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  max-width:400px;
+  background:#172033;
+  color:white;
+  padding:16px;
+  border-radius:13px;
+  text-align:center;
+  z-index:5000;
+  box-shadow:0 5px 25px rgba(0,0,0,.3);
+}
+
+/* FOOTER */
+footer{
+  background:#172033;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+  margin-top:30px;
+}
+
+footer p{
+  font-size:13px;
+  margin:5px;
+}
+
+/* MOBILE */
+@media(max-width:380px){
+
+  .products{
+    grid-template-columns:1fr;
   }
 
-  to {
-    transform: translateX(calc(100vw + 200px));
+  .product-image{
+    height:210px;
   }
 
-}
-
-/* ENFANTS */
-
-.children {
-  position: relative;
-
-  margin-top: 65px;
-
-  font-size: 48px;
-
-  animation: childrenBounce 2s ease-in-out infinite;
-}
-
-@keyframes childrenBounce {
-
-  0%,100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-
-}
-
-.laugh {
-  margin-top: 5px;
-
-  font-size: 15px;
-
-  font-weight: bold;
-
-  color: #185a8d;
-}
-
-/* TEXTE ACCUEIL */
-
-.welcome {
-  position: relative;
-
-  margin-top: 15px;
-
-  background: rgba(255,255,255,.78);
-
-  padding: 20px;
-
-  border-radius: 22px;
-
-  box-shadow: 0 5px 20px rgba(0,0,0,.1);
-}
-
-.welcome h1 {
-  color: #0b5ed7;
-
-  font-size: 29px;
-
-  margin-bottom: 12px;
-}
-
-.welcome p {
-  line-height: 1.6;
-
-  font-size: 15px;
-}
-
-/* =========================
-   INFORMATIONS
-========================= */
-
-.info {
-  display: grid;
-
-  grid-template-columns: repeat(3,1fr);
-
-  gap: 8px;
-
-  padding: 15px;
-}
-
-.info-card {
-  background: white;
-
-  border-radius: 13px;
-
-  padding: 12px 5px;
-
-  text-align: center;
-
-  box-shadow: 0 3px 10px rgba(0,0,0,.07);
-
-  font-size: 12px;
-}
-
-.info-card strong {
-  display: block;
-
-  margin-top: 5px;
-
-  color: #0b5ed7;
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-
-.navigation {
-  display: flex;
-
-  gap: 10px;
-
-  padding: 12px 15px;
-}
-
-.nav-button {
-  flex: 1;
-
-  border: none;
-
-  padding: 14px 8px;
-
-  border-radius: 12px;
-
-  background: #0b5ed7;
-
-  color: white;
-
-  font-size: 14px;
-
-  font-weight: bold;
-}
-
-.nav-button.other {
-  background: #172033;
-}
-
-/* =========================
-   RECHERCHE
-========================= */
-
-.search-area {
-  padding: 15px;
-
-  background: white;
-}
-
-.search-input {
-  width: 100%;
-
-  padding: 14px 18px;
-
-  border: 2px solid #dbe5f2;
-
-  border-radius: 30px;
-
-  font-size: 16px;
-
-  outline: none;
-}
-
-.search-input:focus {
-  border-color: #0b5ed7;
-}
-
-/* =========================
-   TITRES
-========================= */
-
-.section-title {
-  text-align: center;
-
-  padding: 25px 15px 12px;
-}
-
-.section-title h2 {
-  color: #0b5ed7;
-
-  margin-bottom: 5px;
-}
-
-.section-title p {
-  color: #667085;
-
-  font-size: 14px;
-}
-
-/* =========================
-   PRODUITS
-========================= */
-
-.products {
-  display: grid;
-
-  grid-template-columns: repeat(2,1fr);
-
-  gap: 14px;
-
-  padding: 15px;
-}
-
-.product {
-  background: white;
-
-  border-radius: 15px;
-
-  overflow: hidden;
-
-  box-shadow: 0 3px 12px rgba(0,0,0,.08);
-
-  transition: .2s;
-}
-
-.product:active {
-  transform: scale(.98);
-}
-
-.product-image {
-  height: 165px;
-
-  background: linear-gradient(
-    135deg,
-    #e8f2ff,
-    #d7e9ff
-  );
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  font-size: 55px;
-}
-
-.product-info {
-  padding: 12px;
-}
-
-.product-info h3 {
-  font-size: 15px;
-
-  min-height: 38px;
-
-  margin-bottom: 7px;
-}
-
-.price {
-  color: #0b5ed7;
-
-  font-weight: bold;
-
-  display: block;
-
-  margin-bottom: 10px;
-}
-
-.add-button {
-  width: 100%;
-
-  border: none;
-
-  background: #0b5ed7;
-
-  color: white;
-
-  padding: 10px;
-
-  border-radius: 9px;
-
-  font-weight: bold;
-}
-
-/* =========================
-   PAGE AUTRES
-========================= */
-
-#otherPage {
-  display: none;
-
-  min-height: 100vh;
-
-  background: #f5f7fb;
-}
-
-.other-header {
-  background: #172033;
-
-  color: white;
-
-  padding: 20px 15px;
-
-  text-align: center;
-}
-
-.other-header h2 {
-  margin-bottom: 6px;
-}
-
-.other-header p {
-  font-size: 13px;
-
-  color: #dce4f0;
-}
-
-/* STYLE MARKETPLACE */
-
-.categories {
-  display: flex;
-
-  overflow-x: auto;
-
-  gap: 10px;
-
-  padding: 12px 15px;
-
-  background: white;
-}
-
-.category {
-  flex: 0 0 auto;
-
-  border: 1px solid #ddd;
-
-  background: white;
-
-  border-radius: 20px;
-
-  padding: 9px 14px;
-
-  font-size: 13px;
-}
-
-.category.active {
-  background: #0b5ed7;
-
-  color: white;
-
-  border-color: #0b5ed7;
-}
-
-.back-button {
-  margin: 15px;
-
-  border: none;
-
-  background: #0b5ed7;
-
-  color: white;
-
-  padding: 11px 16px;
-
-  border-radius: 9px;
-
-  font-weight: bold;
-}
-
-/* =========================
-   PANIER
-========================= */
-
-#cartPanel {
-  display: none;
-
-  position: fixed;
-
-  top: 0;
-  right: 0;
-
-  width: 94%;
-
-  max-width: 430px;
-
-  height: 100vh;
-
-  background: white;
-
-  z-index: 3000;
-
-  box-shadow: -5px 0 25px rgba(0,0,0,.25);
-
-  padding: 20px;
-
-  overflow-y: auto;
-}
-
-.cart-header {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  margin-bottom: 20px;
-}
-
-.close-cart {
-  border: none;
-
-  background: #eee;
-
-  width: 36px;
-  height: 36px;
-
-  border-radius: 50%;
-
-  font-size: 19px;
-}
-
-.cart-item {
-  padding: 15px 0;
-
-  border-bottom: 1px solid #eee;
-}
-
-.cart-item h4 {
-  margin-bottom: 7px;
-}
-
-.quantity {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  margin-top: 10px;
-}
-
-.quantity button {
-  border: none;
-
-  width: 31px;
-  height: 31px;
-
-  border-radius: 50%;
-
-  background: #0b5ed7;
-
-  color: white;
-
-  font-size: 18px;
-
-  font-weight: bold;
-}
-
-.remove-item {
-  margin-top: 10px;
-
-  border: none;
-
-  background: #ffe5e5;
-
-  color: #d00000;
-
-  padding: 7px 10px;
-
-  border-radius: 7px;
-}
-
-.cart-bottom {
-  margin-top: 20px;
-
-  padding-top: 15px;
-
-  border-top: 2px solid #eee;
-}
-
-.total {
-  display: flex;
-
-  justify-content: space-between;
-
-  font-size: 20px;
-
-  font-weight: bold;
-
-  margin-bottom: 15px;
-}
-
-.clear-cart {
-  width: 100%;
-
-  border: none;
-
-  background: #e53935;
-
-  color: white;
-
-  padding: 12px;
-
-  border-radius: 10px;
-
-  font-weight: bold;
-
-  margin-bottom: 10px;
-}
-
-.whatsapp {
-  display: block;
-
-  width: 100%;
-
-  text-align: center;
-
-  text-decoration: none;
-
-  background: #25D366;
-
-  color: white;
-
-  padding: 14px;
-
-  border-radius: 11px;
-
-  font-weight: bold;
-}
-
-/* =========================
-   REMERCIEMENT
-========================= */
-
-#thankYou {
-  display: none;
-
-  position: fixed;
-
-  bottom: 25px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: 90%;
-
-  max-width: 400px;
-
-  background: #172033;
-
-  color: white;
-
-  padding: 16px;
-
-  border-radius: 13px;
-
-  text-align: center;
-
-  z-index: 5000;
-
-  box-shadow: 0 5px 25px rgba(0,0,0,.3);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-  background: #172033;
-
-  color: white;
-
-  text-align: center;
-
-  padding: 25px 15px;
-
-  margin-top: 30px;
-}
-
-footer p {
-  font-size: 13px;
-
-  margin: 5px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:380px) {
-
-  .products {
-    grid-template-columns: 1fr;
-  }
-
-  .product-image {
-    height: 210px;
-  }
-
-  .info {
-    grid-template-columns: 1fr;
+  .info{
+    grid-template-columns:1fr;
   }
 
 }
-
 </style>
 </head>
 
 <body>
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header>
 
@@ -813,301 +558,703 @@ footer p {
 </header>
 
 
-<!-- ==================================================
-     PAGE D'ACCUEIL
-================================================== -->
+<!-- =========================
+     PAGE ACCUEIL
+========================= -->
 
 <main id="homePage">
 
-  <section class="home">
+<section class="home">
 
-    <div class="sun"></div>
+  <div class="sun"></div>
 
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-    <div class="cloud cloud3"></div>
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
 
-    <div class="children">
-      🧒 👧 🧒
-    </div>
+  <div class="children">
+    🧒 👧 🧒
+  </div>
 
-    <div class="laugh">
-      😂🤣 Des sourires, de la joie et beaucoup de créativité !
-    </div>
+  <div class="laugh">
+    😂🤣 Des sourires, de la joie et beaucoup de créativité !
+  </div>
 
-    <div class="welcome">
+  <div class="welcome">
 
-      <h1>👋 Bienvenue chez Perlora</h1>
+    <h1>👋 Bienvenue chez Perlora</h1>
 
-      <p>
-        Perlora est une boutique en ligne consacrée à la vente
-        d'objets en perles et d'autres types d'articles.
-      </p>
+    <p>
+      Perlora est une boutique en ligne consacrée à la vente
+      d'objets en perles et d'autres types d'articles.
+    </p>
 
-      <p style="margin-top:10px;">
-        ✨ Découvrez nos créations et trouvez l'article
-        qui vous plaît.
-      </p>
+    <p style="margin-top:10px;">
+      ✨ Découvrez nos créations et trouvez l'article
+      qui vous plaît.
+    </p>
 
-    </div>
+  </div>
 
-  </section>
-
-
-  <!-- INFORMATIONS -->
-
-  <section class="info">
-
-    <div class="info-card">
-      🚚
-      <strong>Livraison</strong>
-      Disponible
-    </div>
-
-    <div class="info-card">
-      💳
-      <strong>Paiement</strong>
-      Wave & MTN
-    </div>
-
-    <div class="info-card">
-      📱
-      <strong>Commande</strong>
-      WhatsApp
-    </div>
-
-  </section>
+</section>
 
 
-  <!-- NAVIGATION -->
+<section class="info">
 
-  <section class="navigation">
+  <div class="info-card">
+    🚚
+    <strong>Livraison</strong>
+    Disponible
+  </div>
+
+  <div class="info-card">
+    💳
+    <strong>Paiement</strong>
+    Wave & MTN
+  </div>
+
+  <div class="info-card">
+    📱
+    <strong>Commande</strong>
+    WhatsApp
+  </div>
+
+</section>
+
+
+<section class="navigation">
+
+  <button class="nav-button">
+    💎 Perles
+  </button>
+
+  <button
+    class="nav-button other"
+    onclick="showOther()">
+    🛍️ AUTRES
+  </button>
+
+</section>
+
+
+<section class="search-area">
+
+  <input
+    id="homeSearch"
+    class="search-input"
+    type="search"
+    placeholder="🔎 Rechercher un article en perles..."
+    oninput="searchProducts('home')">
+
+</section>
+
+
+<section class="section-title">
+
+  <h2>💎 Nos créations en perles</h2>
+
+  <p>
+    Découvrez nos porte-clés disponibles.
+  </p>
+
+</section>
+
+
+<section class="products" id="homeProducts">
+
+
+<!-- 1 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de S</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
 
     <button
-      class="nav-button"
-      onclick="showHome()">
-      💎 Perles
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de S')">
+      🛒 Ajouter
     </button>
+
+  </div>
+
+</article>
+
+
+<!-- 2 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de A</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
 
     <button
-      class="nav-button other"
-      onclick="showOther()">
-      🛍️ AUTRES
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de A')">
+      🛒 Ajouter
     </button>
 
-  </section>
+  </div>
 
+</article>
 
-  <!-- RECHERCHE -->
 
-  <section class="search-area">
+<!-- 3 -->
 
-    <input
-      id="homeSearch"
-      class="search-input"
-      type="search"
-      placeholder="🔎 Rechercher un article en perles..."
-      oninput="searchProducts('home')">
+<article class="product">
 
-  </section>
+  <div class="product-image">
+    🔑
+  </div>
 
+  <div class="product-info">
 
-  <!-- ARTICLES PERLES -->
+    <h3>Porte-clés en forme de I</h3>
 
-  <section class="section-title">
+    <span class="price">
+      Prix à définir
+    </span>
 
-    <h2>💎 Nos créations en perles</h2>
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de I')">
+      🛒 Ajouter
+    </button>
 
-    <p>
-      Découvrez nos articles disponibles.
-    </p>
+  </div>
 
-  </section>
+</article>
 
 
-  <section class="products" id="homeProducts">
+<!-- 4 -->
 
-    <article class="product">
+<article class="product">
 
-      <div class="product-image">
-        💎
-      </div>
+  <div class="product-image">
+    🔑
+  </div>
 
-      <div class="product-info">
+  <div class="product-info">
 
-        <h3>Bracelet en perles</h3>
+    <h3>Porte-clés en forme de S</h3>
 
-        <span class="price">
-          Prix à définir
-        </span>
+    <span class="price">
+      Prix à définir
+    </span>
 
-        <button
-          class="add-button"
-          onclick="addToCart('Bracelet en perles')">
-          🛒 Ajouter
-        </button>
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de S')">
+      🛒 Ajouter
+    </button>
 
-      </div>
+  </div>
 
-    </article>
+</article>
 
 
-    <article class="product">
+<!-- 5 -->
 
-      <div class="product-image">
-        👜
-      </div>
+<article class="product">
 
-      <div class="product-info">
+  <div class="product-image">
+    🔑
+  </div>
 
-        <h3>Sac en perles</h3>
+  <div class="product-info">
 
-        <span class="price">
-          Prix à définir
-        </span>
+    <h3>Porte-clés en forme de P</h3>
 
-        <button
-          class="add-button"
-          onclick="addToCart('Sac en perles')">
-          🛒 Ajouter
-        </button>
+    <span class="price">
+      Prix à définir
+    </span>
 
-      </div>
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de P')">
+      🛒 Ajouter
+    </button>
 
-    </article>
+  </div>
 
+</article>
 
-    <article class="product">
 
-      <div class="product-image">
-        💍
-      </div>
+<!-- 6 -->
 
-      <div class="product-info">
+<article class="product">
 
-        <h3>Bijou en perles</h3>
+  <div class="product-image">
+    🔑
+  </div>
 
-        <span class="price">
-          Prix à définir
-        </span>
+  <div class="product-info">
 
-        <button
-          class="add-button"
-          onclick="addToCart('Bijou en perles')">
-          🛒 Ajouter
-        </button>
+    <h3>Porte-clés en forme de H</h3>
 
-      </div>
+    <span class="price">
+      Prix à définir
+    </span>
 
-    </article>
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de H')">
+      🛒 Ajouter
+    </button>
 
+  </div>
 
-    <article class="product">
+</article>
 
-      <div class="product-image">
-        🔑
-      </div>
 
-      <div class="product-info">
+<!-- 7 -->
 
-        <h3>Porte-clés en perles</h3>
+<article class="product">
 
-        <span class="price">
-          Prix à définir
-        </span>
+  <div class="product-image">
+    🔑
+  </div>
 
-        <button
-          class="add-button"
-          onclick="addToCart('Porte-clés en perles')">
-          🛒 Ajouter
-        </button>
+  <div class="product-info">
 
-      </div>
+    <h3>Porte-clés en forme de O</h3>
 
-    </article>
+    <span class="price">
+      Prix à définir
+    </span>
 
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de O')">
+      🛒 Ajouter
+    </button>
 
-    <article class="product">
+  </div>
 
-      <div class="product-image">
-        🌸
-      </div>
+</article>
 
-      <div class="product-info">
 
-        <h3>Cadre décoratif en perles</h3>
+<!-- 8 -->
 
-        <span class="price">
-          Prix à définir
-        </span>
+<article class="product">
 
-        <button
-          class="add-button"
-          onclick="addToCart('Cadre décoratif en perles')">
-          🛒 Ajouter
-        </button>
+  <div class="product-image">
+    🔑
+  </div>
 
-      </div>
+  <div class="product-info">
 
-    </article>
+    <h3>Porte-clés en forme de Y</h3>
 
+    <span class="price">
+      Prix à définir
+    </span>
 
-    <article class="product">
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de Y')">
+      🛒 Ajouter
+    </button>
 
-      <div class="product-image">
-        🎀
-      </div>
+  </div>
 
-      <div class="product-info">
+</article>
 
-        <h3>Pochette en perles</h3>
 
-        <span class="price">
-          Prix à définir
-        </span>
+<!-- 9 -->
 
-        <button
-          class="add-button"
-          onclick="addToCart('Pochette en perles')">
-          🛒 Ajouter
-        </button>
+<article class="product">
 
-      </div>
+  <div class="product-image">
+    🧊
+  </div>
 
-    </article>
+  <div class="product-info">
 
-  </section>
+    <h3>Porte-clés en forme de cubes</h3>
 
+    <span class="price">
+      Prix à définir
+    </span>
 
-  <footer>
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de cubes')">
+      🛒 Ajouter
+    </button>
 
-    <p>💎 PERLORA</p>
+  </div>
 
-    <p>
-      Boutique en ligne — Créations en perles
-      et autres articles.
-    </p>
+</article>
 
-    <p>
-      🚚 Livraisons disponibles
-    </p>
 
-    <p>
-      💳 Paiement : Wave et MTN
-    </p>
+<!-- 10 -->
 
-    <p>
-      🙏 Merci de faire confiance à Perlora ❤️
-    </p>
+<article class="product">
 
-  </footer>
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de F</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de F')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 11 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de E</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de E')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 12 -->
+
+<article class="product">
+
+  <div class="product-image">
+    ❤️
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de cœur</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de cœur')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 13 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de H</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de H')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 14 -->
+
+<article class="product">
+
+  <div class="product-image">
+    👜
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de sac</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de sac')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 15 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de U</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de U')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 16 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de W</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de W')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 17 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de K</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de K')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 18 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de D</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de D')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 19 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de B</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de B')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 20 -->
+
+<article class="product">
+
+  <div class="product-image">
+    🔑
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de Z</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de Z')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+
+<!-- 21 -->
+
+<article class="product">
+
+  <div class="product-image">
+    ✝️
+  </div>
+
+  <div class="product-info">
+
+    <h3>Porte-clés en forme de croix</h3>
+
+    <span class="price">
+      Prix à définir
+    </span>
+
+    <button
+      class="add-button"
+      onclick="addToCart('Porte-clés en forme de croix')">
+      🛒 Ajouter
+    </button>
+
+  </div>
+
+</article>
+
+</section>
+
+
+<footer>
+
+  <p>💎 PERLORA</p>
+
+  <p>
+    Boutique en ligne — Créations en perles
+    et autres articles.
+  </p>
+
+  <p>🚚 Livraisons disponibles</p>
+
+  <p>💳 Paiement : Wave et MTN</p>
+
+  <p>🙏 Merci de faire confiance à Perlora ❤️</p>
+
+</footer>
 
 </main>
 
 
-<!-- ==================================================
+<!-- =========================
      PAGE AUTRES
-================================================== -->
+========================= -->
 
 <section id="otherPage">
 
@@ -1116,21 +1263,19 @@ footer p {
     <h2>🛍️ AUTRES ARTICLES</h2>
 
     <p>
-      Découvrez toutes sortes d'articles
-      disponibles chez Perlora.
+      Découvrez toutes sortes d'articles disponibles chez Perlora.
     </p>
 
   </div>
 
-
   <button
     class="back-button"
     onclick="showHome()">
+
     ← Retour à Perlora
+
   </button>
 
-
-  <!-- CATEGORIES -->
 
   <div class="categories">
 
@@ -1161,8 +1306,6 @@ footer p {
   </div>
 
 
-  <!-- RECHERCHE AUTRES -->
-
   <section class="search-area">
 
     <input
@@ -1187,7 +1330,6 @@ footer p {
 
 
   <section class="products" id="otherProducts">
-
 
     <article class="product">
 
@@ -1338,7 +1480,6 @@ footer p {
 
     </article>
 
-
   </section>
 
 
@@ -1346,22 +1487,18 @@ footer p {
 
     <p>🛍️ PERLORA — AUTRES ARTICLES</p>
 
-    <p>
-      🚚 Livraisons disponibles
-    </p>
+    <p>🚚 Livraisons disponibles</p>
 
-    <p>
-      💳 Wave et MTN
-    </p>
+    <p>💳 Wave et MTN</p>
 
   </footer>
 
 </section>
 
 
-<!-- ==================================================
+<!-- =========================
      PANIER
-================================================== -->
+========================= -->
 
 <div id="cartPanel">
 
@@ -1380,9 +1517,7 @@ footer p {
 
   <div id="cartItems">
 
-    <p>
-      Votre panier est vide.
-    </p>
+    <p>Votre panier est vide.</p>
 
   </div>
 
@@ -1424,8 +1559,6 @@ footer p {
 </div>
 
 
-<!-- MESSAGE DE REMERCIEMENT -->
-
 <div id="thankYou">
 
   🙏 Merci !
@@ -1436,139 +1569,118 @@ footer p {
 
 <script>
 
-/* ==================================================
-   PANIER
-================================================== */
+/* PANIER */
 
 let cart = [];
 
 
-/* NUMÉRO WHATSAPP */
+/* WHATSAPP */
 
 const whatsappNumber = "225556074077";
 
 
 /* AJOUTER */
 
-function addToCart(name) {
+function addToCart(name){
 
   let existing =
     cart.find(item => item.name === name);
 
-
-  if (existing) {
+  if(existing){
 
     existing.quantity++;
 
-  } else {
+  }else{
 
     cart.push({
-      name: name,
-      quantity: 1
+      name:name,
+      quantity:1
     });
 
   }
 
-
   updateCart();
-
-
-  /* MESSAGE */
 
   const message =
     document.getElementById("thankYou");
 
-  message.style.display = "block";
+  message.style.display="block";
 
+  setTimeout(function(){
 
-  setTimeout(function() {
+    message.style.display="none";
 
-    message.style.display = "none";
-
-  }, 2500);
+  },2500);
 
 }
 
 
-/* MISE À JOUR */
+/* UPDATE */
 
-function updateCart() {
+function updateCart(){
 
-  let count = 0;
+  let count=0;
 
-  cart.forEach(function(item) {
+  cart.forEach(function(item){
 
     count += item.quantity;
 
   });
 
-
   document.getElementById("cartCount")
-    .textContent = count;
-
+    .textContent=count;
 
   displayCart();
 
 }
 
 
-/* AFFICHER */
+/* AFFICHER PANIER */
 
-function displayCart() {
+function displayCart(){
 
   const container =
     document.getElementById("cartItems");
 
-
-  if (cart.length === 0) {
+  if(cart.length===0){
 
     container.innerHTML =
       "<p>Votre panier est vide.</p>";
 
     document.getElementById("cartTotal")
-      .textContent = "0 FCFA";
+      .textContent="0 FCFA";
 
     document.getElementById("whatsappOrder")
-      .style.display = "none";
+      .style.display="none";
 
     return;
 
   }
 
+  container.innerHTML="";
 
-  container.innerHTML = "";
-
-
-  cart.forEach(function(item,index) {
+  cart.forEach(function(item,index){
 
     const div =
       document.createElement("div");
 
+    div.className="cart-item";
 
-    div.className = "cart-item";
-
-
-    div.innerHTML = `
+    div.innerHTML=`
 
       <h4>${item.name}</h4>
 
-      <p>
-        Prix : à définir
-      </p>
+      <p>Prix : à définir</p>
 
       <div class="quantity">
 
-        <button
-          onclick="decreaseItem(${index})">
+        <button onclick="decreaseItem(${index})">
           −
         </button>
 
-        <strong>
-          ${item.quantity}
-        </strong>
+        <strong>${item.quantity}</strong>
 
-        <button
-          onclick="increaseItem(${index})">
+        <button onclick="increaseItem(${index})">
           +
         </button>
 
@@ -1584,29 +1696,22 @@ function displayCart() {
 
     `;
 
-
     container.appendChild(div);
 
   });
 
 
-  /*
-    Les prix seront ajoutés lorsque
-    tu me donneras les prix des articles.
-  */
-
   document.getElementById("cartTotal")
-    .textContent = "Prix à confirmer";
-
+    .textContent="Prix à confirmer";
 
   updateWhatsApp();
 
 }
 
 
-/* AUGMENTER */
+/* PLUS */
 
-function increaseItem(index) {
+function increaseItem(index){
 
   cart[index].quantity++;
 
@@ -1615,15 +1720,15 @@ function increaseItem(index) {
 }
 
 
-/* DIMINUER */
+/* MOINS */
 
-function decreaseItem(index) {
+function decreaseItem(index){
 
-  if (cart[index].quantity > 1) {
+  if(cart[index].quantity>1){
 
     cart[index].quantity--;
 
-  } else {
+  }else{
 
     cart.splice(index,1);
 
@@ -1634,9 +1739,9 @@ function decreaseItem(index) {
 }
 
 
-/* SUPPRIMER UN ARTICLE */
+/* SUPPRIMER */
 
-function removeItem(index) {
+function removeItem(index){
 
   cart.splice(index,1);
 
@@ -1645,165 +1750,137 @@ function removeItem(index) {
 }
 
 
-/* VIDER TOUT */
+/* VIDER */
 
-function clearCart() {
+function clearCart(){
 
-  if (cart.length === 0) {
-    return;
-  }
-
-
-  cart = [];
+  cart=[];
 
   updateCart();
 
 }
 
 
-/* OUVRIR PANIER */
+/* OUVRIR */
 
-function openCart() {
+function openCart(){
 
   document.getElementById("cartPanel")
-    .style.display = "block";
+    .style.display="block";
 
   displayCart();
 
 }
 
 
-/* FERMER PANIER */
+/* FERMER */
 
-function closeCart() {
+function closeCart(){
 
   document.getElementById("cartPanel")
-    .style.display = "none";
+    .style.display="none";
 
 }
 
 
-/* ==================================================
-   WHATSAPP
-================================================== */
+/* WHATSAPP */
 
-function updateWhatsApp() {
+function updateWhatsApp(){
 
   const button =
     document.getElementById("whatsappOrder");
 
+  if(cart.length===0){
 
-  if (cart.length === 0) {
-
-    button.style.display = "none";
+    button.style.display="none";
 
     return;
 
   }
 
-
-  button.style.display = "block";
-
+  button.style.display="block";
 
   let message =
     "Bonjour Perlora 👋%0A%0A" +
     "Je souhaite commander les articles suivants :%0A%0A";
 
-
-  cart.forEach(function(item) {
+  cart.forEach(function(item){
 
     message +=
-      "• " +
-      item.name +
-      " x" +
-      item.quantity +
+      "• "+item.name+
+      " x"+item.quantity+
       "%0A";
 
   });
 
-
   message +=
-    "%0A🙏 Merci." +
+    "%0A🙏 Merci."+
     "%0AJe souhaite connaître le prix total et les modalités de livraison.";
 
-
   button.href =
-    "https://wa.me/" +
-    whatsappNumber +
-    "?text=" +
+    "https://wa.me/"+
+    whatsappNumber+
+    "?text="+
     message;
 
 }
 
 
-/* ==================================================
-   NAVIGATION
-================================================== */
+/* NAVIGATION */
 
-function showOther() {
+function showOther(){
 
   document.getElementById("homePage")
-    .style.display = "none";
-
+    .style.display="none";
 
   document.getElementById("otherPage")
-    .style.display = "block";
-
+    .style.display="block";
 
   window.scrollTo(0,0);
 
 }
 
 
-function showHome() {
+function showHome(){
 
   document.getElementById("otherPage")
-    .style.display = "none";
-
+    .style.display="none";
 
   document.getElementById("homePage")
-    .style.display = "block";
-
+    .style.display="block";
 
   window.scrollTo(0,0);
 
 }
 
 
-/* ==================================================
-   RECHERCHE
-================================================== */
+/* RECHERCHE */
 
-function searchProducts(page) {
+function searchProducts(page){
 
   let input;
-
-
   let products;
 
-
-  if (page === "home") {
+  if(page==="home"){
 
     input =
       document.getElementById("homeSearch")
-        .value
-        .toLowerCase()
-        .trim();
-
+      .value
+      .toLowerCase()
+      .trim();
 
     products =
       document.querySelectorAll(
         "#homeProducts .product"
       );
 
-  } else {
+  }else{
 
     input =
       document.getElementById("otherSearch")
-        .value
-        .toLowerCase()
-        .trim();
-
+      .value
+      .toLowerCase()
+      .trim();
 
     products =
       document.querySelectorAll(
@@ -1813,21 +1890,20 @@ function searchProducts(page) {
   }
 
 
-  products.forEach(function(product) {
+  products.forEach(function(product){
 
     const name =
       product.querySelector("h3")
-        .textContent
-        .toLowerCase();
+      .textContent
+      .toLowerCase();
 
+    if(name.includes(input)){
 
-    if (name.includes(input)) {
+      product.style.display="";
 
-      product.style.display = "";
+    }else{
 
-    } else {
-
-      product.style.display = "none";
+      product.style.display="none";
 
     }
 
@@ -1838,4 +1914,4 @@ function searchProducts(page) {
 </script>
 
 </body>
-  </html>
+   </html>
