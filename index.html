@@ -334,7 +334,37 @@ footer p {
     Découvrez les créations Perlora faites avec soin,
     passion et créativité.
   </p>
+</section><!-- BOUTON AUTRES ARTICLES -->
+<section class="other-products-button">
+  <button onclick="showOtherProducts()">
+    🛍️ Autres types d'articles
+  </button>
 </section>
+
+<style>
+.other-products-button {
+  text-align: center;
+  padding: 18px 15px;
+  background: white;
+}
+
+.other-products-button button {
+  width: 100%;
+  max-width: 380px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 30px;
+  background: #172033;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.other-products-button button:active {
+  transform: scale(.97);
+}
+</style>
 
 <div class="search-box">
   <input
@@ -728,7 +758,13 @@ searchInput.addEventListener("input", function() {
 
 });
 
-</script>
+function showOtherProducts() {
+  alert(
+    "🛍️ Autres types d'articles\n\n" +
+    "Cette catégorie sera bientôt disponible sur Perlora. ❤️\n\n" +
+    "🙏 Merci pour votre confiance !"
+  );
+  }</script>
 
 </body>
   </html>
