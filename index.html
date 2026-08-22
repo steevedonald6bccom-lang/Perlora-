@@ -4,589 +4,259 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Perlora - Boutique d'objets en perles</title>
+<title>PERLORA — Créations en perles</title>
 
-<meta name="description" content="Bienvenue chez Perlora, boutique en ligne consacrée à la vente d'objets artisanaux en perles.">
+<meta name="description"
+content="Perlora — créations artisanales en perles, porte-clés, bracelets, sacs, décorations et objets personnalisés.">
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#eef6ff;
-  color:#123;
-  overflow-x:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#071d55;
+  background:#fff;
 }
 
 /* =========================
-   ACCUEIL
+   BARRE SUPERIEURE
 ========================= */
 
-.hero{
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
+.topbar{
+  background:#061c63;
+  color:white;
+  min-height:38px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:45px;
+  padding:8px 15px;
+  font-size:14px;
+  font-weight:bold;
+  flex-wrap:wrap;
+}
+
+.topbar span{
   display:flex;
   align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:30px 15px;
-  background:linear-gradient(
-    to bottom,
-    #071a3d 0%,
-    #174d91 55%,
-    #b9ddff 100%
-  );
+  gap:7px;
 }
 
-/* ÉTOILES */
+/* =========================
+   NAVIGATION
+========================= */
 
-.stars{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-
-.star{
-  position:absolute;
-  color:white;
-  font-size:20px;
-  animation:twinkle 2s infinite alternate;
-}
-
-.star:nth-child(1){top:8%;left:10%}
-.star:nth-child(2){top:18%;left:25%;animation-delay:.5s}
-.star:nth-child(3){top:10%;left:50%;animation-delay:1s}
-.star:nth-child(4){top:25%;left:70%;animation-delay:.2s}
-.star:nth-child(5){top:12%;left:90%;animation-delay:.8s}
-.star:nth-child(6){top:38%;left:15%;animation-delay:1.3s}
-.star:nth-child(7){top:32%;left:40%;animation-delay:.4s}
-.star:nth-child(8){top:40%;left:82%;animation-delay:1.1s}
-
-@keyframes twinkle{
-  from{opacity:.3;transform:scale(.7)}
-  to{opacity:1;transform:scale(1.3)}
-}
-
-/* NUAGES */
-
-.cloud{
-  position:absolute;
+.navbar{
+  height:100px;
   background:white;
-  border-radius:50px;
-  width:180px;
-  height:55px;
-  opacity:.8;
-  animation:moveCloud 25s linear infinite;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 35px;
+  box-shadow:0 2px 15px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.cloud:before,
-.cloud:after{
-  content:"";
-  position:absolute;
-  background:white;
-  border-radius:50%;
-}
-
-.cloud:before{
-  width:75px;
-  height:75px;
-  left:25px;
-  bottom:15px;
-}
-
-.cloud:after{
-  width:95px;
-  height:95px;
-  right:20px;
-  bottom:10px;
-}
-
-.cloud1{
-  top:22%;
-  left:-220px;
-}
-
-.cloud2{
-  top:45%;
-  left:-300px;
-  animation-duration:35s;
-  animation-delay:8s;
-  transform:scale(.7);
-}
-
-@keyframes moveCloud{
-  from{transform:translateX(-250px)}
-  to{transform:translateX(calc(100vw + 350px))}
-}
-
-/* NEIGE */
-
-.snow{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.snowflake{
-  position:absolute;
-  top:-30px;
-  color:white;
-  font-size:18px;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-  to{
-    transform:translateY(110vh) rotate(360deg);
-  }
-}
-
-.snowflake:nth-child(1){left:5%;animation-duration:7s}
-.snowflake:nth-child(2){left:15%;animation-duration:9s}
-.snowflake:nth-child(3){left:25%;animation-duration:6s}
-.snowflake:nth-child(4){left:35%;animation-duration:10s}
-.snowflake:nth-child(5){left:45%;animation-duration:8s}
-.snowflake:nth-child(6){left:55%;animation-duration:7s}
-.snowflake:nth-child(7){left:65%;animation-duration:11s}
-.snowflake:nth-child(8){left:75%;animation-duration:8s}
-.snowflake:nth-child(9){left:85%;animation-duration:6s}
-.snowflake:nth-child(10){left:95%;animation-duration:10s}
-
-.hero-content{
-  position:relative;
-  z-index:5;
-  max-width:800px;
-  color:white;
-  background:rgba(0,0,0,.28);
-  padding:35px 20px;
-  border-radius:25px;
-  backdrop-filter:blur(5px);
+.menu-btn{
+  display:none;
+  border:0;
+  background:none;
+  font-size:30px;
+  color:#08256f;
 }
 
 .logo{
-  font-size:48px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:#08256f;
+}
+
+.logo-icon{
+  font-size:50px;
+  color:#d59b20;
+}
+
+.logo-text{
+  font-family:Georgia,serif;
+  font-size:34px;
   font-weight:bold;
-  letter-spacing:5px;
-  color:#fff;
-  text-shadow:0 0 15px #70cfff;
+  letter-spacing:2px;
 }
 
-.hero-content h1{
-  margin-top:15px;
-  font-size:30px;
+.logo-sub{
+  display:block;
+  color:#b07a19;
+  font-size:11px;
+  letter-spacing:2px;
+  text-align:center;
 }
 
-.hero-content p{
-  margin:15px 0;
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:35px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#111;
+  font-size:16px;
+  padding:12px 0;
+  position:relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+  color:#0b36a0;
+}
+
+.nav-links a.active:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:#0b36a0;
+}
+
+.panier-nav{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:#f5f3ee;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+  color:#071d55;
+  font-weight:bold;
+  position:relative;
+}
+
+.panier-nav .icone{
+  font-size:28px;
+}
+
+.badge{
+  position:absolute;
+  right:3px;
+  top:1px;
+  background:#0b2d87;
+  color:white;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  border:2px solid #dca92b;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:510px;
+  background:
+    radial-gradient(circle at 75% 30%,rgba(40,112,255,.35),transparent 25%),
+    radial-gradient(circle at 15% 60%,rgba(30,80,200,.3),transparent 30%),
+    linear-gradient(135deg,#03144b,#092b78 55%,#03164f);
+  color:white;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  padding:45px 6%;
+}
+
+.hero:before{
+  content:"✦  ✧    ✦       ✧   ✦";
+  position:absolute;
+  inset:20px;
+  color:#ffd45b;
+  font-size:25px;
+  letter-spacing:55px;
+  opacity:.8;
+}
+
+.hero-content{
+  width:52%;
+  position:relative;
+  z-index:2;
+}
+
+.hero-script{
+  color:#e9b83c;
+  font-family:cursive;
+  font-size:38px;
+  margin-bottom:5px;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:70px;
+  letter-spacing:3px;
+  line-height:1;
+  margin-bottom:12px;
+}
+
+.hero-title{
+  color:#eab73b;
+  font-size:21px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.hero p{
   font-size:18px;
   line-height:1.6;
+  max-width:550px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:14px;
+  margin-top:25px;
+  flex-wrap:wrap;
 }
 
 .btn{
-  border:none;
-  padding:14px 20px;
-  margin:6px;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  padding:14px 28px;
   border-radius:30px;
-  cursor:pointer;
-  font-size:16px;
+  text-decoration:none;
   font-weight:bold;
-  background:white;
-  color:#07529a;
+  transition:.2s;
+  cursor:pointer;
 }
 
 .btn:hover{
-  transform:scale(1.05);
+  transform:translateY(-2px);
 }
 
-/* =========================
-   BOUTIQUE
-========================= */
-
-#boutique{
-  padding:45px 15px;
-  background:#f7fbff;
-}
-
-.section-title{
-  text-align:center;
-  color:#07529a;
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.section-description{
-  text-align:center;
-  margin-bottom:30px;
-  color:#555;
-}
-
-.products{
-  max-width:1100px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.product{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
-  padding-bottom:15px;
-}
-
-.product-img{
-  width:100%;
-  height:200px;
-  background:linear-gradient(135deg,#d8ecff,#f8fbff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#699;
-  font-size:16px;
-}
-
-.product-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.product-info{
-  padding:15px;
-  text-align:center;
-}
-
-.product-info h3{
-  color:#07529a;
-  margin-bottom:10px;
-}
-
-.price{
-  display:block;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.quantity{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  margin:10px;
-}
-
-.quantity button{
-  width:35px;
-  height:35px;
-  border:none;
-  border-radius:50%;
-  background:#07529a;
+.btn-gold{
+  background:#0b48c9;
   color:white;
-  font-size:22px;
-  cursor:pointer;
-}
-
-.quantity span{
-  font-weight:bold;
-  min-width:25px;
-}
-
-.add-cart{
-  border:none;
-  border-radius:25px;
-  padding:11px 18px;
-  background:#07529a;
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* =========================
-   PANIER
-========================= */
-
-#cart-section{
-  max-width:900px;
-  margin:40px auto;
-  padding:25px;
-  background:white;
-  border-radius:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-#cart-section h2{
-  color:#07529a;
-  margin-bottom:20px;
-  text-align:center;
-}
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #ddd;
-  padding:12px 0;
-  gap:10px;
-}
-
-.cart-item button{
-  border:none;
-  background:#07529a;
-  color:white;
-  border-radius:8px;
-  padding:5px 9px;
-  cursor:pointer;
-}
-
-.total{
-  text-align:right;
-  font-size:20px;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-.thanks{
-  display:none;
-  margin-top:15px;
-  padding:15px;
-  border-radius:12px;
-  background:#e3f4ff;
-  color:#07529a;
-  text-align:center;
-  font-weight:bold;
-}
-
-/* =========================
-   PAIEMENT
-========================= */
-
-.payment{
-  text-align:center;
-  padding:35px 15px;
-}
-
-.payment-box{
-  max-width:700px;
-  margin:auto;
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-.payment-box h2{
-  color:#07529a;
-  margin-bottom:15px;
-}
-
-.payment-methods{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
-  margin-top:20px;
-}
-
-.method{
-  padding:15px 25px;
-  border-radius:15px;
-  background:#eef6ff;
-  font-weight:bold;
-}
-
-/* =========================
-   LIVRAISON
-========================= */
-
-#delivery{
-  display:none;
-  padding:35px 15px;
-  background:#eaf5ff;
-}
-
-.delivery-box{
-  max-width:600px;
-  margin:auto;
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-.delivery-box h2{
-  text-align:center;
-  color:#07529a;
-  margin-bottom:20px;
-}
-
-.delivery-box label{
-  display:block;
-  margin-top:15px;
-  font-weight:bold;
-}
-
-.delivery-box input{
-  width:100%;
-  padding:13px;
-  border:1px solid #ccc;
-  border-radius:10px;
-  margin-top:6px;
-}
-
-#deliveryMessage{
-  margin-top:15px;
-  text-align:center;
-  font-weight:bold;
-}
-
-/* =========================
-   WHATSAPP / PARTAGE
-========================= */
-
-.actions{
-  text-align:center;
-  padding:30px 15px;
-}
-
-.whatsapp{
-  background:#25D366;
-  color:white;
-}
-
-.share{
-  background:#07529a;
-  color:white;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  background:#071a3d;
-  color:white;
-  text-align:center;
-  padding:25px 15px;
-}
-
-footer p{
-  margin:7px;
-}
-
-@media(max-width:600px){
-  .logo{
-    font-size:38px;
-  }
-
-  .hero-content h1{
-    font-size:25px;
-  }
-
-  .hero-content p{
-    font-size:16px;
-  }
-
-  .product-img{
-    height:180px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<!-- =========================
-     PAGE D'ACCUEIL
-========================= -->
-
-<section class="hero">
-
-  <div class="stars">
-    <span class="star">⭐</span>
-    <span class="star">✦</span>
-    <span class="star">⭐</span>
-    <span class="star">✦</span>
-    <span class="star">⭐</span>
-    <span class="star">✦</span>
-    <span class="star">⭐</span>
-    <span class="star">✦</span>
-  </div>
-
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
-
-  <div class="snow">
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-    <span class="snowflake">❄</span>
-  </div>
-
-  <div class="hero-content">
-
-    <div class="logo">PERLORA</div>
-
-    <h1>✨ Bienvenue chez Perlora ✨</h1>
-
-    <p>
-      Une boutique en ligne consacrée à la vente
-      d'objets artisanaux en perles.
-    </p>
-
-    <button class="btn" onclick="goToBoutique()">
-      🛍️ Voir la boutique
-    </button>
-
-    <button class="btn" onclick="goToCart()">
-      🛒 Mon panier (<span id="cartCount">0</span>)
-    </button>
-
-    <br>
-
-    <button class="btn" onclick="showDelivery()">
-      🚚 Livraison
-    </button>
-
-    <button class="btn whatsapp" onclick="sendWhatsApp()">
-      📱 Commander sur WhatsApp
-    </button>
-
-  </div>
-</section>
-
-
-<!-- =========================
-     BOUTIQUE
-========================= -->
-
-<section id="boutique">
-
-  <h2 class="section-title">💎 Notre boutique</h2>
-
-  <p class="section-description">
-    Découvrez nos 21 modèles d'objets en perles.
-  </p>
-
-  <div class="products">
-
-    <!-- ARTICLE 1 -->
-    <article class="product">
-      <div class="product-img">📷 Photo article 1</div>
-      <div class="product-info">
-        <h3>Porte-clés en forme de sac</h3>
-        <span class="price">Prix à définir</span>
-        <div class="quantity">
-          <button onclick="changeQty
+  border:1px solid #eab83d;
+  box-shadow:0 4px 15px rgba(0,0,0,.2);
