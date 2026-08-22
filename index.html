@@ -260,3 +260,1289 @@ body{
   color:white;
   border:1px solid #eab83d;
   box-shadow:0 4px 15px rgba(0,0,0,.2);
+}
+
+.btn-outline{
+  background:transparent;
+  color:white;
+  border:1px solid #eab83d;
+}
+
+.hero-products{
+  width:48%;
+  position:relative;
+  min-height:420px;
+}
+
+.hero-card{
+  position:absolute;
+  background:white;
+  border-radius:25px;
+  padding:10px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+
+.hero-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:18px;
+}
+
+.hero-card.big{
+  width:250px;
+  height:270px;
+  left:25%;
+  top:65px;
+  z-index:2;
+}
+
+.hero-card.small1{
+  width:150px;
+  height:170px;
+  left:0;
+  top:210px;
+}
+
+.hero-card.small2{
+  width:160px;
+  height:180px;
+  right:0;
+  top:120px;
+}
+
+/* =========================
+   GARANTIES
+========================= */
+
+.guarantees{
+  background:white;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:25px 6%;
+  gap:15px;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.guarantee{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:10px;
+  border-right:1px solid #ddd;
+}
+
+.guarantee:last-child{
+  border-right:0;
+}
+
+.guarantee-icon{
+  font-size:32px;
+}
+
+.guarantee strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+  padding:55px 5%;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title small{
+  color:#a66c12;
+  font-weight:bold;
+  letter-spacing:2px;
+  font-size:15px;
+}
+
+.section-title h2{
+  font-family:Georgia,serif;
+  color:#092878;
+  font-size:32px;
+  margin-top:8px;
+}
+
+.section-title h2 span{
+  color:#1470d8;
+}
+
+/* =========================
+   COLLECTIONS
+========================= */
+
+.collections{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.collection{
+  height:245px;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  background:#eee;
+  box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+.collection img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.3s;
+}
+
+.collection:hover img{
+  transform:scale(1.06);
+}
+
+.collection-overlay{
+  position:absolute;
+  left:8px;
+  right:8px;
+  bottom:8px;
+  padding:13px;
+  border-radius:12px;
+  background:rgba(4,24,72,.88);
+  color:white;
+  text-align:center;
+}
+
+.collection-overlay strong{
+  display:block;
+  margin-bottom:8px;
+}
+
+.collection-overlay a{
+  color:white;
+  border:1px solid #d9a52e;
+  border-radius:20px;
+  padding:6px 15px;
+  display:inline-block;
+  text-decoration:none;
+  font-size:13px;
+}
+
+/* =========================
+   PRODUITS
+========================= */
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:20px;
+  max-width:1200px;
+  margin:auto;
+}
+
+.product{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.1);
+  border:1px solid #eee;
+}
+
+.product-img{
+  height:210px;
+  background:#f5eeee;
+  overflow:hidden;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-info{
+  padding:15px;
+}
+
+.product-info h3{
+  font-size:16px;
+  margin-bottom:10px;
+  color:#17244a;
+}
+
+.product-price{
+  color:#092878;
+  font-weight:bold;
+  margin-bottom:13px;
+}
+
+.product-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.cart-add{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:12px;
+  background:#093baf;
+  color:white;
+  font-size:19px;
+  cursor:pointer;
+}
+
+/* =========================
+   BLOC PANIER / WHATSAPP
+========================= */
+
+.cta{
+  margin:20px 3% 50px;
+  border-radius:25px;
+  padding:35px 5%;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(45,102,220,.4),transparent 25%),
+    linear-gradient(120deg,#04174d,#0b368e);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.cta h2{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.cta p{
+  font-size:17px;
+}
+
+.cta-actions{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  min-width:280px;
+}
+
+.btn-gold-solid{
+  background:#e5aa2e;
+  color:white;
+  text-align:center;
+}
+
+.btn-whatsapp{
+  background:#25d366;
+  color:white;
+  text-align:center;
+}
+
+/* =========================
+   A PROPOS
+========================= */
+
+.about{
+  background:#f8f7f3;
+  text-align:center;
+  padding:55px 10%;
+}
+
+.about h2{
+  font-family:Georgia,serif;
+  color:#092878;
+  margin-bottom:15px;
+  font-size:32px;
+}
+
+.about p{
+  max-width:750px;
+  margin:auto;
+  line-height:1.8;
+  color:#444;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  background:#04174d;
+  color:white;
+  padding:40px 6%;
+  text-align:center;
+}
+
+.footer-logo{
+  font-family:Georgia,serif;
+  font-size:30px;
+  color:#e6b338;
+  margin-bottom:10px;
+}
+
+footer p{
+  margin:7px 0;
+}
+
+footer a{
+  color:white;
+  text-decoration:none;
+}
+
+.footer-bottom{
+  margin-top:25px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.2);
+  font-size:13px;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:white;
+  color:#092878;
+  padding:15px 20px;
+  border-radius:15px;
+  box-shadow:0 5px 25px rgba(0,0,0,.2);
+  display:none;
+  z-index:500;
+  font-weight:bold;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+  .navbar{
+    height:75px;
+    padding:0 15px;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:75px;
+    left:0;
+    right:0;
+    background:white;
+    flex-direction:column;
+    gap:0;
+    padding:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.1);
+  }
+
+  .nav-links.open{
+    display:flex;
+  }
+
+  .nav-links a{
+    width:100%;
+    text-align:center;
+    padding:15px;
+  }
+
+  .logo-text{
+    font-size:25px;
+  }
+
+  .logo-icon{
+    font-size:35px;
+  }
+
+  .hero{
+    padding:45px 20px;
+    display:block;
+  }
+
+  .hero-content{
+    width:100%;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .hero-script{
+    font-size:30px;
+  }
+
+  .hero p{
+    margin:auto;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .hero-products{
+    width:100%;
+    min-height:350px;
+    margin-top:25px;
+  }
+
+  .hero-card.big{
+    left:50%;
+    transform:translateX(-50%);
+  }
+
+  .hero-card.small1{
+    left:3%;
+  }
+
+  .hero-card.small2{
+    right:3%;
+  }
+
+  .guarantees{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .guarantee{
+    border-right:0;
+  }
+
+  .collections{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .cta{
+    flex-direction:column;
+    text-align:center;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .topbar{
+    gap:10px;
+    font-size:11px;
+  }
+
+  .topbar span:nth-child(3),
+  .topbar span:nth-child(4){
+    display:none;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+
+  .hero-title{
+    font-size:16px;
+  }
+
+  .hero-card.big{
+    width:210px;
+    height:230px;
+  }
+
+  .hero-card.small1{
+    width:115px;
+    height:130px;
+    top:180px;
+  }
+
+  .hero-card.small2{
+    width:120px;
+    height:140px;
+    top:100px;
+  }
+
+  .guarantees{
+    grid-template-columns:1fr;
+  }
+
+  .collections{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .collection{
+    height:190px;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .product-img{
+    height:150px;
+  }
+
+  .product-info{
+    padding:10px;
+  }
+
+  .product-info h3{
+    font-size:14px;
+  }
+
+  .cta-actions{
+    width:100%;
+    min-width:0;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     BARRE SUPERIEURE
+========================= -->
+
+<div class="topbar">
+
+  <span>📞</span>
+
+  <span>
+    🟢 Commander sur WhatsApp :
+    <strong>0556074077</strong>
+  </span>
+
+  <span>🚚 Livraison rapide en Côte d’Ivoire</span>
+
+  <span>🔒 Paiement sécurisé</span>
+
+</div>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<header class="navbar">
+
+  <button class="menu-btn" onclick="ouvrirMenu()">☰</button>
+
+  <a href="index.html" class="logo">
+
+    <div class="logo-icon">♛</div>
+
+    <div>
+      <div class="logo-text">PERLORA</div>
+      <span class="logo-sub">CRÉATIONS EN PERLES</span>
+    </div>
+
+  </a>
+
+  <nav class="nav-links" id="navLinks">
+
+    <a href="#accueil" class="active">Accueil</a>
+
+    <a href="boutique.html">Boutique</a>
+
+    <a href="#collections">Collections</a>
+
+    <a href="#apropos">À propos</a>
+
+    <a href="#contact">Contact</a>
+
+  </nav>
+
+  <a href="boutique.html" class="panier-nav">
+
+    <span class="icone">🛒</span>
+    <span>Panier</span>
+
+    <span class="badge" id="panierBadge">0</span>
+
+  </a>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="accueil">
+
+  <div class="hero-content">
+
+    <div class="hero-script">
+      Bienvenue chez
+    </div>
+
+    <h1>PERLORA</h1>
+
+    <div class="hero-title">
+      — CRÉATIONS EN PERLES —
+    </div>
+
+    <p>
+      Découvrez l’élégance artisanale.
+      Des créations uniques en perles faites avec passion
+      pour sublimer votre quotidien.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="boutique.html" class="btn btn-gold">
+        🛍️ VOIR LA BOUTIQUE
+      </a>
+
+      <a href="#apropos" class="btn btn-outline">
+        👤 À PROPOS DE NOUS
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-products">
+
+    <div class="hero-card big">
+      <img
+        src="images/produit1.jpg"
+        alt="Création Perlora"
+        onerror="imageErreur(this,'Création Perlora')"
+      >
+    </div>
+
+    <div class="hero-card small1">
+      <img
+        src="images/produit2.jpg"
+        alt="Création en perles"
+        onerror="imageErreur(this,'Perles')"
+      >
+    </div>
+
+    <div class="hero-card small2">
+      <img
+        src="images/produit3.jpg"
+        alt="Porte-clés Perlora"
+        onerror="imageErreur(this,'Porte-clés')"
+      >
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     GARANTIES
+========================= -->
+
+<section class="guarantees">
+
+  <div class="guarantee">
+    <div class="guarantee-icon">🤲</div>
+    <div>
+      <strong>Fait main</strong>
+      <small>Avec passion</small>
+    </div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-icon">💎</div>
+    <div>
+      <strong>Qualité</strong>
+      <small>Matériaux sélectionnés</small>
+    </div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-icon">⭐</div>
+    <div>
+      <strong>Unique</strong>
+      <small>Pièces originales</small>
+    </div>
+  </div>
+
+  <div class="guarantee">
+    <div class="guarantee-icon">🔒</div>
+    <div>
+      <strong>Sécurisé</strong>
+      <small>Paiement sécurisé</small>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section class="section">
+
+  <div class="guarantees">
+
+    <div class="guarantee">
+      <div class="guarantee-icon">🚚</div>
+      <div>
+        <strong>Livraison rapide</strong>
+        <small>Partout en Côte d’Ivoire</small>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="guarantee-icon">💳</div>
+      <div>
+        <strong>Paiement à la livraison</strong>
+        <small>Payez quand vous recevez</small>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="guarantee-icon">🎧</div>
+      <div>
+        <strong>Service client réactif</strong>
+        <small>Nous sommes là pour vous</small>
+      </div>
+    </div>
+
+    <div class="guarantee">
+      <div class="guarantee-icon">🏆</div>
+      <div>
+        <strong>Satisfaction garantie</strong>
+        <small>Votre satisfaction compte</small>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     COLLECTIONS
+========================= -->
+
+<section class="section" id="collections">
+
+  <div class="section-title">
+
+    <small>— NOS COLLECTIONS —</small>
+
+    <h2>
+      Trouvez votre bonheur 💙
+    </h2>
+
+  </div>
+
+
+  <div class="collections">
+
+    <div class="collection">
+      <img src="images/produit2.jpg"
+           alt="Porte-clés"
+           onerror="imageErreur(this,'Porte-clés')">
+
+      <div class="collection-overlay">
+        <strong>Porte-clés</strong>
+        <a href="boutique.html">Découvrir</a>
+      </div>
+    </div>
+
+
+    <div class="collection">
+      <img src="images/produit3.jpg"
+           alt="Bracelets"
+           onerror="imageErreur(this,'Bracelets')">
+
+      <div class="collection-overlay">
+        <strong>Bracelets</strong>
+        <a href="boutique.html">Découvrir</a>
+      </div>
+    </div>
+
+
+    <div class="collection">
+      <img src="images/produit4.jpg"
+           alt="Sacs et pochettes"
+           onerror="imageErreur(this,'Sacs & Pochettes')">
+
+      <div class="collection-overlay">
+        <strong>Sacs & Pochettes</strong>
+        <a href="boutique.html">Découvrir</a>
+      </div>
+    </div>
+
+
+    <div class="collection">
+      <img src="images/produit5.jpg"
+           alt="Décorations"
+           onerror="imageErreur(this,'Décorations')">
+
+      <div class="collection-overlay">
+        <strong>Décorations</strong>
+        <a href="boutique.html">Découvrir</a>
+      </div>
+    </div>
+
+
+    <div class="collection">
+      <img src="images/produit6.jpg"
+           alt="Objets personnalisés"
+           onerror="imageErreur(this,'Objets personnalisés')">
+
+      <div class="collection-overlay">
+        <strong>Objets personnalisés</strong>
+        <a href="boutique.html">Découvrir</a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUITS PHARES
+========================= -->
+
+<section class="section">
+
+  <div class="section-title">
+
+    <small>— NOS PRODUITS PHARES —</small>
+
+    <h2>
+      Nos créations <span>💙</span>
+    </h2>
+
+  </div>
+
+
+  <div class="products">
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <img src="images/produit1.jpg"
+             alt="Sac en perles"
+             onerror="imageErreur(this,'Sac en perles')">
+      </div>
+
+      <div class="product-info">
+
+        <h3>Sac en perles</h3>
+
+        <div class="product-price">
+          Prix à définir
+        </div>
+
+        <div class="product-bottom">
+
+          <a href="boutique.html">
+            Voir
+          </a>
+
+          <button
+            class="cart-add"
+            onclick="ajouterAccueil('Sac en perles')">
+            🛒
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <img src="images/produit2.jpg"
+             alt="Porte-clés"
+             onerror="imageErreur(this,'Porte-clés')">
+      </div>
+
+      <div class="product-info">
+
+        <h3>Porte-clés en perles</h3>
+
+        <div class="product-price">
+          Prix à définir
+        </div>
+
+        <div class="product-bottom">
+
+          <a href="boutique.html">
+            Voir
+          </a>
+
+          <button
+            class="cart-add"
+            onclick="ajouterAccueil('Porte-clés en perles')">
+            🛒
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <img src="images/produit3.jpg"
+             alt="Bracelet"
+             onerror="imageErreur(this,'Bracelet')">
+      </div>
+
+      <div class="product-info">
+
+        <h3>Bracelet en perles</h3>
+
+        <div class="product-price">
+          Prix à définir
+        </div>
+
+        <div class="product-bottom">
+
+          <a href="boutique.html">
+            Voir
+          </a>
+
+          <button
+            class="cart-add"
+            onclick="ajouterAccueil('Bracelet en perles')">
+            🛒
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <img src="images/produit4.jpg"
+             alt="Porte-clés lettre"
+             onerror="imageErreur(this,'Porte-clés lettre')">
+      </div>
+
+      <div class="product-info">
+
+        <h3>Porte-clés personnalisé</h3>
+
+        <div class="product-price">
+          Prix à définir
+        </div>
+
+        <div class="product-bottom">
+
+          <a href="boutique.html">
+            Voir
+          </a>
+
+          <button
+            class="cart-add"
+            onclick="ajouterAccueil('Porte-clés personnalisé')">
+            🛒
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="product">
+
+      <div class="product-img">
+        <img src="images/produit5.jpg"
+             alt="Décoration"
+             onerror="imageErreur(this,'Décoration')">
+      </div>
+
+      <div class="product-info">
+
+        <h3>Décoration en perles</h3>
+
+        <div class="product-price">
+          Prix à définir
+        </div>
+
+        <div class="product-bottom">
+
+          <a href="boutique.html">
+            Voir
+          </a>
+
+          <button
+            class="cart-add"
+            onclick="ajouterAccueil('Décoration en perles')">
+            🛒
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PANIER / WHATSAPP
+========================= -->
+
+<section class="cta">
+
+  <div>
+
+    <h2>
+      Ajoutez vos articles au panier
+    </h2>
+
+    <p>
+      et passez votre commande facilement ✨
+    </p>
+
+  </div>
+
+
+  <div class="cta-actions">
+
+    <a href="boutique.html"
+       class="btn btn-gold-solid">
+      🛒 ALLER AU PANIER
+    </a>
+
+    <a
+      href="https://wa.me/2250556074077?text=Bonjour%20Perlora%20!%20Je%20souhaite%20passer%20une%20commande."
+      target="_blank"
+      class="btn btn-whatsapp">
+
+      📱 Commander sur WhatsApp
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     A PROPOS
+========================= -->
+
+<section class="about" id="apropos">
+
+  <h2>À propos de Perlora</h2>
+
+  <p>
+    Perlora est une boutique dédiée aux créations artisanales
+    réalisées avec des perles. Chaque création est pensée avec
+    soin afin de vous proposer des objets uniques, élégants
+    et personnalisables. 💎
+  </p>
+
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="section" id="contact">
+
+  <div class="section-title">
+
+    <small>— CONTACT —</small>
+
+    <h2>
+      Parlons de votre projet 💙
+    </h2>
+
+  </div>
+
+  <div style="text-align:center">
+
+    <p style="margin-bottom:20px">
+      Une question ? Une création personnalisée ?
+    </p>
+
+    <a
+      href="https://wa.me/2250556074077?text=Bonjour%20Perlora%20!%20Je%20souhaite%20avoir%20plus%20d'informations."
+      target="_blank"
+      class="btn btn-whatsapp">
+
+      📱 Nous contacter sur WhatsApp
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-logo">
+    PERLORA
+  </div>
+
+  <p>
+    ✨ Créations artisanales en perles ✨
+  </p>
+
+  <p>
+    📱 WhatsApp :
+    <a href="https://wa.me/2250556074077"
+       target="_blank">
+      0556074077
+    </a>
+  </p>
+
+  <p>
+    🚚 Livraison en Côte d'Ivoire
+  </p>
+
+  <div class="footer-bottom">
+    © 2026 Perlora — Tous droits réservés
+  </div>
+
+</footer>
+
+
+<!-- MESSAGE -->
+
+<div id="message"></div>
+
+
+<script>
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+function ouvrirMenu(){
+
+  const menu = document.getElementById("navLinks");
+
+  menu.classList.toggle("open");
+
+}
+
+
+/* =========================
+   PANIER ACCUEIL
+========================= */
+
+let nombrePanier =
+  parseInt(localStorage.getItem("perloraPanier")) || 0;
+
+
+function actualiserBadge(){
+
+  document.getElementById("panierBadge")
+    .textContent = nombrePanier;
+
+}
+
+
+function ajouterAccueil(nom){
+
+  nombrePanier++;
+
+  localStorage.setItem(
+    "perloraPanier",
+    nombrePanier
+  );
+
+  actualiserBadge();
+
+  afficherMessage(
+    "💕 " + nom + " ajouté au panier !"
+  );
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function afficherMessage(texte){
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent = texte;
+
+  message.style.display = "block";
+
+  setTimeout(function(){
+
+    message.style.display = "none";
+
+  },2500);
+
+}
+
+
+/* =========================
+   IMAGE DE SECOURS
+========================= */
+
+function imageErreur(image, texte){
+
+  image.onerror = null;
+
+  image.src =
+    "https://placehold.co/600x500/edf1fa/092878?text="
+    + encodeURIComponent(texte);
+
+}
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+actualiserBadge();
+
+</script>
+
+</body>
+  </html>
