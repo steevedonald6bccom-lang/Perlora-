@@ -3,338 +3,318 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perlora — Créations en perles</title>
+
+<title>PERLORA — Créations en perles</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:Arial,sans-serif;
-  background:#020b20;
-  color:#fff;
-  min-height:100vh;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.app{
-  max-width:1200px;
-  margin:auto;
-  background:linear-gradient(135deg,#020b20,#062c78,#020b20);
-  min-height:100vh;
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f8fc;
+  color: #172033;
 }
 
-header{
-  padding:18px 25px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid #1c5bd6;
-  background:rgba(2,11,32,.9);
-  position:sticky;
-  top:0;
-  z-index:10;
+/* HEADER */
+header {
+  background: #0b5ed7;
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 12px rgba(0,0,0,.15);
 }
 
-.menu,.cart{
-  font-size:28px;
-  cursor:pointer;
+.logo {
+  text-align: center;
+  flex: 1;
 }
 
-.logo{
-  text-align:center;
+.logo strong {
+  display: block;
+  font-size: 24px;
+  letter-spacing: 2px;
 }
 
-.logo strong{
-  display:block;
-  font-family:Georgia,serif;
-  font-size:38px;
-  letter-spacing:3px;
+.logo span {
+  font-size: 9px;
+  letter-spacing: 1px;
 }
 
-.logo span{
-  font-size:12px;
-  letter-spacing:4px;
-  color:#a9dfff;
+.menu {
+  font-size: 25px;
 }
 
-.hero{
-  margin:20px;
-  padding:35px;
-  min-height:360px;
-  border-radius:28px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 80% 50%,#168cff 0,#063d9a 20%,transparent 45%),
-    linear-gradient(120deg,#03143b,#075ee5,#021537);
-  box-shadow:0 15px 50px #00153f;
+#cartButton {
+  background: white;
+  color: #0b5ed7;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 12px;
+  font-weight: bold;
 }
 
-.hero-text{
-  max-width:520px;
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0b5ed7, #38a3ff);
+  color: white;
+  text-align: center;
+  padding: 45px 20px;
 }
 
-.hero h1{
-  font-size:46px;
-  line-height:1.05;
-  margin-bottom:18px;
+.hero h1 {
+  font-size: 30px;
+  margin-bottom: 12px;
 }
 
-.hero h1 span{
-  color:#18aaff;
+.hero p {
+  font-size: 15px;
+  line-height: 1.5;
 }
 
-.hero p{
-  font-size:19px;
-  color:#dbeaff;
-  margin-bottom:28px;
+/* RECHERCHE */
+.search-box {
+  padding: 20px;
+  background: white;
 }
 
-.btn{
-  display:inline-block;
-  padding:15px 25px;
-  border-radius:14px;
-  background:#0787ff;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  box-shadow:0 8px 25px #001f5c;
+#searchInput {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid #dbe5f2;
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
 }
 
-.pearl{
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  border:28px dotted #f4f8ff;
-  box-shadow:0 0 45px #6dbbff;
-  position:relative;
+#searchInput:focus {
+  border-color: #0b5ed7;
 }
 
-.pearl:after{
-  content:"P";
-  position:absolute;
-  inset:85px;
-  border-radius:50%;
-  background:linear-gradient(145deg,#00aaff,#003d99);
-  display:grid;
-  place-items:center;
-  font:70px Georgia;
-  color:white;
-  box-shadow:0 0 30px #00aaff;
+/* TITRE */
+.section-title {
+  text-align: center;
+  padding: 25px 15px 10px;
 }
 
-.search{
-  margin:20px;
-  padding:16px 20px;
-  border-radius:30px;
-  background:white;
-  color:#53627c;
-  font-size:17px;
+.section-title h2 {
+  color: #0b5ed7;
 }
 
-.categories{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin:20px;
+.section-title p {
+  margin-top: 6px;
+  color: #667085;
 }
 
-.category{
-  background:white;
-  color:#07183c;
-  padding:18px 8px;
-  border-radius:18px;
-  text-align:center;
-  font-weight:bold;
+/* PRODUITS */
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 15px;
 }
 
-.category .icon{
-  font-size:30px;
-  margin-bottom:8px;
+.product {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
-.promo{
-  margin:20px;
-  padding:25px;
-  border-radius:22px;
-  background:linear-gradient(110deg,#03245f,#007cff,#03245f);
-  border:1px solid #1baaff;
+.product-img {
+  width: 100%;
+  height: 170px;
+  background: #eaf2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.promo h2{
-  font-size:32px;
-  color:#8bdcff;
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.promo p{
-  margin:8px 0 18px;
-  font-size:18px;
+.placeholder {
+  color: #0b5ed7;
+  font-size: 40px;
 }
 
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  margin:30px 20px 15px;
+.product-info {
+  padding: 12px;
 }
 
-.products{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  padding:0 20px 30px;
+.product-info h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  min-height: 36px;
 }
 
-.product{
-  background:white;
-  color:#07183c;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 8px 25px #001338;
+.price {
+  display: block;
+  font-weight: bold;
+  color: #0b5ed7;
+  margin-bottom: 10px;
 }
 
-.product-img{
-  height:180px;
-  background:
-    radial-gradient(circle,#fff 0 9%,transparent 10%),
-    radial-gradient(circle,#d9ecff 0 14%,transparent 15%),
-    linear-gradient(135deg,#eaf6ff,#b9d8ef);
-  background-size:55px 55px,80px 80px,100% 100%;
+.buy {
+  width: 100%;
+  border: none;
+  background: #0b5ed7;
+  color: white;
+  padding: 10px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.product-info{
-  padding:14px;
+/* PANIER */
+#cartPanel {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 92%;
+  max-width: 420px;
+  height: 100vh;
+  background: white;
+  z-index: 2000;
+  box-shadow: -5px 0 20px rgba(0,0,0,.2);
+  padding: 20px;
+  overflow-y: auto;
 }
 
-.product h3{
-  margin-bottom:8px;
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.price{
-  color:#0074e8;
-  font-weight:bold;
-  font-size:18px;
+#closeCart {
+  border: none;
+  background: #eee;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
 }
 
-.buy{
-  float:right;
-  background:#087df2;
-  color:white;
-  border:0;
-  border-radius:50%;
-  width:40px;
-  height:40px;
-  font-size:19px;
+.cart-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
 }
 
-.qr{
-  margin:20px;
-  padding:25px;
-  border-radius:22px;
-  background:#031b48;
-  border:1px solid #087df2;
-  text-align:center;
+.cart-item h4 {
+  margin-bottom: 8px;
 }
 
-.qr-box{
-  width:180px;
-  height:180px;
-  margin:20px auto;
-  background:
-    repeating-linear-gradient(45deg,#000 0 5px,#fff 5px 10px);
-  border:12px solid white;
-  display:grid;
-  place-items:center;
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.qr-box span{
-  background:#06245f;
-  padding:18px;
-  border-radius:50%;
-  font:bold 30px Georgia;
+.quantity button {
+  border: none;
+  background: #0b5ed7;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
 }
 
-.services{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  padding:0 20px 100px;
+.remove {
+  border: none;
+  background: #ffe5e5;
+  color: #d60000;
+  padding: 6px 10px;
+  border-radius: 7px;
+  margin-top: 8px;
 }
 
-.service{
-  text-align:center;
-  padding:20px 10px;
-  border:1px solid #1765c9;
-  border-radius:18px;
-  background:#031943;
+.cart-total {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f0f6ff;
+  border-radius: 12px;
+  font-size: 19px;
+  font-weight: bold;
 }
 
-.service b{
-  display:block;
-  margin-top:8px;
+#whatsappOrder {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: #25D366;
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  margin-top: 15px;
+  font-weight: bold;
 }
 
-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  background:#020d29ee;
-  border-top:1px solid #145dcc;
-  padding:12px 5px;
-  z-index:20;
+/* MESSAGE */
+#thankYou {
+  display: none;
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background: #172033;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 3000;
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
 }
 
-nav a{
-  color:white;
-  text-align:center;
-  text-decoration:none;
-  font-size:13px;
+/* FOOTER */
+footer {
+  margin-top: 30px;
+  padding: 25px 15px;
+  text-align: center;
+  background: #172033;
+  color: white;
 }
 
-nav span{
-  display:block;
-  font-size:25px;
-  margin-bottom:3px;
+footer p {
+  margin: 5px;
+  font-size: 13px;
 }
 
-@media(max-width:700px){
-  .hero{min-height:470px;padding:25px;flex-direction:column;text-align:center}
-  .hero h1{font-size:34px}
-  .pearl{width:220px;height:220px}
-  .pearl:after{inset:62px;font-size:50px}
-  .categories{grid-template-columns:repeat(3,1fr)}
-  .products{grid-template-columns:1fr}
-  .services{grid-template-columns:1fr}
-  .logo strong{font-size:25px}
+/* MOBILE */
+@media (max-width: 380px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .product-img {
+    height: 210px;
+  }
 }
 </style>
-</head><div id="cartPanel">
-  <h2>🛒 Mon panier</h2>
-
-  <div id="cartItems">
-    <p>Votre panier est vide.</p>
-  </div>
-
-  <h3>Total : <span id="cartTotal">0 FCFA</span></h3>
-
-  <a id="whatsappOrder" href="#" target="_blank">
-    📱 Commander sur WhatsApp
-  </a>
-
-  <p id="thankYou" style="display:none;">
-    Merci beaucoup pour votre achat ! 🥰💙✨
-  </p>
-  </div>
+</head>
 
 <body>
-<div class="app">
 
 <header>
+
   <div class="menu">☰</div>
 
   <div class="logo">
@@ -342,489 +322,187 @@ nav span{
     <span>CRÉATIONS EN PERLES</span>
   </div>
 
-  <button id="cartButton">🛒 Panier (<span id="cartCount">0</span>)</button>
+  <button id="cartButton">
+    🛒 <span id="cartCount">0</span>
+  </button>
+
 </header>
 
 <section class="hero">
-  <div class="hero-text">
-    <h1>L’éclat des perles,<br>l’art de l’<span>élégance.</span></h1>
-    <p>Des créations uniques faites à la main avec passion.</p>
-    <a class="btn" href="#boutique">Découvrir nos créations ✨</a>
-  </div>
-
-  <div class="pearl"></div>
+  <h1>✨ L'élégance en perles ✨</h1>
+  <p>
+    Découvrez les créations Perlora faites avec soin,
+    passion et créativité.
+  </p>
 </section>
 
-<div class="search">
-  🔎
-  <input type="text" id="searchInput" placeholder="Rechercher un article...">
+<div class="search-box">
+  <input
+    type="search"
+    id="searchInput"
+    placeholder="🔎 Rechercher un article..."
+  >
 </div>
 
-<div class="categories">
-  <div class="category"><div class="icon">📿</div>Bracelets</div>
-  <div class="category"><div class="icon">📿</div>Colliers</div>
-  <div class="category"><div class="icon">🔑</div>Porte-clés</div>
-  <div class="category"><div class="icon">💎</div>Boucles</div>
-  <div class="category"><div class="icon">♡</div>Autres</div>
-</div>
-
-<section class="promo">
-  <h2>OFFRE SPÉCIALE —20%</h2>
-  <p>Sur toute la boutique pendant la promotion.</p>
-  <a class="btn" href="#boutique">Profiter maintenant →</a>
+<section class="section-title">
+  <h2>🛍️ Notre boutique</h2>
+  <p>Découvrez nos créations Perlora</p>
 </section>
 
-<div class="section-title" id="boutique">
-  <h2>Nos créations en vedette</h2>
-  <a href="#" style="color:#38aaff">Voir tout →</a>
-</div>
-
-<div class="products">
+<section class="products" id="products">
 
   <article class="product">
-    <div class="product-img"></div>
+    <div class="product-img">
+      <div class="placeholder">💎</div>
+    </div>
     <div class="product-info">
-      <h3>Porte-clés Étoile en perles</h3>
-      <span class="price">2 000 FCFA</span>
-      <button class="buy">🛒</button>
+      <h3>Bracelet en perles</h3>
+      <span class="price">Prix à définir</span>
+      <button class="buy" data-name="Bracelet en perles">
+        🛒 Ajouter au panier
+      </button>
     </div>
   </article>
 
   <article class="product">
-    <div class="product-img"></div>
+    <div class="product-img">
+      <div class="placeholder">👜</div>
+    </div>
     <div class="product-info">
-      <h3>Porte-clés Perles Bleues</h3>
-      <span class="price">3 000 FCFA</span>
-      <button class="buy">🛒</button>
+      <h3>Sac en perles</h3>
+      <span class="price">Prix à définir</span>
+      <button class="buy" data-name="Sac en perles">
+        🛒 Ajouter au panier
+      </button>
     </div>
   </article>
 
   <article class="product">
-    <div class="product-img"></div>
+    <div class="product-img">
+      <div class="placeholder">💍</div>
+    </div>
     <div class="product-info">
-      <h3>Porte-clés Lettre P en perles</h3>
-      <span class="price">1 000 FCFA</span>
-      <button class="buy">🛒</button>
+      <h3>Bijou en perles</h3>
+      <span class="price">Prix à définir</span>
+      <button class="buy" data-name="Bijou en perles">
+        🛒 Ajouter au panier
+      </button>
     </div>
   </article>
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Porte-clés Ancre Rose</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
 
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Mini-sac Violet en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
+  <article class="product">
+    <div class="product-img">
+      <div class="placeholder">🔑</div>
+    </div>
+    <div class="product-info">
+      <h3>Porte-clés en perles</h3>
+      <span class="price">Prix à définir</span>
+      <button class="buy" data-name="Porte-clés en perles">
+        🛒 Ajouter au panier
+      </button>
+    </div>
+  </article>
 
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Mini-sac Vert en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
+  <article class="product">
+    <div class="product-img">
+      <div class="placeholder">🌸</div>
+    </div>
+    <div class="product-info">
+      <h3>Cadre décoratif en perles</h3>
+      <span class="price">Prix à définir</span>
+      <button class="buy" data-name="Cadre décoratif en perles">
+        🛒 Ajouter au panier
+      </button>
+    </div>
+  </article>
 
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Sac à main Bleu en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
+  <article class="product">
+    <div class="product-img">
+      <div class="placeholder">🎀</div>
+    </div>
+    <div class="product-info">
+      <h3>Pochette en perles</h3>
+      <span class="price">Prix à définir</span>
+      <button class="buy" data-name="Pochette en perles">
+        🛒 Ajouter au panier
+      </button>
+    </div>
+  </article>
 
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Petit panier Rose en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
-
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Sac Bleu et Blanc en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
-
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Porte-clés Lettre P Noir</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-      </article><article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Cadre décoratif en perles rose</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
-
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Pochette bleue en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
-
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Pochette Papillon rouge et blanche en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
-
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Porte-clés Cœur rouge et noir en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-</article>
-
-<article class="product">
-  <div class="product-img"></div>
-  <div class="product-info">
-    <h3>Porte-clés Fleurs multicolores en perles</h3>
-    <span class="price">Prix à définir</span>
-    <button class="buy">🛒</button>
-  </div>
-    </article>
-</div>
-
-<section class="qr">
-  <h2>📱 Paiement facile</h2>
-  <p>Scannez et payez en toute sécurité</p>
-
-  <div class="qr-box">
-    <span>P</span>
-  </div>
-
-  <p>Merci pour votre confiance ! 💙</p>
 </section>
 
-<div class="services">
-  <div class="service">💯👌<b>Fait main</b>avec amour</div>
-  <div class="service">🤝<b>Qualité</b>premium</div>
-  <div class="service">🚚<b>Livraison</b>rapide</div>
-</div>
+<!-- PANIER -->
 
-<nav>
-  <a href="#"><span>⌂</span>Accueil</a>
-  <a href="#boutique"><span>🛍</span>Boutique</a>
-  <a href="#"><span>♡</span>Favoris</a>
-  <a href="#"><span>♙</span>Compte</a>
-</nav>
-
-</div>
-<a href="https://wa.me/2250556074077?text=Bonjour%20Perlora%2C%20je%20voudrais%20passer%20une%20commande."
-   target="_blank"
-   rel="noopener"
-   style="position:fixed; right:20px; bottom:85px; z-index:9999; background:#25D366; color:white; padding:14px 18px; border-radius:30px; text-decoration:none; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-   💬 WhatsApp
-</a>
-<style>
-#cartButton{
-  position:fixed;
-  left:20px;
-  bottom:85px;
-  z-index:9999;
-  background:#1683ff;
-  color:white;
-  border:none;
-  padding:14px 18px;
-  border-radius:30px;
-  font-size:16px;
-  font-weight:bold;
-  box-shadow:0 4px 12px rgba(0,0,0,.3);
-}
-
-#cartPanel{
-  display:none;
-  position:fixed;
-  left:10px;
-  right:10px;
-  bottom:145px;
-  max-height:65vh;
-  overflow-y:auto;
-  z-index:10000;
-  background:white;
-  color:#111;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,.4);
-}
-
-#cartPanel h2{
-  margin-top:0;
-}
-
-.cartItem{
-  border-bottom:1px solid #ddd;
-  padding:10px 0;
-}
-
-.cartControls{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:8px;
-}
-
-.cartControls button{
-  border:none;
-  background:#1683ff;
-  color:white;
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  font-size:18px;
-}
-
-.removeItem{
-  background:#e53935 !important;
-}
-
-#whatsappOrder{
-  display:block;
-  width:100%;
-  margin-top:15px;
-  padding:14px;
-  background:#25D366;
-  color:white;
-  text-align:center;
-  text-decoration:none;
-  border-radius:25px;
-  font-weight:bold;
-  box-sizing:border-box;
-<button id="cartButton">🛒 Panier (<span id="cartCount">0</span>)</button>
 <div id="cartPanel">
-  <h2>🛒 Mon panier</h2>
+
+  <div class="cart-header">
+    <h2>🛒 Mon panier</h2>
+    <button id="closeCart">✕</button>
+  </div>
 
   <div id="cartItems">
     <p>Votre panier est vide.</p>
   </div>
 
-  <h3>Total : <span id="cartTotal">0 FCFA</span></h3>
+  <div class="cart-total">
+    Total : <span id="cartTotal">0 FCFA</span>
+  </div>
 
-  <a id="whatsappOrder"
-     href="#"
-     target="_blank"
-     rel="noopener">
-     💬 Commander sur WhatsApp
+  <a id="whatsappOrder" href="#" target="_blank">
+    📱 Commander sur WhatsApp
   </a>
+
 </div>
 
+<!-- MESSAGE DE REMERCIEMENT -->
+
+<div id="thankYou">
+  🙏 Merci ! Votre article a été ajouté au panier avec succès ❤️
+</div>
+
+<footer>
+  <p>💎 PERLORA</p>
+  <p>Créations en perles faites avec passion.</p>
+  <p>🙏 Merci de soutenir nos créations.</p>
+</footer>
+
 <script>
+
+/* =========================
+   PANIER
+========================= */
+
 let cart = [];
 
 const cartButton = document.getElementById("cartButton");
 const cartPanel = document.getElementById("cartPanel");
-const cartItems = document.getElementById("cartItems");
-const cartCount = document.getElementById("cartCount");
-const cartTotal = document.getElementById("cartTotal");
-const whatsappOrder = document.getElementById("whatsappOrder");
-
-cartButton.addEventListener("click", function(){
-  cartPanel.style.display =
-    cartPanel.style.display === "block" ? "none" : "block";
-});
-
-document.querySelectorAll(".product").forEach(function(product){
-
-  const buyButton = product.querySelector(".buy");
-  const nameElement = product.querySelector("h3");
-  const priceElement = product.querySelector(".price");
-
-  if(!buyButton || !nameElement || !priceElement) return;
-
-  buyButton.addEventListener("click", function(){
-
-    const name = nameElement.textContent.trim();
-    const priceText = priceElement.textContent.trim();
-
-    const existing = cart.find(item => item.name === name);
-
-    if(existing){
-      existing.quantity++;
-    }else{
-      const priceMatch = priceText.replace(/\s/g,"").match(/\d+/);
-      const price = priceMatch ? parseInt(priceMatch[0]) : 0;
-
-      cart.push({
-        name:name,
-        price:price,
-        priceText:priceText,
-        quantity:1
-      });
-    }
-
-    updateCart();
-
-    cartPanel.style.display = "block";
-  });
-});
-
-function updateCart(){
-
-  cartCount.textContent =
-    cart.reduce((total,item) => total + item.quantity, 0);
-
-  if(cart.length === 0){
-    cartItems.innerHTML = "<p>Votre panier est vide.</p>";
-    cartTotal.textContent = "0 FCFA";
-    whatsappOrder.href = "#";
-    return;
-  }
-
-  cartItems.innerHTML = "";
-
-  let total = 0;
-  let hasPriceToDefine = false;
-
-  cart.forEach(function(item,index){
-
-    total += item.price * item.quantity;
-
-    if(item.price === 0){
-      hasPriceToDefine = true;
-    }
-
-    const div = document.createElement("div");
-    div.className = "cartItem";
-
-    div.innerHTML = `
-      <strong>${item.name}</strong><br>
-      ${item.priceText}
-
-      <div class="cartControls">
-        <button onclick="changeQuantity(${index},-1)">−</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity(${index},1)">+</button>
-        <button class="removeItem" onclick="removeItem(${index})">🗑️</button>
-      </div>
-    `;
-
-    cartItems.appendChild(div);
-  });
-
-  cartTotal.textContent =
-    total.toLocaleString("fr-FR") + " FCFA";
-
-  let message =
-    "Bonjour Perlora, je voudrais passer une commande :%0A%0A";
-
-  cart.forEach(function(item){
-
-    message +=
-      "• " + item.name +
-      " — " + item.priceText +
-      " × " + item.quantity +
-      "%0A";
-  });
-
-  message +=
-    "%0ATotal : " +
-    total.toLocaleString("fr-FR") +
-    " FCFA";
-
-  if(hasPriceToDefine){
-    message +=
-      "%0A%0A*Certains prix sont encore à définir.*";
-  }
-
-  whatsappOrder.href =
-    "https://wa.me/2250556074077?text=" + message;
-}
-
-function changeQuantity(index,change){
-
-  cart[index].quantity += change;
-
-  if(cart[index].quantity <= 0){
-    cart.splice(index,1);
-  }
-
-  updateCart();
-}
-
-function removeItem(index){
-
-  cart.splice(index,1);
-
-  updateCart();
-}
-
-updateCart();
-});
-</script>
-<script>
-const searchInput = document.querySelector('input[type="search"], input[type="text"]');
-
-if (searchInput) {
-  searchInput.addEventListener("input", function () {
-    const recherche = this.value.toLowerCase().trim();
-
-    document.querySelectorAll(".product").forEach(function(product) {
-      const nom = product.querySelector("h3");
-
-      if (nom) {
-        const texte = nom.textContent.toLowerCase();
-        product.style.display = texte.includes(recherche) ? "" : "none";
-      }
-    });
-  });
-}
-</script><script>
-let cart = [];
-
-const cartButton = document.getElementById("cartButton");
-const cartPanel = document.getElementById("cartPanel");
+const closeCart = document.getElementById("closeCart");
 const cartItems = document.getElementById("cartItems");
 const cartCount = document.getElementById("cartCount");
 const cartTotal = document.getElementById("cartTotal");
 const whatsappOrder = document.getElementById("whatsappOrder");
 const thankYou = document.getElementById("thankYou");
 
+/* OUVRIR PANIER */
+
+cartButton.addEventListener("click", function() {
+  cartPanel.style.display = "block";
+  displayCart();
+});
+
+/* FERMER PANIER */
+
+closeCart.addEventListener("click", function() {
+  cartPanel.style.display = "none";
+});
+
+/* AJOUTER PRODUIT */
+
 document.querySelectorAll(".buy").forEach(function(button) {
 
   button.addEventListener("click", function() {
 
-    const product = button.closest(".product");
-    const name = product.querySelector("h3").textContent.trim();
-    const priceText = product.querySelector(".price").textContent;
-
-    const price = parseInt(
-      priceText.replace(/\s/g, "").replace("FCFA", ""),
-      10
-    );
-
-    if (isNaN(price)) {
-      alert("Le prix de cet article n'est pas encore défini.");
-      return;
-    }
+    const name = this.dataset.name;
 
     const existing = cart.find(item => item.name === name);
 
@@ -833,317 +511,224 @@ document.querySelectorAll(".buy").forEach(function(button) {
     } else {
       cart.push({
         name: name,
-        price: price,
-        quantity: 1
+        quantity: 1,
+        price: 0
       });
     }
 
     updateCart();
 
-    cartPanel.style.display = "block";
+    /* MESSAGE */
+
+    thankYou.style.display = "block";
+
+    setTimeout(function() {
+      thankYou.style.display = "none";
+    }, 2500);
+
   });
 
 });
 
+/* METTRE À JOUR LE PANIER */
+
 function updateCart() {
+
+  let totalQuantity = 0;
+
+  cart.forEach(function(item) {
+    totalQuantity += item.quantity;
+  });
+
+  cartCount.textContent = totalQuantity;
+
+  displayCart();
+}
+
+/* AFFICHER PANIER */
+
+function displayCart() {
+
+  if (cart.length === 0) {
+
+    cartItems.innerHTML =
+      "<p>Votre panier est vide.</p>";
+
+    cartTotal.textContent = "0 FCFA";
+
+    return;
+  }
 
   cartItems.innerHTML = "";
 
   let total = 0;
-  let count = 0;
 
   cart.forEach(function(item, index) {
 
-    total += item.price * item.quantity;
-    count += item.quantity;
+    const itemTotal = item.price * item.quantity;
+
+    total += itemTotal;
 
     const div = document.createElement("div");
 
+    div.className = "cart-item";
+
     div.innerHTML = `
-      <div style="margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #ddd;">
-        <strong>${item.name}</strong><br>
+      <h4>${item.name}</h4>
 
-        ${item.price.toLocaleString("fr-FR")} FCFA × ${item.quantity}
+      <p>${item.price > 0
+        ? item.price + " FCFA"
+        : "Prix à définir"
+      }</p>
 
-        <div style="margin-top:8px;">
-          <button onclick="decreaseQuantity(${index})">➖</button>
+      <div class="quantity">
 
-          <span style="margin:0 10px;font-weight:bold;">
-            ${item.quantity}
-          </span>
+        <button onclick="decreaseItem(${index})">
+          −
+        </button>
 
-          <button onclick="increaseQuantity(${index})">➕</button>
+        <strong>${item.quantity}</strong>
 
-          <button onclick="removeItem(${index})">
-            🗑️
-          </button>
-        </div>
+        <button onclick="increaseItem(${index})">
+          +
+        </button>
+
       </div>
+
+      <button
+        class="remove"
+        onclick="removeItem(${index})">
+        🗑️ Supprimer
+      </button>
     `;
 
     cartItems.appendChild(div);
+
   });
 
-  if (cart.length === 0) {
-    cartItems.innerHTML = "<p>Votre panier est vide.</p>";
-  }
-
-  cartCount.textContent = count;
-  cartTotal.textContent =
-    total.toLocaleString("fr-FR") + " FCFA";
+  cartTotal.textContent = total + " FCFA";
 
   updateWhatsApp();
 }
 
-function increaseQuantity(index) {
+/* AUGMENTER */
+
+function increaseItem(index) {
+
   cart[index].quantity++;
+
   updateCart();
 }
 
-function decreaseQuantity(index) {
+/* DIMINUER */
+
+function decreaseItem(index) {
 
   if (cart[index].quantity > 1) {
+
     cart[index].quantity--;
+
   } else {
+
     cart.splice(index, 1);
+
   }
 
   updateCart();
 }
 
+/* SUPPRIMER */
+
 function removeItem(index) {
+
   cart.splice(index, 1);
+
   updateCart();
 }
+
+/* WHATSAPP */
 
 function updateWhatsApp() {
 
-  let message =
-    "Bonjour Perlora 👋%0A%0A" +
-    "Je souhaite commander :%0A%0A";
+  if (cart.length === 0) {
 
-  let total = 0;
+    whatsappOrder.style.display = "none";
 
-  cart.forEach(function(item) {
-
-    const sousTotal = item.price * item.quantity;
-    total += sousTotal;
-
-    message +=
-      "🛍️ " + item.name +
-      "%0AQuantité : " + item.quantity +
-      "%0ASous-total : " +
-      sousTotal.toLocaleString("fr-FR") +
-      " FCFA%0A%0A";
-  });
-
-  message +=
-    "💰 TOTAL : " +
-    total.toLocaleString("fr-FR") +
-    " FCFA%0A%0A";
-
-  message +=
-    "Merci Perlora 🥰💙";
-
-  /*
-  
-    
-  */
-
-  whatsappOrder.href =
-    "https://wa.me/2250556074077?text=" + message;
-}
-
-cartButton.addEventListener("click", function() {
-
-  if (cartPanel.style.display === "none" ||
-      cartPanel.style.display === "") {
-
-    cartPanel.style.display = "block";
-
-  } else {
-
-    cartPanel.style.display = "none";
-  }
-
-});
-</script><script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const cartButton = document.getElementById("cartButton");
-  const cartPanel = document.getElementById("cartPanel");
-  const cartItems = document.getElementById("cartItems");
-  const cartCount = document.getElementById("cartCount");
-  const cartTotal = document.getElementById("cartTotal");
-
-  let panier = [];
-
-  // Ouvrir / fermer le panier
-  if (cartButton && cartPanel) {
-    cartButton.addEventListener("click", function () {
-      cartPanel.style.display =
-        cartPanel.style.display === "block" ? "none" : "block";
-    });
-  }
-
-  // Ajouter les produits au panier
-  document.querySelectorAll(".product").forEach(function (product) {
-
-    const bouton = product.querySelector(".buy");
-    const nom = product.querySelector("h3");
-    const prix = product.querySelector(".price");
-
-    if (!bouton || !nom || !prix) return;
-
-    bouton.addEventListener("click", function () {
-
-      const nomProduit = nom.textContent.trim();
-      const textePrix = prix.textContent.trim();
-
-      let prixProduit =
-        parseInt(textePrix.replace(/[^\d]/g, "")) || 0;
-
-      panier.push({
-        nom: nomProduit,
-        prix: prixProduit
-      });
-
-      afficherPanier();
-      cartPanel.style.display = "block";
-    });
-  });
-
-  function afficherPanier() {
-
-  if (!cartItems) return;
-
-  cartItems.innerHTML = "";
-
-  if (panier.length === 0) {
-    cartItems.innerHTML = "<p>🛒 Votre panier est vide.</p>";
-    cartCount.textContent = "0";
-    cartTotal.textContent = "0 FCFA";
     return;
   }
 
-  let total = 0;
-  let quantiteTotale = 0;
+  whatsappOrder.style.display = "block";
 
-  panier.forEach(function (produit, index) {
+  let message =
+    "Bonjour Perlora 👋%0A%0A" +
+    "Je souhaite commander :%0A";
 
-    const quantite = produit.quantite || 1;
+  cart.forEach(function(item) {
 
-    total += produit.prix * quantite;
-    quantiteTotale += quantite;
+    message +=
+      "• " +
+      item.name +
+      " x" +
+      item.quantity +
+      "%0A";
 
-    const article = document.createElement("div");
-
-    article.innerHTML = `
-      <div style="margin-bottom:15px; padding:10px; border-bottom:1px solid #ddd;">
-
-        <strong>${produit.nom}</strong><br>
-
-        <span>
-          ${
-            produit.prix > 0
-              ? produit.prix + " FCFA"
-              : "Prix à définir"
-          }
-        </span>
-
-        <div style="margin-top:8px; display:flex; align-items:center; gap:8px;">
-
-          <button onclick="diminuerQuantite(${index})"
-            style="padding:5px 10px;">
-            ➖
-          </button>
-
-          <span>
-            ${quantite}
-          </span>
-
-          <button onclick="augmenterQuantite(${index})"
-            style="padding:5px 10px;">
-            ➕
-          </button>
-
-          <button onclick="supprimerProduit(${index})"
-            style="padding:5px 10px;">
-            🗑️
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-    cartItems.appendChild(article);
   });
 
-  cartCount.textContent = quantiteTotale;
-  cartTotal.textContent = total + " FCFA";
+  message +=
+    "%0AMerci 🙏%0A" +
+    "Je souhaite connaître le prix total et les modalités de livraison.";
+
+  /*
+    REMPLACE LE NUMÉRO CI-DESSOUS
+    PAR TON NUMÉRO WHATSAPP
+  */
+
+  const numero = "2250556074077";
+
+  whatsappOrder.href =
+    "https://wa.me/" +
+    numero +
+    "?text=" +
+    message;
 }
 
+/* =========================
+   RECHERCHE
+========================= */
 
-/* ➕ AUGMENTER */
-window.augmenterQuantite = function (index) {
+const searchInput =
+  document.getElementById("searchInput");
 
-  panier[index].quantite = (panier[index].quantite || 1) + 1;
+searchInput.addEventListener("input", function() {
 
-  afficherPanier();
-};
+  const recherche =
+    this.value.toLowerCase().trim();
 
+  document.querySelectorAll(".product").forEach(function(product) {
 
-/* ➖ DIMINUER */
-window.diminuerQuantite = function (index) {
+    const nom =
+      product.querySelector("h3");
 
-  panier[index].quantite = panier[index].quantite || 1;
+    if (!nom) return;
 
-  if (panier[index].quantite > 1) {
+    const texte =
+      nom.textContent.toLowerCase();
 
-    panier[index].quantite--;
+    if (texte.includes(recherche)) {
 
-  } else {
+      product.style.display = "";
 
-    panier.splice(index, 1);
+    } else {
 
-  }
+      product.style.display = "none";
 
-  afficherPanier();
-};
+    }
 
+  });
 
-/* 🗑️ SUPPRIMER */
-window.supprimerProduit = function (index) {
+});
 
-  panier.splice(index, 1);
+</script>
 
-  afficherPanier();
-};window.augmenterQuantite = function (index) {
-  panier[index].quantite = (panier[index].quantite || 1) + 1;
-  afficherPanier();
-};
-
-window.diminuerQuantite = function (index) {
-  panier[index].quantite = panier[index].quantite || 1;
-
-  if (panier[index].quantite > 1) {
-    panier[index].quantite--;
-  } else {
-    panier.splice(index, 1);
-  }
-
-  afficherPanier();
-};
-
-window.supprimerProduit = function (index) {
-  panier.splice(index, 1);
-  afficherPanier();
-};
-  </script>
 </body>
-</html>
-
-
-
-
+  </html>
