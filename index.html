@@ -1119,6 +1119,26 @@ window.supprimerProduit = function (index) {
   panier.splice(index, 1);
 
   afficherPanier();
+};window.augmenterQuantite = function (index) {
+  panier[index].quantite = (panier[index].quantite || 1) + 1;
+  afficherPanier();
+};
+
+window.diminuerQuantite = function (index) {
+  panier[index].quantite = panier[index].quantite || 1;
+
+  if (panier[index].quantite > 1) {
+    panier[index].quantite--;
+  } else {
+    panier.splice(index, 1);
+  }
+
+  afficherPanier();
+};
+
+window.supprimerProduit = function (index) {
+  panier.splice(index, 1);
+  afficherPanier();
 };
   </script>
 </body>
