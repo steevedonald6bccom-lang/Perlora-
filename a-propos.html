@@ -1,154 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>À propos de Perlora</title>
-
-  <meta name="description" content="Découvrez Perlora, une boutique dédiée aux créations artisanales en perles.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Perlora">
-  <meta name="theme-color" content="#0b5ed7">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f9ff;
-      color: #222;
-    }
-
-    header {
-      background: #0b5ed7;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
-
-    header p {
-      margin: 8px 0 0;
-    }
-
-    main {
-      max-width: 850px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    section {
-      background: white;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-      color: #0b5ed7;
-    }
-
-    a {
-      color: #0b5ed7;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .retour {
-      display: inline-block;
-      background: #0b5ed7;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #111;
-      color: white;
-      margin-top: 30px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <h1>PERLORA 🩵</h1>
-    <p>Créations artisanales en perles</p>
-  </header>
-
-  <main>
-
-    <section>
-      <h2>✨ Qui sommes-nous ?</h2>
-      <p>
-        Perlora est une boutique dédiée aux créations artisanales réalisées
-        avec soin à partir de perles.
-      </p>
-      <p>
-        Notre objectif est de proposer des créations originales, élégantes
-        et accessibles à nos clients.
-      </p>
-    </section>
-
-    <section>
-      <h2>🛍️ Nos créations</h2>
-      <p>
-        Découvrez nos différents articles en perles, notamment nos
-        porte-clés, accessoires et autres créations artisanales.
-      </p>
-      <p>
-        Chaque article est présenté avec sa photo et ses informations
-        afin de faciliter votre choix.
-      </p>
-    </section>
-
-    <section>
-      <h2>💙 Notre objectif</h2>
-      <p>
-        Perlora souhaite offrir une expérience simple et agréable pour
-        découvrir et commander nos créations.
-      </p>
-    </section>
-
-    <section>
-      <h2>📱 Une question ?</h2>
-      <p>
-        Pour toute question concernant un article ou une commande,
-        vous pourrez nous contacter directement depuis notre boutique.
-      </p>
-    </section>
-
-    <a class="retour" href="index.html">← Retour à la boutique</a>
-
-  </main>
-
-  <footer>
-    <p>© 2026 Perlora — Créations en perles 🩵</p>
-  </footer>
-
-</body>
-</html>
-<html lang="fr">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PERLORA — Boutique en ligne</title><meta name="description" content="Perlora – Découvrez nos créations artisanales en perles, porte-clés, bracelets, sacs et accessoires.">
-<meta name="robots" content="index, follow">
-<meta name="author" content="Perlora">
-<meta name="theme-color" content="#0b5ed7">
+
+<title>Perlora - Boutique d'objets en perles</title>
+
+<meta name="description" content="Bienvenue chez Perlora, boutique en ligne consacrée à la vente d'objets artisanaux en perles.">
 
 <style>
 *{
@@ -157,1906 +15,578 @@
   padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   font-family:Arial,sans-serif;
-  background:#f5f7fb;
-  color:#172033;
+  background:#eef6ff;
+  color:#123;
+  overflow-x:hidden;
 }
 
-button{
-  cursor:pointer;
-}
+/* =========================
+   ACCUEIL
+========================= */
 
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 15px;
-  background:#0b5ed7;
-  color:white;
-  box-shadow:0 3px 15px rgba(0,0,0,.18);
-}
-
-.logo{
-  text-align:center;
-}
-
-.logo strong{
-  display:block;
-  font-size:24px;
-  letter-spacing:3px;
-}
-
-.logo span{
-  font-size:8px;
-  letter-spacing:1px;
-}
-
-.menu{
-  font-size:25px;
-}
-
-.cart-top{
-  border:none;
-  background:white;
-  color:#0b5ed7;
-  padding:9px 12px;
-  border-radius:25px;
-  font-weight:bold;
-}
-
-/* ACCUEIL */
-.home{
+.hero{
+  min-height:100vh;
   position:relative;
   overflow:hidden;
-  min-height:430px;
-  background:linear-gradient(180deg,#63c8ff 0%,#a9e4ff 55%,#e8f8ff 100%);
-  padding:35px 18px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
+  padding:30px 15px;
+  background:linear-gradient(
+    to bottom,
+    #071a3d 0%,
+    #174d91 55%,
+    #b9ddff 100%
+  );
 }
 
-.sun{
+/* ÉTOILES */
+
+.stars{
   position:absolute;
-  width:70px;
-  height:70px;
-  background:#ffd43b;
-  border-radius:50%;
-  top:30px;
-  right:30px;
-  box-shadow:0 0 35px rgba(255,212,59,.7);
+  inset:0;
+  overflow:hidden;
 }
+
+.star{
+  position:absolute;
+  color:white;
+  font-size:20px;
+  animation:twinkle 2s infinite alternate;
+}
+
+.star:nth-child(1){top:8%;left:10%}
+.star:nth-child(2){top:18%;left:25%;animation-delay:.5s}
+.star:nth-child(3){top:10%;left:50%;animation-delay:1s}
+.star:nth-child(4){top:25%;left:70%;animation-delay:.2s}
+.star:nth-child(5){top:12%;left:90%;animation-delay:.8s}
+.star:nth-child(6){top:38%;left:15%;animation-delay:1.3s}
+.star:nth-child(7){top:32%;left:40%;animation-delay:.4s}
+.star:nth-child(8){top:40%;left:82%;animation-delay:1.1s}
+
+@keyframes twinkle{
+  from{opacity:.3;transform:scale(.7)}
+  to{opacity:1;transform:scale(1.3)}
+}
+
+/* NUAGES */
 
 .cloud{
   position:absolute;
-  width:110px;
-  height:35px;
   background:white;
   border-radius:50px;
-  opacity:.9;
-  animation:moveCloud 18s linear infinite;
+  width:180px;
+  height:55px;
+  opacity:.8;
+  animation:moveCloud 25s linear infinite;
 }
 
-.cloud::before,
-.cloud::after{
+.cloud:before,
+.cloud:after{
   content:"";
   position:absolute;
   background:white;
   border-radius:50%;
 }
 
-.cloud::before{
-  width:45px;
-  height:45px;
-  left:20px;
-  top:-20px;
+.cloud:before{
+  width:75px;
+  height:75px;
+  left:25px;
+  bottom:15px;
 }
 
-.cloud::after{
-  width:55px;
-  height:55px;
-  right:15px;
-  top:-28px;
+.cloud:after{
+  width:95px;
+  height:95px;
+  right:20px;
+  bottom:10px;
 }
 
 .cloud1{
-  top:80px;
-  left:-130px;
+  top:22%;
+  left:-220px;
 }
 
 .cloud2{
-  top:160px;
-  left:-200px;
-  animation-delay:5s;
-  transform:scale(.75);
-}
-
-.cloud3{
-  top:230px;
-  left:-160px;
-  animation-delay:10s;
-  transform:scale(.9);
+  top:45%;
+  left:-300px;
+  animation-duration:35s;
+  animation-delay:8s;
+  transform:scale(.7);
 }
 
 @keyframes moveCloud{
-  from{
-    transform:translateX(-150px);
-  }
-  to{
-    transform:translateX(calc(100vw + 200px));
-  }
+  from{transform:translateX(-250px)}
+  to{transform:translateX(calc(100vw + 350px))}
 }
 
-.children{
-  position:relative;
-  margin-top:65px;
-  font-size:48px;
-  animation:childrenBounce 2s ease-in-out infinite;
+/* NEIGE */
+
+.snow{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
 }
 
-@keyframes childrenBounce{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-8px);
-  }
-}
-
-.laugh{
-  margin-top:5px;
-  font-size:15px;
-  font-weight:bold;
-  color:#185a8d;
-}
-
-.welcome{
-  position:relative;
-  margin-top:15px;
-  background:rgba(255,255,255,.78);
-  padding:20px;
-  border-radius:22px;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-
-.welcome h1{
-  color:#0b5ed7;
-  font-size:29px;
-  margin-bottom:12px;
-}
-
-.welcome p{
-  line-height:1.6;
-  font-size:15px;
-}
-
-/* INFORMATIONS */
-.info{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  padding:15px;
-}
-
-.info-card{
-  background:white;
-  border-radius:13px;
-  padding:12px 5px;
-  text-align:center;
-  box-shadow:0 3px 10px rgba(0,0,0,.07);
-  font-size:12px;
-}
-
-.info-card strong{
-  display:block;
-  margin-top:5px;
-  color:#0b5ed7;
-}
-
-/* NAVIGATION */
-.navigation{
-  display:flex;
-  gap:10px;
-  padding:12px 15px;
-}
-
-.nav-button{
-  flex:1;
-  border:none;
-  padding:14px 8px;
-  border-radius:12px;
-  background:#0b5ed7;
+.snowflake{
+  position:absolute;
+  top:-30px;
   color:white;
-  font-size:14px;
+  font-size:18px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+
+.snowflake:nth-child(1){left:5%;animation-duration:7s}
+.snowflake:nth-child(2){left:15%;animation-duration:9s}
+.snowflake:nth-child(3){left:25%;animation-duration:6s}
+.snowflake:nth-child(4){left:35%;animation-duration:10s}
+.snowflake:nth-child(5){left:45%;animation-duration:8s}
+.snowflake:nth-child(6){left:55%;animation-duration:7s}
+.snowflake:nth-child(7){left:65%;animation-duration:11s}
+.snowflake:nth-child(8){left:75%;animation-duration:8s}
+.snowflake:nth-child(9){left:85%;animation-duration:6s}
+.snowflake:nth-child(10){left:95%;animation-duration:10s}
+
+.hero-content{
+  position:relative;
+  z-index:5;
+  max-width:800px;
+  color:white;
+  background:rgba(0,0,0,.28);
+  padding:35px 20px;
+  border-radius:25px;
+  backdrop-filter:blur(5px);
+}
+
+.logo{
+  font-size:48px;
   font-weight:bold;
+  letter-spacing:5px;
+  color:#fff;
+  text-shadow:0 0 15px #70cfff;
 }
 
-.nav-button.other{
-  background:#172033;
+.hero-content h1{
+  margin-top:15px;
+  font-size:30px;
 }
 
-/* RECHERCHE */
-.search-area{
-  padding:15px;
-  background:white;
+.hero-content p{
+  margin:15px 0;
+  font-size:18px;
+  line-height:1.6;
 }
 
-.search-input{
-  width:100%;
-  padding:14px 18px;
-  border:2px solid #dbe5f2;
+.btn{
+  border:none;
+  padding:14px 20px;
+  margin:6px;
   border-radius:30px;
+  cursor:pointer;
   font-size:16px;
-  outline:none;
+  font-weight:bold;
+  background:white;
+  color:#07529a;
 }
 
-.search-input:focus{
-  border-color:#0b5ed7;
+.btn:hover{
+  transform:scale(1.05);
 }
 
-/* TITRES */
+/* =========================
+   BOUTIQUE
+========================= */
+
+#boutique{
+  padding:45px 15px;
+  background:#f7fbff;
+}
+
 .section-title{
   text-align:center;
-  padding:25px 15px 12px;
+  color:#07529a;
+  font-size:32px;
+  margin-bottom:10px;
 }
 
-.section-title h2{
-  color:#0b5ed7;
-  margin-bottom:5px;
+.section-description{
+  text-align:center;
+  margin-bottom:30px;
+  color:#555;
 }
 
-.section-title p{
-  color:#667085;
-  font-size:14px;
-}
-
-/* PRODUITS */
 .products{
+  max-width:1100px;
+  margin:auto;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  padding:15px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
 .product{
   background:white;
-  border-radius:15px;
+  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-  transition:.2s;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+  padding-bottom:15px;
 }
 
-.product:active{
-  transform:scale(.98);
-}
-
-.product-image{
-  height:165px;
-  background:linear-gradient(135deg,#e8f2ff,#d7e9ff);
+.product-img{
+  width:100%;
+  height:200px;
+  background:linear-gradient(135deg,#d8ecff,#f8fbff);
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-size:55px;
+  justify-content:center;
+  color:#699;
+  font-size:16px;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .product-info{
-  padding:12px;
-}
-
-.product-info h3{
-  font-size:15px;
-  min-height:38px;
-  margin-bottom:7px;
-}
-
-.price{
-  color:#0b5ed7;
-  font-weight:bold;
-  display:block;
-  margin-bottom:10px;
-}
-
-.add-button{
-  width:100%;
-  border:none;
-  background:#0b5ed7;
-  color:white;
-  padding:10px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-/* PAGE AUTRES */
-#otherPage{
-  display:none;
-  min-height:100vh;
-  background:#f5f7fb;
-}
-
-.other-header{
-  background:#172033;
-  color:white;
-  padding:20px 15px;
+  padding:15px;
   text-align:center;
 }
 
-.other-header h2{
-  margin-bottom:6px;
+.product-info h3{
+  color:#07529a;
+  margin-bottom:10px;
 }
 
-.other-header p{
-  font-size:13px;
-  color:#dce4f0;
-}
-
-.categories{
-  display:flex;
-  overflow-x:auto;
-  gap:10px;
-  padding:12px 15px;
-  background:white;
-}
-
-.category{
-  flex:0 0 auto;
-  border:1px solid #ddd;
-  background:white;
-  border-radius:20px;
-  padding:9px 14px;
-  font-size:13px;
-}
-
-.category.active{
-  background:#0b5ed7;
-  color:white;
-  border-color:#0b5ed7;
-}
-
-.back-button{
-  margin:15px;
-  border:none;
-  background:#0b5ed7;
-  color:white;
-  padding:11px 16px;
-  border-radius:9px;
+.price{
+  display:block;
   font-weight:bold;
-}
-
-/* PANIER */
-#cartPanel{
-  display:none;
-  position:fixed;
-  top:0;
-  right:0;
-  width:94%;
-  max-width:430px;
-  height:100vh;
-  background:white;
-  z-index:3000;
-  box-shadow:-5px 0 25px rgba(0,0,0,.25);
-  padding:20px;
-  overflow-y:auto;
-}
-
-.cart-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:20px;
-}
-
-.close-cart{
-  border:none;
-  background:#eee;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  font-size:19px;
-}
-
-.cart-item{
-  padding:15px 0;
-  border-bottom:1px solid #eee;
-}
-
-.cart-item h4{
-  margin-bottom:7px;
+  margin-bottom:10px;
 }
 
 .quantity{
   display:flex;
+  justify-content:center;
   align-items:center;
   gap:12px;
-  margin-top:10px;
+  margin:10px;
 }
 
 .quantity button{
+  width:35px;
+  height:35px;
   border:none;
-  width:31px;
-  height:31px;
   border-radius:50%;
-  background:#0b5ed7;
+  background:#07529a;
   color:white;
-  font-size:18px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.quantity span{
+  font-weight:bold;
+  min-width:25px;
+}
+
+.add-cart{
+  border:none;
+  border-radius:25px;
+  padding:11px 18px;
+  background:#07529a;
+  color:white;
+  cursor:pointer;
   font-weight:bold;
 }
 
-.remove-item{
-  margin-top:10px;
-  border:none;
-  background:#ffe5e5;
-  color:#d00000;
-  padding:7px 10px;
-  border-radius:7px;
+/* =========================
+   PANIER
+========================= */
+
+#cart-section{
+  max-width:900px;
+  margin:40px auto;
+  padding:25px;
+  background:white;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
 }
 
-.cart-bottom{
-  margin-top:20px;
-  padding-top:15px;
-  border-top:2px solid #eee;
+#cart-section h2{
+  color:#07529a;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+  padding:12px 0;
+  gap:10px;
+}
+
+.cart-item button{
+  border:none;
+  background:#07529a;
+  color:white;
+  border-radius:8px;
+  padding:5px 9px;
+  cursor:pointer;
 }
 
 .total{
-  display:flex;
-  justify-content:space-between;
+  text-align:right;
   font-size:20px;
   font-weight:bold;
+  margin-top:20px;
+}
+
+.thanks{
+  display:none;
+  margin-top:15px;
+  padding:15px;
+  border-radius:12px;
+  background:#e3f4ff;
+  color:#07529a;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* =========================
+   PAIEMENT
+========================= */
+
+.payment{
+  text-align:center;
+  padding:35px 15px;
+}
+
+.payment-box{
+  max-width:700px;
+  margin:auto;
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.payment-box h2{
+  color:#07529a;
   margin-bottom:15px;
 }
 
-.clear-cart{
-  width:100%;
-  border:none;
-  background:#e53935;
-  color:white;
-  padding:12px;
-  border-radius:10px;
+.payment-methods{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.method{
+  padding:15px 25px;
+  border-radius:15px;
+  background:#eef6ff;
   font-weight:bold;
-  margin-bottom:10px;
+}
+
+/* =========================
+   LIVRAISON
+========================= */
+
+#delivery{
+  display:none;
+  padding:35px 15px;
+  background:#eaf5ff;
+}
+
+.delivery-box{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.delivery-box h2{
+  text-align:center;
+  color:#07529a;
+  margin-bottom:20px;
+}
+
+.delivery-box label{
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.delivery-box input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  margin-top:6px;
+}
+
+#deliveryMessage{
+  margin-top:15px;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* =========================
+   WHATSAPP / PARTAGE
+========================= */
+
+.actions{
+  text-align:center;
+  padding:30px 15px;
 }
 
 .whatsapp{
-  display:block;
-  width:100%;
-  text-align:center;
-  text-decoration:none;
   background:#25D366;
   color:white;
-  padding:14px;
-  border-radius:11px;
-  font-weight:bold;
 }
 
-/* REMERCIEMENT */
-#thankYou{
-  display:none;
-  position:fixed;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  width:90%;
-  max-width:400px;
-  background:#172033;
+.share{
+  background:#07529a;
   color:white;
-  padding:16px;
-  border-radius:13px;
-  text-align:center;
-  z-index:5000;
-  box-shadow:0 5px 25px rgba(0,0,0,.3);
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 footer{
-  background:#172033;
+  background:#071a3d;
   color:white;
   text-align:center;
   padding:25px 15px;
-  margin-top:30px;
 }
 
 footer p{
-  font-size:13px;
-  margin:5px;
+  margin:7px;
 }
 
-/* MOBILE */
-@media(max-width:380px){
-
-  .products{
-    grid-template-columns:1fr;
+@media(max-width:600px){
+  .logo{
+    font-size:38px;
   }
 
-  .product-image{
-    height:210px;
+  .hero-content h1{
+    font-size:25px;
   }
 
-  .info{
-    grid-template-columns:1fr;
+  .hero-content p{
+    font-size:16px;
   }
 
+  .product-img{
+    height:180px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-
-  <div class="menu">☰</div>
-
-  <div class="logo">
-    <strong>PERLORA</strong>
-    <span>BOUTIQUE EN LIGNE</span>
-  </div>
-
-  <button class="cart-top" onclick="openCart()">
-    🛒 <span id="cartCount">0</span>
-  </button>
-
-</header>
-
-
 <!-- =========================
-     PAGE ACCUEIL
+     PAGE D'ACCUEIL
 ========================= -->
 
-<main id="homePage">
+<section class="hero">
 
-<section class="home">
-
-  <div class="sun"></div>
+  <div class="stars">
+    <span class="star">⭐</span>
+    <span class="star">✦</span>
+    <span class="star">⭐</span>
+    <span class="star">✦</span>
+    <span class="star">⭐</span>
+    <span class="star">✦</span>
+    <span class="star">⭐</span>
+    <span class="star">✦</span>
+  </div>
 
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
-  <div class="cloud cloud3"></div>
 
-  <div class="children">
-    🧒 👧 🧒
+  <div class="snow">
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
+    <span class="snowflake">❄</span>
   </div>
 
-  <div class="laugh">
-    😂🤣 Des sourires, de la joie et beaucoup de créativité !
-  </div>
+  <div class="hero-content">
 
-  <div class="welcome">
+    <div class="logo">PERLORA</div>
 
-    <h1>👋 Bienvenue chez Perlora</h1>
+    <h1>✨ Bienvenue chez Perlora ✨</h1>
 
     <p>
-      Perlora est une boutique en ligne consacrée à la vente
-      d'objets en perles et d'autres types d'articles.
+      Une boutique en ligne consacrée à la vente
+      d'objets artisanaux en perles.
     </p>
 
-    <p style="margin-top:10px;">
-      ✨ Découvrez nos créations et trouvez l'article
-      qui vous plaît.
-    </p>
-
-  </div>
-
-</section>
-
-
-<section class="info">
-
-  <div class="info-card">
-    🚚
-    <strong>Livraison</strong>
-    Disponible
-  </div>
-
-  <div class="info-card">
-    💳
-    <strong>Paiement</strong>
-    Wave & MTN
-  </div>
-
-  <div class="info-card">
-    📱
-    <strong>Commande</strong>
-    WhatsApp
-  </div>
-
-</section>
-
-
-<section class="navigation">
-
-  <button class="nav-button">
-    💎 Perles
-  </button>
-
-  <button
-    class="nav-button other"
-    onclick="showOther()">
-    🛍️ AUTRES
-  </button>
-
-</section>
-
-
-<section class="search-area">
-
-  <input
-    id="homeSearch"
-    class="search-input"
-    type="search"
-    placeholder="🔎 Rechercher un article en perles..."
-    oninput="searchProducts('home')">
-
-</section>
-
-
-<section class="section-title">
-
-  <h2>💎 Nos créations en perles</h2>
-
-  <p>
-    Découvrez nos porte-clés disponibles.
-  </p>
-
-</section>
-
-
-<section class="products" id="homeProducts">
-
-
-<!-- 1 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de S</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de S')">
-      🛒 Ajouter
+    <button class="btn" onclick="goToBoutique()">
+      🛍️ Voir la boutique
     </button>
 
-  </div>
-
-</article>
-
-
-<!-- 2 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de A</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de A')">
-      🛒 Ajouter
+    <button class="btn" onclick="goToCart()">
+      🛒 Mon panier (<span id="cartCount">0</span>)
     </button>
 
-  </div>
+    <br>
 
-</article>
-
-
-<!-- 3 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de I</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de I')">
-      🛒 Ajouter
+    <button class="btn" onclick="showDelivery()">
+      🚚 Livraison
     </button>
 
-  </div>
-
-</article>
-
-
-<!-- 4 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de S</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de S')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 5 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de P</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de P')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 6 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de H</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de H')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 7 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de O</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de O')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 8 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de Y</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de Y')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 9 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🧊
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de cubes</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de cubes')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 10 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de F</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de F')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 11 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de E</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de E')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 12 -->
-
-<article class="product">
-
-  <div class="product-image">
-    ❤️
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de cœur</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de cœur')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 13 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de H</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de H')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 14 -->
-
-<article class="product">
-
-  <div class="product-image">
-    👜
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de sac</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de sac')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 15 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de U</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de U')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 16 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de W</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de W')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 17 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de K</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de K')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 18 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de D</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de D')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 19 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de B</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de B')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 20 -->
-
-<article class="product">
-
-  <div class="product-image">
-    🔑
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de Z</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de Z')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-
-<!-- 21 -->
-
-<article class="product">
-
-  <div class="product-image">
-    ✝️
-  </div>
-
-  <div class="product-info">
-
-    <h3>Porte-clés en forme de croix</h3>
-
-    <span class="price">
-      Prix à définir
-    </span>
-
-    <button
-      class="add-button"
-      onclick="addToCart('Porte-clés en forme de croix')">
-      🛒 Ajouter
-    </button>
-
-  </div>
-
-</article>
-
-</section>
-
-
-<footer>
-
-  <p>💎 PERLORA</p>
-
-  <p>
-    Boutique en ligne — Créations en perles
-    et autres articles.
-  </p>
-
-  <p>🚚 Livraisons disponibles</p>
-
-  <p>💳 Paiement : Wave et MTN</p>
-
-  <p>🙏 Merci de faire confiance à Perlora ❤️</p>
-
-</footer>
-
-</main>
-
-
-<!-- =========================
-     PAGE AUTRES
-========================= -->
-
-<section id="otherPage">
-
-  <div class="other-header">
-
-    <h2>🛍️ AUTRES ARTICLES</h2>
-
-    <p>
-      Découvrez toutes sortes d'articles disponibles chez Perlora.
-    </p>
-
-  </div>
-
-  <button
-    class="back-button"
-    onclick="showHome()">
-
-    ← Retour à Perlora
-
-  </button>
-
-
-  <div class="categories">
-
-    <button class="category active">
-      🏠 Tous
-    </button>
-
-    <button class="category">
-      👕 Mode
-    </button>
-
-    <button class="category">
-      👟 Chaussures
-    </button>
-
-    <button class="category">
-      📱 Téléphones
-    </button>
-
-    <button class="category">
-      🏠 Maison
-    </button>
-
-    <button class="category">
-      🎁 Cadeaux
-    </button>
-
-  </div>
-
-
-  <section class="search-area">
-
-    <input
-      id="otherSearch"
-      class="search-input"
-      type="search"
-      placeholder="🔎 Rechercher un autre article..."
-      oninput="searchProducts('other')">
-
-  </section>
-
-
-  <section class="section-title">
-
-    <h2>🛍️ Découvrez nos autres articles</h2>
-
-    <p>
-      Une sélection d'articles pour différents besoins.
-    </p>
-
-  </section>
-
-
-  <section class="products" id="otherProducts">
-
-    <article class="product">
-
-      <div class="product-image">
-        👕
-      </div>
-
-      <div class="product-info">
-
-        <h3>Vêtement</h3>
-
-        <span class="price">
-          Prix à définir
-        </span>
-
-        <button
-          class="add-button"
-          onclick="addToCart('Vêtement')">
-          🛒 Ajouter
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <article class="product">
-
-      <div class="product-image">
-        👟
-      </div>
-
-      <div class="product-info">
-
-        <h3>Chaussures</h3>
-
-        <span class="price">
-          Prix à définir
-        </span>
-
-        <button
-          class="add-button"
-          onclick="addToCart('Chaussures')">
-          🛒 Ajouter
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <article class="product">
-
-      <div class="product-image">
-        🎧
-      </div>
-
-      <div class="product-info">
-
-        <h3>Écouteurs</h3>
-
-        <span class="price">
-          Prix à définir
-        </span>
-
-        <button
-          class="add-button"
-          onclick="addToCart('Écouteurs')">
-          🛒 Ajouter
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <article class="product">
-
-      <div class="product-image">
-        🎒
-      </div>
-
-      <div class="product-info">
-
-        <h3>Sac à dos</h3>
-
-        <span class="price">
-          Prix à définir
-        </span>
-
-        <button
-          class="add-button"
-          onclick="addToCart('Sac à dos')">
-          🛒 Ajouter
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <article class="product">
-
-      <div class="product-image">
-        🎁
-      </div>
-
-      <div class="product-info">
-
-        <h3>Article cadeau</h3>
-
-        <span class="price">
-          Prix à définir
-        </span>
-
-        <button
-          class="add-button"
-          onclick="addToCart('Article cadeau')">
-          🛒 Ajouter
-        </button>
-
-      </div>
-
-    </article>
-
-
-    <article class="product">
-
-      <div class="product-image">
-        🏠
-      </div>
-
-      <div class="product-info">
-
-        <h3>Article pour la maison</h3>
-
-        <span class="price">
-          Prix à définir
-        </span>
-
-        <button
-          class="add-button"
-          onclick="addToCart('Article pour la maison')">
-          🛒 Ajouter
-        </button>
-
-      </div>
-
-    </article>
-
-  </section>
-
-
-  <footer>
-
-    <p>🛍️ PERLORA — AUTRES ARTICLES</p>
-
-    <p>🚚 Livraisons disponibles</p>
-
-    <p>💳 Wave et MTN</p>
-
-  </footer>
-
-</section>
-
-
-<!-- =========================
-     PANIER
-========================= -->
-
-<div id="cartPanel">
-
-  <div class="cart-header">
-
-    <h2>🛒 Mon panier</h2>
-
-    <button
-      class="close-cart"
-      onclick="closeCart()">
-      ✕
-    </button>
-
-  </div>
-
-
-  <div id="cartItems">
-
-    <p>Votre panier est vide.</p>
-
-  </div>
-
-
-  <div class="cart-bottom">
-
-    <div class="total">
-
-      <span>Total</span>
-
-      <span id="cartTotal">
-        0 FCFA
-      </span>
-
-    </div>
-
-
-    <button
-      class="clear-cart"
-      onclick="clearCart()">
-
-      🗑️ Vider complètement le panier
-
-    </button>
-
-
-    <a
-      id="whatsappOrder"
-      class="whatsapp"
-      href="#"
-      target="_blank">
-
+    <button class="btn whatsapp" onclick="sendWhatsApp()">
       📱 Commander sur WhatsApp
-
-    </a>
+    </button>
 
   </div>
+</section>
 
-</div>
 
+<!-- =========================
+     BOUTIQUE
+========================= -->
 
-<div id="thankYou">
+<section id="boutique">
 
-  🙏 Merci !
-  Votre article a été ajouté au panier ❤️
+  <h2 class="section-title">💎 Notre boutique</h2>
 
-</div>
+  <p class="section-description">
+    Découvrez nos 21 modèles d'objets en perles.
+  </p>
 
+  <div class="products">
 
-<script>
-
-/* PANIER */
-
-let cart = [];
-
-
-/* WHATSAPP */
-
-const whatsappNumber = "225556074077";
-
-
-/* AJOUTER */
-
-function addToCart(name){
-
-  let existing =
-    cart.find(item => item.name === name);
-
-  if(existing){
-
-    existing.quantity++;
-
-  }else{
-
-    cart.push({
-      name:name,
-      quantity:1
-    });
-
-  }
-
-  updateCart();
-
-  const message =
-    document.getElementById("thankYou");
-
-  message.style.display="block";
-
-  setTimeout(function(){
-
-    message.style.display="none";
-
-  },2500);
-
-}
-
-
-/* UPDATE */
-
-function updateCart(){
-
-  let count=0;
-
-  cart.forEach(function(item){
-
-    count += item.quantity;
-
-  });
-
-  document.getElementById("cartCount")
-    .textContent=count;
-
-  displayCart();
-
-}
-
-
-/* AFFICHER PANIER */
-
-function displayCart(){
-
-  const container =
-    document.getElementById("cartItems");
-
-  if(cart.length===0){
-
-    container.innerHTML =
-      "<p>Votre panier est vide.</p>";
-
-    document.getElementById("cartTotal")
-      .textContent="0 FCFA";
-
-    document.getElementById("whatsappOrder")
-      .style.display="none";
-
-    return;
-
-  }
-
-  container.innerHTML="";
-
-  cart.forEach(function(item,index){
-
-    const div =
-      document.createElement("div");
-
-    div.className="cart-item";
-
-    div.innerHTML=`
-
-      <h4>${item.name}</h4>
-
-      <p>Prix : à définir</p>
-
-      <div class="quantity">
-
-        <button onclick="decreaseItem(${index})">
-          −
-        </button>
-
-        <strong>${item.quantity}</strong>
-
-        <button onclick="increaseItem(${index})">
-          +
-        </button>
-
-      </div>
-
-      <button
-        class="remove-item"
-        onclick="removeItem(${index})">
-
-        🗑️ Supprimer
-
-      </button>
-
-    `;
-
-    container.appendChild(div);
-
-  });
-
-
-  document.getElementById("cartTotal")
-    .textContent="Prix à confirmer";
-
-  updateWhatsApp();
-
-}
-
-
-/* PLUS */
-
-function increaseItem(index){
-
-  cart[index].quantity++;
-
-  updateCart();
-
-}
-
-
-/* MOINS */
-
-function decreaseItem(index){
-
-  if(cart[index].quantity>1){
-
-    cart[index].quantity--;
-
-  }else{
-
-    cart.splice(index,1);
-
-  }
-
-  updateCart();
-
-}
-
-
-/* SUPPRIMER */
-
-function removeItem(index){
-
-  cart.splice(index,1);
-
-  updateCart();
-
-}
-
-
-/* VIDER */
-
-function clearCart(){
-
-  cart=[];
-
-  updateCart();
-
-}
-
-
-/* OUVRIR */
-
-function openCart(){
-
-  document.getElementById("cartPanel")
-    .style.display="block";
-
-  displayCart();
-
-}
-
-
-/* FERMER */
-
-function closeCart(){
-
-  document.getElementById("cartPanel")
-    .style.display="none";
-
-}
-
-
-/* WHATSAPP */
-
-function updateWhatsApp(){
-
-  const button =
-    document.getElementById("whatsappOrder");
-
-  if(cart.length===0){
-
-    button.style.display="none";
-
-    return;
-
-  }
-
-  button.style.display="block";
-
-  let message =
-    "Bonjour Perlora 👋%0A%0A" +
-    "Je souhaite commander les articles suivants :%0A%0A";
-
-  cart.forEach(function(item){
-
-    message +=
-      "• "+item.name+
-      " x"+item.quantity+
-      "%0A";
-
-  });
-
-  message +=
-    "%0A🙏 Merci."+
-    "%0AJe souhaite connaître le prix total et les modalités de livraison.";
-
-  button.href =
-    "https://wa.me/"+
-    whatsappNumber+
-    "?text="+
-    message;
-
-}
-
-
-/* NAVIGATION */
-
-function showOther(){
-
-  document.getElementById("homePage")
-    .style.display="none";
-
-  document.getElementById("otherPage")
-    .style.display="block";
-
-  window.scrollTo(0,0);
-
-}
-
-
-function showHome(){
-
-  document.getElementById("otherPage")
-    .style.display="none";
-
-  document.getElementById("homePage")
-    .style.display="block";
-
-  window.scrollTo(0,0);
-
-}
-
-
-/* RECHERCHE */
-
-function searchProducts(page){
-
-  let input;
-  let products;
-
-  if(page==="home"){
-
-    input =
-      document.getElementById("homeSearch")
-      .value
-      .toLowerCase()
-      .trim();
-
-    products =
-      document.querySelectorAll(
-        "#homeProducts .product"
-      );
-
-  }else{
-
-    input =
-      document.getElementById("otherSearch")
-      .value
-      .toLowerCase()
-      .trim();
-
-    products =
-      document.querySelectorAll(
-        "#otherProducts .product"
-      );
-
-  }
-
-
-  products.forEach(function(product){
-
-    const name =
-      product.querySelector("h3")
-      .textContent
-      .toLowerCase();
-
-    if(name.includes(input)){
-
-      product.style.display="";
-
-    }else{
-
-      product.style.display="none";
-
-    }
-
-  });
-
-}
-
-</script>
-
-</body>
-  </html>
+    <!-- ARTICLE 1 -->
+    <article class="product">
+      <div class="product-img">📷 Photo article 1</div>
+      <div class="product-info">
+        <h3>Porte-clés en forme de sac</h3>
+        <span class="price">Prix à définir</span>
+        <div class="quantity">
+          <button onclick="changeQty
