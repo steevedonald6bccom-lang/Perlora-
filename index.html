@@ -1015,45 +1015,111 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function afficherPanier() {
 
-    if (!cartItems) return;
+  if (!cartItems) return;
 
-    cartItems.innerHTML = "";
+  cartItems.innerHTML = "";
 
-    if (panier.length === 0) {
-      cartItems.innerHTML = "<p>Votre panier est vide.</p>";
-      cartCount.textContent = "0";
-      cartTotal.textContent = "0 FCFA";
-      return;
-    }
-
-    let total = 0;
-
-    panier.forEach(function (produit, index) {
-
-      total += produit.prix;
-
-      const article = document.createElement("div");
-
-      article.innerHTML = `
-        <p>
-          <strong>${produit.nom}</strong><br>
-          ${produit.prix > 0 ? produit.prix + " FCFA" : "Prix à définir"}
-          <button onclick="supprimerProduit(${index})">
-            ❌
-          </button>
-        </p>
-      `;
-
-      cartItems.appendChild(article);
-    });
-
-    cartCount.textContent = panier.length;
-    cartTotal.textContent = total + " FCFA";
+  if (panier.length === 0) {
+    cartItems.innerHTML = "<p>🛒 Votre panier est vide.</p>";
+    cartCount.textContent = "0";
+    cartTotal.textContent = "0 FCFA";
+    return;
   }
 
-  window.supprimerProduit = function (index) {
+  let total = 0;
+  let quantiteTotale = 0;
+
+  panier.forEach(function (produit, index) {
+
+    const quantite = produit.quantite || 1;
+
+    total += produit.prix * quantite;
+    quantiteTotale += quantite;
+
+    const article = document.createElement("div");
+
+    article.innerHTML = `
+      <div style="margin-bottom:15px; padding:10px; border-bottom:1px solid #ddd;">
+
+        <strong>${produit.nom}</strong><br>
+
+        <span>
+          ${
+            produit.prix > 0
+              ? produit.prix + " FCFA"
+              : "Prix à définir"
+          }
+        </span>
+
+        <div style="margin-top:8px; display:flex; align-items:center; gap:8px;">
+
+          <button onclick="diminuerQuantite(${index})"
+            style="padding:5px 10px;">
+            ➖
+          </button>
+
+          <span>
+            ${quantite}
+          </span>
+
+          <button onclick="augmenterQuantite(${index})"
+            style="padding:5px 10px;">
+            ➕
+          </button>
+
+          <button onclick="supprimerProduit(${index})"
+            style="padding:5px 10px;">
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    cartItems.appendChild(article);
+  });
+
+  cartCount.textContent = quantiteTotale;
+  cartTotal.textContent = total + " FCFA";
+}
+
+
+/* ➕ AUGMENTER */
+window.augmenterQuantite = function (index) {
+
+  panier[index].quantite = (panier[index].quantite || 1) + 1;
+
+  afficherPanier();
+};
+
+
+/* ➖ DIMINUER */
+window.diminuerQuantite = function (index) {
+
+  panier[index].quantite = panier[index].quantite || 1;
+
+  if (panier[index].quantite > 1) {
+
+    panier[index].quantite--;
+
+  } else {
+
     panier.splice(index, 1);
-    afficherPanier();
+
+  }
+
+  afficherPanier();
+};
+
+
+/* 🗑️ SUPPRIMER */
+window.supprimerProduit = function (index) {
+
+  panier.splice(index, 1);
+
+  afficherPanier();
+};
   </script>
 </body>
 </html>
