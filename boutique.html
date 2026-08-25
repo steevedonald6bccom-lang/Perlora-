@@ -1017,6 +1017,41 @@ function preparerWhatsApp(){
 afficherPanier();
 
 </script>
+<!-- 🔎 RECHERCHE PERLORA -->
+<script>
+(function () {
 
+  const recherche = document.getElementById("perloraSearch");
+  const produits = document.getElementById("produits");
+
+  if (!recherche || !produits) return;
+
+  recherche.addEventListener("input", function () {
+
+    const texte = this.value
+      .toLowerCase()
+      .trim();
+
+    const articles = produits.children;
+
+    for (let i = 0; i < articles.length; i++) {
+
+      const article = articles[i];
+
+      const nom = article.textContent
+        .toLowerCase();
+
+      if (texte === "" || nom.includes(texte)) {
+        article.style.display = "";
+      } else {
+        article.style.display = "none";
+      }
+
+    }
+
+  });
+
+})();
+</script>
 </body>
   </html>
