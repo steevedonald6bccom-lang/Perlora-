@@ -360,7 +360,40 @@ header{
 <div class="container">
 
   <div class="titre">
+<!-- 🔎 RECHERCHE PERLORA -->
+<div class="perlora-search">
+  <input
+    type="search"
+    id="perloraSearch"
+    placeholder="🔎 Rechercher un produit..."
+    autocomplete="off"
+  >
+</div>
 
+<style>
+.perlora-search {
+  width: 92%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+#perloraSearch {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  border: 2px solid #168cff;
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
+  background: white;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+#perloraSearch:focus {
+  border-color: #0757d5;
+  box-shadow: 0 0 0 4px rgba(22,140,255,0.12);
+}
+</style>
     <h2>🛍️ Notre boutique</h2>
 
     <p>
