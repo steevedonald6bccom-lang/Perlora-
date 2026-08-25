@@ -1543,6 +1543,494 @@ function imageErreur(image, texte){
 actualiserBadge();
 
 </script>
+<!-- =====================================================
+     PERLORA - FORMULAIRE DE LIVRAISON
+     ===================================================== -->
 
+<style>
+/* Bouton livraison */
+#perloraDeliveryButton {
+  display: block;
+  width: min(92%, 500px);
+  margin: 25px auto;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0757d5, #168cff);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0, 80, 200, 0.25);
+  transition: 0.2s;
+}
+
+#perloraDeliveryButton:hover {
+  transform: translateY(-2px);
+}
+
+/* Fond du formulaire */
+#perloraDeliveryModal {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* Boîte */
+.perlora-delivery-box {
+  width: min(100%, 520px);
+  margin: 30px auto;
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+  position: relative;
+  animation: perloraDeliveryOpen 0.25s ease;
+}
+
+@keyframes perloraDeliveryOpen {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Bouton fermer */
+#perloraDeliveryClose {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: #333;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Titre */
+.perlora-delivery-box h2 {
+  margin: 0 35px 8px 0;
+  color: #0757d5;
+  font-size: 25px;
+}
+
+.perlora-delivery-subtitle {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Champs */
+.perlora-field {
+  margin-bottom: 15px;
+}
+
+.perlora-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #222;
+}
+
+.perlora-field input,
+.perlora-field textarea,
+.perlora-field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  background: #fafafa;
+}
+
+.perlora-field input:focus,
+.perlora-field textarea:focus,
+.perlora-field select:focus {
+  border-color: #168cff;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(22, 140, 255, 0.1);
+}
+
+.perlora-field textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+/* Bouton WhatsApp */
+#perloraSendDelivery {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: #25D366;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+#perloraSendDelivery:hover {
+  background: #1ebe5d;
+}
+
+/* Message information */
+.perlora-delivery-info {
+  background: #eef6ff;
+  border-left: 4px solid #168cff;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: #333;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .perlora-delivery-box {
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .perlora-delivery-box h2 {
+    font-size: 22px;
+  }
+}
+</style>
+
+
+<!-- Bouton livraison -->
+<button id="perloraDeliveryButton" type="button">
+  🚚 Demander une livraison
+</button>
+
+
+<!-- Fenêtre livraison -->
+<div id="perloraDeliveryModal">
+
+  <div class="perlora-delivery-box">
+
+    <button id="perloraDeliveryClose" type="button">
+      ×
+    </button>
+
+    <h2>🚚 Livraison Perlora</h2>
+
+    <p class="perlora-delivery-subtitle">
+      Remplissez vos informations pour que nous puissions organiser votre livraison.
+    </p>
+
+    <div class="perlora-delivery-info">
+      📍 Livraison disponible en Côte d'Ivoire.<br>
+      📱 Votre demande sera envoyée directement à Perlora sur WhatsApp.
+    </div>
+
+    <form id="perloraDeliveryForm">
+
+      <!-- Nom -->
+      <div class="perlora-field">
+        <label for="perloraNom">
+          👤 Nom et prénom *
+        </label>
+
+        <input
+          type="text"
+          id="perloraNom"
+          name="nom"
+          placeholder="Exemple : Steeve Kouassi"
+          required
+        >
+      </div>
+
+
+      <!-- WhatsApp -->
+      <div class="perlora-field">
+        <label for="perloraTelephone">
+          📱 Numéro WhatsApp *
+        </label>
+
+        <input
+          type="tel"
+          id="perloraTelephone"
+          name="telephone"
+          placeholder="Exemple : 05 56 07 40 77"
+          required
+        >
+      </div>
+
+
+      <!-- Ville -->
+      <div class="perlora-field">
+        <label for="perloraVille">
+          🏙️ Ville *
+        </label>
+
+        <input
+          type="text"
+          id="perloraVille"
+          name="ville"
+          placeholder="Exemple : Abidjan"
+          required
+        >
+      </div>
+
+
+      <!-- Commune -->
+      <div class="perlora-field">
+        <label for="perloraCommune">
+          📍 Commune *
+        </label>
+
+        <input
+          type="text"
+          id="perloraCommune"
+          name="commune"
+          placeholder="Exemple : Cocody"
+          required
+        >
+      </div>
+
+
+      <!-- Quartier -->
+      <div class="perlora-field">
+        <label for="perloraQuartier">
+          🏘️ Quartier *
+        </label>
+
+        <input
+          type="text"
+          id="perloraQuartier"
+          name="quartier"
+          placeholder="Exemple : Riviera"
+          required
+        >
+      </div>
+
+
+      <!-- Lieu -->
+      <div class="perlora-field">
+        <label for="perloraLieu">
+          📌 Lieu précis de livraison *
+        </label>
+
+        <textarea
+          id="perloraLieu"
+          name="lieu"
+          placeholder="Exemple : devant la pharmacie..., près de..."
+          required
+        ></textarea>
+      </div>
+
+
+      <!-- Type de livraison -->
+      <div class="perlora-field">
+        <label for="perloraType">
+          🚚 Mode de livraison
+        </label>
+
+        <select id="perloraType" name="type">
+          <option value="Livraison à domicile">
+            🏠 Livraison à domicile
+          </option>
+
+          <option value="Point de rendez-vous">
+            📍 Point de rendez-vous
+          </option>
+
+          <option value="Autre lieu">
+            📌 Autre lieu
+          </option>
+        </select>
+      </div>
+
+
+      <!-- Informations supplémentaires -->
+      <div class="perlora-field">
+        <label for="perloraCommentaire">
+          📝 Informations supplémentaires
+        </label>
+
+        <textarea
+          id="perloraCommentaire"
+          name="commentaire"
+          placeholder="Une précision concernant votre livraison..."
+        ></textarea>
+      </div>
+
+
+      <!-- Envoi -->
+      <button id="perloraSendDelivery" type="submit">
+        📲 ENVOYER MA DEMANDE SUR WHATSAPP
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+
+<script>
+/* =====================================================
+   PERLORA - FONCTION LIVRAISON
+   ===================================================== */
+
+(function () {
+
+  const deliveryButton =
+    document.getElementById("perloraDeliveryButton");
+
+  const deliveryModal =
+    document.getElementById("perloraDeliveryModal");
+
+  const deliveryClose =
+    document.getElementById("perloraDeliveryClose");
+
+  const deliveryForm =
+    document.getElementById("perloraDeliveryForm");
+
+
+  /* Ouvrir le formulaire */
+  deliveryButton.addEventListener("click", function () {
+
+    deliveryModal.style.display = "block";
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+
+  /* Fermer le formulaire */
+  deliveryClose.addEventListener("click", function () {
+
+    deliveryModal.style.display = "none";
+
+    document.body.style.overflow = "";
+
+  });
+
+
+  /* Fermer en cliquant à l'extérieur */
+  deliveryModal.addEventListener("click", function (event) {
+
+    if (event.target === deliveryModal) {
+
+      deliveryModal.style.display = "none";
+
+      document.body.style.overflow = "";
+
+    }
+
+  });
+
+
+  /* Envoi du formulaire */
+  deliveryForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+
+    const nom =
+      document.getElementById("perloraNom").value.trim();
+
+    const telephone =
+      document.getElementById("perloraTelephone").value.trim();
+
+    const ville =
+      document.getElementById("perloraVille").value.trim();
+
+    const commune =
+      document.getElementById("perloraCommune").value.trim();
+
+    const quartier =
+      document.getElementById("perloraQuartier").value.trim();
+
+    const lieu =
+      document.getElementById("perloraLieu").value.trim();
+
+    const type =
+      document.getElementById("perloraType").value;
+
+    const commentaire =
+      document.getElementById("perloraCommentaire").value.trim();
+
+
+    /* Message WhatsApp */
+    let message =
+      "🛍️ *NOUVELLE DEMANDE DE LIVRAISON - PERLORA*";
+
+    message += "\n\n";
+
+    message += "👤 *Client :* " + nom;
+
+    message += "\n📱 *WhatsApp :* " + telephone;
+
+    message += "\n🏙️ *Ville :* " + ville;
+
+    message += "\n📍 *Commune :* " + commune;
+
+    message += "\n🏘️ *Quartier :* " + quartier;
+
+    message += "\n📌 *Lieu précis :* " + lieu;
+
+    message += "\n🚚 *Mode :* " + type;
+
+
+    if (commentaire !== "") {
+
+      message +=
+        "\n📝 *Informations supplémentaires :* "
+        + commentaire;
+
+    }
+
+
+    message += "\n\n";
+
+    message +=
+      "✨ Merci d'avoir choisi Perlora !";
+
+
+    /*
+      Numéro WhatsApp Perlora
+      Côte d'Ivoire : +225
+      Numéro affiché actuellement sur la boutique :
+      0556074077
+    */
+    const whatsappNumber = "2250556074077";
+
+
+    /* Encodage sécurisé du message */
+    const whatsappURL =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(message);
+
+
+    /* Ouvrir WhatsApp */
+    window.open(whatsappURL, "_blank");
+
+
+    /* Réinitialiser le formulaire */
+    deliveryForm.reset();
+
+  });
+
+})();
+  </script>
 </body>
   </html>
