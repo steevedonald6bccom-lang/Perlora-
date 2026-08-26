@@ -1246,7 +1246,139 @@ footer a{
 </head>
 
 <body>
-<!-- ================================
+<!-- 💎 PERLES FLOTTANTES PERLORA -->
+
+<style>
+/* 💎 Conteneur des perles */
+.floating-beads {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* 💎 Apparence des perles */
+.floating-beads span {
+  position: absolute;
+  display: block;
+  font-size: 22px;
+  opacity: 0;
+  animation-name: perloraFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+}
+
+/* 💎 Positions et vitesses */
+.floating-beads span:nth-child(1) {
+  left: 5%;
+  animation-duration: 9s;
+  animation-delay: 0s;
+}
+
+.floating-beads span:nth-child(2) {
+  left: 18%;
+  animation-duration: 12s;
+  animation-delay: 2s;
+}
+
+.floating-beads span:nth-child(3) {
+  left: 32%;
+  animation-duration: 10s;
+  animation-delay: 1s;
+}
+
+.floating-beads span:nth-child(4) {
+  left: 47%;
+  animation-duration: 14s;
+  animation-delay: 3s;
+}
+
+.floating-beads span:nth-child(5) {
+  left: 63%;
+  animation-duration: 11s;
+  animation-delay: 4s;
+}
+
+.floating-beads span:nth-child(6) {
+  left: 76%;
+  animation-duration: 13s;
+  animation-delay: 1.5s;
+}
+
+.floating-beads span:nth-child(7) {
+  left: 88%;
+  animation-duration: 10s;
+  animation-delay: 3.5s;
+}
+
+.floating-beads span:nth-child(8) {
+  left: 95%;
+  animation-duration: 15s;
+  animation-delay: 5s;
+}
+
+/* ✨ Animation des perles */
+@keyframes perloraFloat {
+
+  0% {
+    transform: translateY(110vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.85;
+  }
+
+  25% {
+    transform: translateY(75vh) translateX(25px) rotate(90deg);
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(-25px) rotate(180deg);
+  }
+
+  75% {
+    transform: translateY(25vh) translateX(30px) rotate(270deg);
+  }
+
+  90% {
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: translateY(-15vh) translateX(-20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 📱 Téléphone */
+@media (max-width: 600px) {
+
+  .floating-beads span {
+    font-size: 18px;
+  }
+
+}
+</style>
+
+
+<!-- 💎 Les perles -->
+<div class="floating-beads" aria-hidden="true">
+
+  <span>🔵</span>
+  <span>🩷</span>
+  <span>⚪</span>
+  <span>🟣</span>
+  <span>🔵</span>
+  <span>🩷</span>
+  <span>⚪</span>
+  <span>🟣</span>
+
+</div><!-- ================================
      OUVERTURE PERLORA
 ================================ -->
 
