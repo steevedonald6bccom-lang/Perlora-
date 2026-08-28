@@ -4,21 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PERLORA — Boutique en perles</title>
-
-<meta name="description"
-content="PERLORA — Boutique en ligne de créations et objets en perles.">
+<title>PERLORA - Boutique en perles</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html{
@@ -26,113 +18,127 @@ html{
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial,sans-serif;
     background:#fff7fb;
-    color:#291c23;
-    overflow-x:hidden;
+    color:#241820;
 }
 
-
-/* =====================================================
-   ANIMATION D'ENTRÉE PERLORA
-===================================================== */
+/* =========================
+   ANIMATION D'ENTRÉE
+========================= */
 
 #intro{
     position:fixed;
     inset:0;
+    background:#090509;
     z-index:99999;
-    background:
-        radial-gradient(circle at center,#351523 0%,#160b11 45%,#070507 100%);
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     overflow:hidden;
-    transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+    transition:opacity 1s ease;
 }
 
-#intro.hide{
+#intro.hidden{
     opacity:0;
-    visibility:hidden;
     pointer-events:none;
 }
 
-.intro-content{
+.intro-logo{
     position:relative;
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.intro-title{
-    position:relative;
-    z-index:5;
+    z-index:10;
     color:white;
-    font-size:clamp(45px,13vw,105px);
+    font-size:clamp(42px,13vw,90px);
     font-weight:900;
-    letter-spacing:8px;
-    text-align:center;
+    letter-spacing:7px;
     opacity:0;
-    transform:scale(.3);
+    transform:scale(.5);
+    animation:logo 2s ease forwards;
     text-shadow:
-        0 0 10px #ff4f9a,
-        0 0 30px #ff4f9a,
-        0 0 70px #e93683;
-    animation:
-        logoAppear 2s cubic-bezier(.17,.67,.2,1.2) 2.4s forwards;
+        0 0 10px #ff5a9f,
+        0 0 30px #ff5a9f,
+        0 0 60px #e93683;
 }
 
-.intro-title span{
-    color:#ff72ad;
+.intro-logo span{
+    color:#ff68a8;
 }
 
-.intro-subtitle{
+.intro-text{
     position:absolute;
-    z-index:5;
-    top:calc(50% + 65px);
-    color:#ffd6e7;
-    font-size:12px;
+    top:58%;
+    color:#ffd7e8;
+    font-size:11px;
     letter-spacing:4px;
     opacity:0;
-    animation:subtitleAppear 1s ease 3.4s forwards;
+    animation:textAppear 1s ease 1.7s forwards;
 }
 
 .intro-glow{
     position:absolute;
-    width:220px;
-    height:220px;
+    width:250px;
+    height:250px;
     border-radius:50%;
     background:#e93683;
-    filter:blur(80px);
-    opacity:.12;
-    animation:introGlow 4s ease-in-out infinite;
+    filter:blur(90px);
+    opacity:.2;
 }
 
-@keyframes logoAppear{
+.bead{
+    position:absolute;
+    width:var(--s);
+    height:var(--s);
+    left:var(--x);
+    top:var(--y);
+    border-radius:50%;
+    background:radial-gradient(
+        circle at 30% 25%,
+        white,
+        #ffb9d5 20%,
+        #ff4e99 55%,
+        #a81755
+    );
+    box-shadow:0 0 10px #ff65a5,0 0 25px #ff3d8d;
+    animation:move var(--t) ease-in-out var(--d) forwards;
+    opacity:0;
+}
 
+@keyframes move{
     0%{
         opacity:0;
-        transform:scale(.3) rotate(-5deg);
+        transform:translate(var(--fromx),var(--fromy)) scale(.1);
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+}
+
+@keyframes logo{
+    0%{
+        opacity:0;
+        transform:scale(.3);
         letter-spacing:25px;
     }
 
     60%{
         opacity:1;
-        transform:scale(1.12) rotate(0);
+        transform:scale(1.08);
     }
 
     100%{
         opacity:1;
         transform:scale(1);
-        letter-spacing:8px;
+        letter-spacing:7px;
     }
 }
 
-@keyframes subtitleAppear{
-
+@keyframes textAppear{
     from{
         opacity:0;
         transform:translateY(15px);
@@ -144,237 +150,127 @@ body{
     }
 }
 
-@keyframes introGlow{
 
-    0%,100%{
-        transform:scale(.8);
-        opacity:.08;
-    }
-
-    50%{
-        transform:scale(1.4);
-        opacity:.18;
-    }
-}
-
-
-/* PERLES DE L'INTRO */
-
-.intro-bead{
-    position:absolute;
-    width:var(--size);
-    height:var(--size);
-    border-radius:50%;
-    left:var(--x);
-    top:var(--y);
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #fff,
-            #ffb7d5 22%,
-            #ff5b9e 55%,
-            #c51e65 100%
-        );
-    box-shadow:
-        0 0 8px #ff77ae,
-        0 0 20px rgba(255,82,155,.8);
-    opacity:0;
-    animation:
-        beadMove var(--duration) cubic-bezier(.2,.7,.2,1)
-        var(--delay) forwards;
-}
-
-@keyframes beadMove{
-
-    0%{
-        opacity:0;
-        transform:
-            translate(
-                var(--sx),
-                var(--sy)
-            )
-            scale(.15)
-            rotate(0deg);
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    70%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:1;
-        transform:
-            translate(0,0)
-            scale(1)
-            rotate(360deg);
-    }
-}
-
-
-/* =====================================================
+/* =========================
    SITE
-===================================================== */
+========================= */
 
-#site{
-    opacity:0;
-    transform:translateY(20px);
-    animation:siteAppear 1.2s ease 4.2s forwards;
+#website{
+    display:none;
 }
 
-@keyframes siteAppear{
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+#website.show{
+    display:block;
 }
 
 
-/* =====================================================
+/* =========================
    HEADER
-===================================================== */
+========================= */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #ffd5e5;
-    box-shadow:0 5px 25px rgba(150,50,100,.08);
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid #ffd3e5;
+    box-shadow:0 4px 20px rgba(100,30,70,.08);
 }
 
 .navbar{
     max-width:1200px;
     margin:auto;
-    min-height:66px;
-    padding:10px 17px;
+    min-height:65px;
+    padding:10px 15px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:10px;
 }
 
 .logo{
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:9px;
     color:#e93683;
-    font-size:24px;
+    text-decoration:none;
+    font-size:23px;
     font-weight:900;
     letter-spacing:1px;
 }
 
 .logo-circle{
-    width:37px;
-    height:37px;
+    display:inline-flex;
+    width:35px;
+    height:35px;
     border-radius:50%;
-    display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff3e91,#ff9fc7);
     color:white;
-    background:linear-gradient(135deg,#ff3f91,#ff9fc7);
-    box-shadow:0 5px 15px rgba(233,54,131,.3);
+    margin-right:7px;
 }
 
-.nav-actions{
+.nav-buttons{
     display:flex;
     gap:8px;
 }
 
-.nav-btn{
+.nav-button{
     border:0;
-    border-radius:12px;
     padding:10px 13px;
+    border-radius:12px;
     background:#fff0f6;
     color:#d82d76;
     font-weight:bold;
     cursor:pointer;
 }
 
-.cart-btn{
-    position:relative;
+.cart-button{
     background:#e93683;
     color:white;
+    position:relative;
 }
 
-.cart-count{
+.cart-number{
     position:absolute;
-    right:-5px;
     top:-7px;
+    right:-6px;
+    background:#201319;
+    color:white;
+    border-radius:50%;
     min-width:20px;
     height:20px;
-    padding:2px 5px;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#21141a;
-    border-radius:20px;
     font-size:11px;
 }
 
 
-/* =====================================================
+/* =========================
    HERO
-===================================================== */
+========================= */
 
 .hero{
-    position:relative;
-    max-width:1200px;
+    max-width:1100px;
     margin:auto;
-    padding:75px 18px 60px;
+    padding:75px 20px 55px;
     text-align:center;
-    overflow:hidden;
-}
-
-.hero:before,
-.hero:after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    filter:blur(1px);
-    opacity:.5;
-    z-index:-1;
-}
-
-.hero:before{
-    width:180px;
-    height:180px;
-    background:#ffd5e7;
-    left:-80px;
-    top:30px;
-}
-
-.hero:after{
-    width:220px;
-    height:220px;
-    background:#ffe7f1;
-    right:-100px;
-    bottom:0;
 }
 
 .badge{
     display:inline-block;
-    padding:8px 16px;
-    border-radius:30px;
-    background:#ffe4ef;
+    padding:8px 15px;
+    background:#ffe2ee;
     color:#d82d76;
-    font-size:13px;
+    border-radius:30px;
     font-weight:bold;
+    font-size:13px;
     margin-bottom:18px;
 }
 
 .hero h1{
-    font-size:clamp(48px,12vw,90px);
-    line-height:.95;
+    font-size:clamp(48px,12vw,85px);
     color:#e93683;
-    margin-bottom:20px;
-    letter-spacing:2px;
+    line-height:1;
+    margin-bottom:18px;
 }
 
 .hero h1 span{
@@ -382,173 +278,161 @@ header{
 }
 
 .hero p{
-    max-width:680px;
+    max-width:650px;
     margin:auto;
-    color:#75616a;
-    font-size:16px;
+    color:#76636c;
     line-height:1.7;
 }
 
-.hero-buttons{
+.hero-actions{
+    margin-top:28px;
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
     gap:12px;
-    margin-top:28px;
+    flex-wrap:wrap;
 }
 
 .primary,
 .secondary{
     border:0;
-    border-radius:14px;
     padding:14px 22px;
+    border-radius:14px;
     font-weight:bold;
     cursor:pointer;
-    text-decoration:none;
-    transition:.25s;
+    font-size:14px;
 }
 
 .primary{
-    color:white;
     background:#e93683;
-    box-shadow:0 8px 22px rgba(233,54,131,.25);
+    color:white;
 }
 
 .secondary{
-    color:#d82d76;
     background:white;
+    color:#d82d76;
     border:1px solid #ffd0e2;
 }
 
-.primary:hover,
-.secondary:hover{
-    transform:translateY(-3px);
+
+/* =========================
+   PROMO
+========================= */
+
+.promo{
+    max-width:1050px;
+    margin:0 auto 45px;
+    padding:28px 20px;
+    border-radius:24px;
+    text-align:center;
+    color:white;
+    background:linear-gradient(135deg,#d92674,#ff77b1);
+}
+
+.promo h2{
+    margin-bottom:8px;
 }
 
 
-/* =====================================================
-   SECTION
-===================================================== */
+/* =========================
+   BOUTIQUE
+========================= */
 
-.section{
+.shop{
     max-width:1200px;
     margin:auto;
-    padding:30px 18px 70px;
+    padding:25px 17px 70px;
 }
 
-.section-title{
+.shop-title{
     text-align:center;
     margin-bottom:25px;
 }
 
-.section-title h2{
-    font-size:31px;
+.shop-title h2{
+    font-size:32px;
     margin-bottom:7px;
 }
 
-.section-title p{
-    color:#806c75;
+.shop-title p{
+    color:#806b75;
 }
-
-
-/* =====================================================
-   RECHERCHE
-===================================================== */
 
 .search{
     max-width:650px;
     margin:0 auto 30px;
-    position:relative;
 }
 
 .search input{
     width:100%;
-    border:2px solid #ffd4e5;
-    border-radius:16px;
-    padding:15px 18px 15px 47px;
+    padding:15px 18px;
+    border-radius:15px;
+    border:2px solid #ffd2e4;
     outline:none;
     font-size:15px;
-    background:white;
 }
 
 .search input:focus{
     border-color:#e93683;
-    box-shadow:0 0 0 4px #ffe4ef;
-}
-
-.search-icon{
-    position:absolute;
-    left:17px;
-    top:13px;
-    font-size:19px;
 }
 
 
-/* =====================================================
+/* =========================
    PRODUITS
-===================================================== */
+========================= */
 
 .products{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:19px;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
 }
 
 .product{
     background:white;
     border:1px solid #ffe0eb;
-    border-radius:21px;
+    border-radius:20px;
     overflow:hidden;
-    box-shadow:0 8px 25px rgba(120,50,80,.07);
-    transition:.3s;
+    box-shadow:0 7px 22px rgba(80,30,55,.07);
 }
 
-.product:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(120,50,80,.13);
-}
-
-.product-photo{
-    height:215px;
-    background:
-        radial-gradient(circle,#fff,#ffe7f1);
+.product-image{
+    height:210px;
+    background:linear-gradient(135deg,#fff0f6,#ffe0ec);
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     overflow:hidden;
 }
 
-.product-photo img{
+.product-image img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-.placeholder{
+.emoji{
     font-size:65px;
 }
 
 .product-info{
-    padding:15px;
+    padding:14px;
 }
 
 .product-info h3{
-    font-size:16px;
-    margin-bottom:6px;
+    font-size:15px;
+    margin-bottom:7px;
 }
 
 .product-info p{
-    color:#89757e;
     font-size:12px;
-    line-height:1.5;
-    min-height:36px;
+    color:#89747e;
+    min-height:35px;
 }
 
 .price{
-    margin:11px 0;
     color:#e93683;
     font-size:18px;
     font-weight:900;
+    margin:10px 0;
 }
 
 .product-buttons{
@@ -559,8 +443,8 @@ header{
 .add{
     flex:1;
     border:0;
-    border-radius:11px;
-    padding:11px;
+    padding:10px;
+    border-radius:10px;
     background:#e93683;
     color:white;
     font-weight:bold;
@@ -569,44 +453,24 @@ header{
 
 .view{
     border:0;
-    border-radius:11px;
-    padding:11px 12px;
+    padding:10px;
+    border-radius:10px;
     background:#fff0f6;
     color:#d82d76;
     cursor:pointer;
 }
 
 
-/* =====================================================
-   PROMO
-===================================================== */
-
-.promo{
-    max-width:1100px;
-    margin:0 auto 55px;
-    padding:30px 20px;
-    text-align:center;
-    color:white;
-    border-radius:25px;
-    background:linear-gradient(135deg,#d92774,#ff78b2);
-    box-shadow:0 12px 30px rgba(233,54,131,.2);
-}
-
-.promo h2{
-    margin-bottom:8px;
-}
-
-
-/* =====================================================
+/* =========================
    PANIER
-===================================================== */
+========================= */
 
 .overlay{
+    display:none;
     position:fixed;
     inset:0;
     z-index:2000;
-    background:rgba(25,10,18,.5);
-    display:none;
+    background:rgba(20,8,15,.55);
 }
 
 .overlay.active{
@@ -616,16 +480,15 @@ header{
 .cart{
     position:fixed;
     z-index:2100;
-    top:0;
     right:0;
-    width:min(430px,94%);
+    top:0;
+    width:min(420px,94%);
     height:100%;
     background:white;
     transform:translateX(110%);
-    transition:.35s;
+    transition:.3s;
     display:flex;
     flex-direction:column;
-    box-shadow:-10px 0 35px rgba(0,0,0,.18);
 }
 
 .cart.active{
@@ -633,48 +496,46 @@ header{
 }
 
 .cart-header{
-    padding:19px;
-    border-bottom:1px solid #f1dce6;
+    padding:18px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #f0dce5;
 }
 
 .close{
-    width:38px;
-    height:38px;
     border:0;
+    width:37px;
+    height:37px;
     border-radius:50%;
     background:#fff0f6;
     color:#d82d76;
     cursor:pointer;
-    font-size:18px;
 }
 
 .cart-list{
     flex:1;
     overflow-y:auto;
-    padding:18px;
+    padding:17px;
 }
 
 .empty{
-    padding:60px 20px;
     text-align:center;
-    color:#917b85;
+    padding:50px 20px;
+    color:#927d86;
 }
 
 .cart-item{
     display:flex;
-    gap:11px;
-    padding:13px 0;
-    border-bottom:1px solid #f4e2ea;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid #f2e1e8;
 }
 
-.cart-img{
-    width:64px;
-    height:64px;
-    flex-shrink:0;
-    border-radius:12px;
+.cart-item-image{
+    width:62px;
+    height:62px;
+    border-radius:11px;
     background:#ffe6f0;
     display:flex;
     align-items:center;
@@ -683,7 +544,7 @@ header{
     font-size:28px;
 }
 
-.cart-img img{
+.cart-item-image img{
     width:100%;
     height:100%;
     object-fit:cover;
@@ -703,35 +564,35 @@ header{
     font-weight:bold;
 }
 
-.qty{
+.quantity{
     display:flex;
     align-items:center;
     gap:7px;
     margin-top:7px;
 }
 
-.qty button{
+.quantity button{
     width:27px;
     height:27px;
     border:0;
     border-radius:8px;
-    background:#ffe6f0;
+    background:#ffe5ef;
     color:#d82d76;
-    font-weight:bold;
     cursor:pointer;
+    font-weight:bold;
 }
 
 .delete{
-    border:0;
-    background:none;
-    color:#999;
-    cursor:pointer;
+    background:none !important;
+    color:#888 !important;
+    width:auto !important;
+    padding:0 4px;
     font-size:11px;
 }
 
-.cart-bottom{
-    padding:18px;
-    border-top:1px solid #f1dce6;
+.cart-footer{
+    border-top:1px solid #f0dce5;
+    padding:17px;
 }
 
 .total{
@@ -739,45 +600,43 @@ header{
     justify-content:space-between;
     font-size:20px;
     font-weight:900;
-    margin-bottom:14px;
+    margin-bottom:13px;
 }
 
 .whatsapp{
     width:100%;
-    padding:14px;
     border:0;
-    border-radius:13px;
+    padding:14px;
+    border-radius:12px;
     background:#20b954;
     color:white;
     font-weight:bold;
     cursor:pointer;
-    font-size:15px;
 }
 
 .clear{
     width:100%;
-    padding:11px;
     margin-top:8px;
     border:0;
+    padding:11px;
     border-radius:12px;
-    background:#f5eef1;
-    color:#735d67;
+    background:#f4eef1;
     cursor:pointer;
 }
 
 
-/* =====================================================
+/* =========================
    LIVRAISON
-===================================================== */
+========================= */
 
 .modal{
+    display:none;
     position:fixed;
     inset:0;
     z-index:3000;
-    background:rgba(25,10,18,.6);
-    display:none;
-    align-items:center;
+    background:rgba(20,8,15,.6);
     justify-content:center;
+    align-items:center;
     padding:18px;
 }
 
@@ -786,18 +645,18 @@ header{
 }
 
 .modal-box{
+    background:white;
     width:min(500px,100%);
     max-height:90vh;
     overflow-y:auto;
-    background:white;
-    border-radius:23px;
-    padding:24px;
+    border-radius:22px;
+    padding:23px;
 }
 
-.modal-title{
+.modal-header{
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     margin-bottom:20px;
 }
 
@@ -817,20 +676,19 @@ header{
     width:100%;
     padding:13px;
     border:1px solid #efcadb;
-    border-radius:11px;
+    border-radius:10px;
     outline:none;
-    background:#fffafd;
 }
 
 .form-group textarea{
-    min-height:85px;
+    min-height:80px;
 }
 
-.send-order{
+.send{
     width:100%;
     border:0;
-    border-radius:13px;
     padding:14px;
+    border-radius:12px;
     background:#e93683;
     color:white;
     font-weight:bold;
@@ -838,59 +696,70 @@ header{
 }
 
 
-/* =====================================================
+/* =========================
    FOOTER
-===================================================== */
+========================= */
 
 footer{
-    padding:40px 20px;
-    text-align:center;
     background:#271820;
     color:white;
+    text-align:center;
+    padding:40px 20px;
 }
 
 .footer-logo{
-    color:#ff72ad;
+    color:#ff70ac;
     font-size:25px;
     font-weight:900;
     margin-bottom:10px;
 }
 
 footer p{
-    color:#cbb8c1;
+    color:#c9b7bf;
     font-size:13px;
-    line-height:1.6;
 }
 
 .copy{
-    margin-top:20px;
-    color:#98858e;
+    margin-top:18px;
+    color:#99868f;
     font-size:12px;
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:900px){
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+
+/* =========================
+   TÉLÉPHONE
+========================= */
 
 @media(max-width:600px){
 
     .navbar{
-        min-height:60px;
-        padding:8px 11px;
+        padding:9px 11px;
     }
 
     .logo{
-        font-size:20px;
+        font-size:19px;
     }
 
     .logo-circle{
-        width:32px;
-        height:32px;
+        width:31px;
+        height:31px;
     }
 
-    .nav-btn{
-        padding:9px 10px;
+    .nav-button{
+        padding:9px 9px;
         font-size:11px;
     }
 
@@ -908,19 +777,15 @@ footer p{
 
     .products{
         grid-template-columns:repeat(2,1fr);
-        gap:12px;
+        gap:11px;
     }
 
-    .product{
-        border-radius:17px;
-    }
-
-    .product-photo{
-        height:160px;
+    .product-image{
+        height:155px;
     }
 
     .product-info{
-        padding:11px;
+        padding:10px;
     }
 
     .product-info h3{
@@ -944,14 +809,6 @@ footer p{
         width:100%;
     }
 
-    .promo{
-        margin-left:15px;
-        margin-right:15px;
-    }
-
-    .intro-subtitle{
-        top:calc(50% + 60px);
-    }
 }
 
 @media(max-width:360px){
@@ -960,91 +817,82 @@ footer p{
         grid-template-columns:1fr;
     }
 
-    .product-photo{
+    .product-image{
         height:220px;
     }
-}
 
+}
 </style>
 </head>
-
 
 <body>
 
 
 <!-- =====================================================
-     ANIMATION D'ENTRÉE
+     INTRO
 ===================================================== -->
 
 <div id="intro">
 
-    <div class="intro-content">
+    <div class="intro-glow"></div>
 
-        <div class="intro-glow"></div>
+    <div
+        class="bead"
+        style="--x:8%;--y:20%;--s:13px;--fromx:300px;--fromy:200px;--t:2.2s;--d:0s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:8%;--y:15%;--size:13px;--sx:350px;--sy:280px;--duration:2.6s;--delay:.1s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:18%;--y:75%;--s:18px;--fromx:250px;--fromy:-200px;--t:2.4s;--d:.1s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:18%;--y:72%;--size:18px;--sx:260px;--sy:-190px;--duration:2.7s;--delay:.2s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:31%;--y:15%;--s:11px;--fromx:170px;--fromy:250px;--t:2.3s;--d:.2s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:30%;--y:25%;--size:11px;--sx:180px;--sy:250px;--duration:2.5s;--delay:.3s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:42%;--y:80%;--s:15px;--fromx:100px;--fromy:-250px;--t:2.4s;--d:.3s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:42%;--y:80%;--size:16px;--sx:100px;--sy:-230px;--duration:2.8s;--delay:.4s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:55%;--y:14%;--s:14px;--fromx:-100px;--fromy:250px;--t:2.3s;--d:.2s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:55%;--y:14%;--size:14px;--sx:-90px;--sy:280px;--duration:2.5s;--delay:.2s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:68%;--y:77%;--s:19px;--fromx:-180px;--fromy:-220px;--t:2.4s;--d:.3s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:68%;--y:76%;--size:20px;--sx:-180px;--sy:-230px;--duration:2.8s;--delay:.3s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:82%;--y:20%;--s:12px;--fromx:-280px;--fromy:220px;--t:2.2s;--d:.1s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:82%;--y:23%;--size:12px;--sx:-290px;--sy:230px;--duration:2.6s;--delay:.15s;">
-        </div>
+    <div
+        class="bead"
+        style="--x:92%;--y:70%;--s:16px;--fromx:-320px;--fromy:-190px;--t:2.5s;--d:.3s">
+    </div>
 
-        <div class="intro-bead"
-             style="--x:92%;--y:68%;--size:15px;--sx:-350px;--sy:-180px;--duration:2.7s;--delay:.4s;">
-        </div>
+    <div class="intro-logo">
+        PERL<span>ORA</span>
+    </div>
 
-        <div class="intro-bead"
-             style="--x:4%;--y:47%;--size:10px;--sx:380px;--sy:20px;--duration:2.5s;--delay:.5s;">
-        </div>
-
-        <div class="intro-bead"
-             style="--x:96%;--y:43%;--size:18px;--sx:-380px;--sy:40px;--duration:2.6s;--delay:.5s;">
-        </div>
-
-
-        <div class="intro-title">
-            PERL<span>ORA</span>
-        </div>
-
-        <div class="intro-subtitle">
-            CRÉATIONS EN PERLES
-        </div>
-
+    <div class="intro-text">
+        CRÉATIONS EN PERLES
     </div>
 
 </div>
-
 
 
 <!-- =====================================================
      SITE
 ===================================================== -->
 
-<div id="site">
+<div id="website">
 
-
-<!-- HEADER -->
 
 <header>
 
@@ -1061,11 +909,11 @@ footer p{
         </a>
 
 
-        <div class="nav-actions">
+        <div class="nav-buttons">
 
             <button
-                class="nav-btn"
-                onclick="goShop()">
+                class="nav-button"
+                onclick="goToShop()">
 
                 🛍️ Boutique
 
@@ -1073,14 +921,14 @@ footer p{
 
 
             <button
-                class="nav-btn cart-btn"
+                class="nav-button cart-button"
                 onclick="openCart()">
 
                 🛒 Panier
 
                 <span
-                    class="cart-count"
-                    id="cartCount">
+                    class="cart-number"
+                    id="cartNumber">
 
                     0
 
@@ -1104,24 +952,28 @@ footer p{
         ✨ Bienvenue chez Perlora
     </span>
 
+
     <h1>
         PERL<span>ORA</span>
     </h1>
 
+
     <p>
         Une boutique en ligne consacrée à la vente
-        d'objets en perles, réalisés avec soin et passion.
+        d'objets en perles, créés avec soin et passion.
     </p>
 
-    <div class="hero-buttons">
+
+    <div class="hero-actions">
 
         <button
             class="primary"
-            onclick="goShop()">
+            onclick="goToShop()">
 
             🛍️ Découvrir la boutique
 
         </button>
+
 
         <button
             class="secondary"
@@ -1137,37 +989,38 @@ footer p{
 
 
 
-<!-- PROMO -->
+<!-- PROMOTION -->
 
 <div class="promo">
 
     <h2>
-        🩷 Trouve ton modèle préféré
+        🩷 Découvre les créations Perlora
     </h2>
 
     <p>
-        Ajoute tes créations préférées au panier
-        et commande directement sur WhatsApp.
+        Choisis ton article préféré et commande facilement.
     </p>
 
 </div>
 
 
 
-<!-- BOUTIQUE -->
+<!-- =====================================================
+     BOUTIQUE
+===================================================== -->
 
 <section
-    class="section"
+    class="shop"
     id="boutique">
 
-    <div class="section-title">
+    <div class="shop-title">
 
         <h2>
             🩷 Notre Boutique
         </h2>
 
         <p>
-            Découvre nos 21 articles Perlora
+            Découvre nos 21 articles
         </p>
 
     </div>
@@ -1175,14 +1028,10 @@ footer p{
 
     <div class="search">
 
-        <span class="search-icon">
-            🔎
-        </span>
-
         <input
             type="search"
-            id="searchInput"
-            placeholder="Rechercher un article..."
+            id="search"
+            placeholder="🔎 Rechercher un article..."
             oninput="searchProducts()">
 
     </div>
@@ -1237,7 +1086,7 @@ footer p{
     </div>
 
 
-    <div class="cart-bottom">
+    <div class="cart-footer">
 
         <div class="total">
 
@@ -1281,11 +1130,11 @@ footer p{
 
 <div
     class="modal"
-    id="delivery">
+    id="deliveryModal">
 
     <div class="modal-box">
 
-        <div class="modal-title">
+        <div class="modal-header">
 
             <h2>
                 🚚 Livraison
@@ -1305,6 +1154,7 @@ footer p{
         <form
             onsubmit="sendDelivery(event)">
 
+
             <div class="form-group">
 
                 <label>
@@ -1312,7 +1162,7 @@ footer p{
                 </label>
 
                 <input
-                    id="name"
+                    id="customerName"
                     type="text"
                     placeholder="Votre nom"
                     required>
@@ -1327,7 +1177,7 @@ footer p{
                 </label>
 
                 <input
-                    id="phone"
+                    id="customerPhone"
                     type="tel"
                     placeholder="Votre numéro"
                     required>
@@ -1342,7 +1192,7 @@ footer p{
                 </label>
 
                 <input
-                    id="city"
+                    id="customerCity"
                     type="text"
                     placeholder="Ex : Abidjan"
                     required>
@@ -1357,7 +1207,7 @@ footer p{
                 </label>
 
                 <input
-                    id="area"
+                    id="customerArea"
                     type="text"
                     placeholder="Ex : Cocody"
                     required>
@@ -1372,15 +1222,15 @@ footer p{
                 </label>
 
                 <textarea
-                    id="place"
-                    placeholder="Indique le lieu de livraison..."
+                    id="customerPlace"
+                    placeholder="Indique le lieu..."
                     required></textarea>
 
             </div>
 
 
             <button
-                class="send-order"
+                class="send"
                 type="submit">
 
                 📲 Envoyer la commande
@@ -1404,8 +1254,7 @@ footer p{
     </div>
 
     <p>
-        Des créations en perles pour apporter
-        une touche unique à ton quotidien.
+        Des créations en perles pour une touche unique.
     </p>
 
     <div class="copy">
@@ -1421,22 +1270,22 @@ footer p{
 <script>
 
 /* =====================================================
-   CONFIGURATION
+   NUMÉRO WHATSAPP
 ===================================================== */
 
 /*
-   ⚠️ REMPLACE CE NUMÉRO PAR TON NUMÉRO WHATSAPP.
+   REMPLACE uniquement ce numéro par ton vrai
+   numéro WhatsApp au format international.
 
-   Exemple Côte d'Ivoire :
+   Exemple :
    2250700000000
 */
 
 const WHATSAPP_NUMBER = "2250000000000";
 
 
-
 /* =====================================================
-   LES 21 ARTICLES
+   21 ARTICLES
 ===================================================== */
 
 const products = [
@@ -1612,7 +1461,6 @@ const products = [
 ];
 
 
-
 /* =====================================================
    PANIER
 ===================================================== */
@@ -1620,12 +1468,11 @@ const products = [
 let cart = [];
 
 
-
 /* =====================================================
-   AFFICHER LES PRODUITS
+   AFFICHER PRODUITS
 ===================================================== */
 
-function displayProducts(list = products){
+function displayProducts(list){
 
     const container =
         document.getElementById("products");
@@ -1636,7 +1483,7 @@ function displayProducts(list = products){
             <div style="
                 grid-column:1/-1;
                 text-align:center;
-                padding:45px;
+                padding:50px;
                 color:#806b75;
             ">
                 😔 Aucun article trouvé.
@@ -1647,28 +1494,34 @@ function displayProducts(list = products){
     }
 
 
-    container.innerHTML = list.map(product => `
+    container.innerHTML = "";
 
-        <article class="product">
 
-            <div class="product-photo">
+    list.forEach(product => {
+
+        const card =
+            document.createElement("article");
+
+        card.className = "product";
+
+
+        card.innerHTML = `
+
+            <div class="product-image">
 
                 <img
                     src="${product.image}"
                     alt="${product.name}"
-                    onerror="
-                        this.style.display='none';
-                        this.nextElementSibling.style.display='block';
-                    "
+                    onerror="this.style.display='none';this.parentElement.querySelector('.emoji').style.display='block';"
                 >
 
-                <div
-                    class="placeholder"
+                <span
+                    class="emoji"
                     style="display:none">
 
                     ${product.emoji}
 
-                </div>
+                </span>
 
             </div>
 
@@ -1680,8 +1533,7 @@ function displayProducts(list = products){
                 </h3>
 
                 <p>
-                    Création en perles
-                    proposée par Perlora.
+                    Création en perles Perlora.
                 </p>
 
                 <div class="price">
@@ -1711,12 +1563,14 @@ function displayProducts(list = products){
                 </div>
 
             </div>
+        `;
 
-        </article>
 
-    `).join("");
+        container.appendChild(card);
+
+    });
+
 }
-
 
 
 /* =====================================================
@@ -1725,9 +1579,9 @@ function displayProducts(list = products){
 
 function searchProducts(){
 
-    const value =
+    const text =
         document
-        .getElementById("searchInput")
+        .getElementById("search")
         .value
         .toLowerCase()
         .trim();
@@ -1737,13 +1591,13 @@ function searchProducts(){
         products.filter(product =>
             product.name
             .toLowerCase()
-            .includes(value)
+            .includes(text)
         );
 
 
     displayProducts(results);
-}
 
+}
 
 
 /* =====================================================
@@ -1783,26 +1637,25 @@ function addToCart(id){
 }
 
 
-
 /* =====================================================
    QUANTITÉ
 ===================================================== */
 
-function changeQuantity(id, amount){
+function changeQuantity(id,change){
 
     const item =
-        cart.find(product => product.id === id);
+        cart.find(p => p.id === id);
 
     if(!item) return;
 
 
-    item.quantity += amount;
+    item.quantity += change;
 
 
     if(item.quantity <= 0){
 
         cart =
-            cart.filter(product => product.id !== id);
+            cart.filter(p => p.id !== id);
 
     }
 
@@ -1812,7 +1665,6 @@ function changeQuantity(id, amount){
 }
 
 
-
 /* =====================================================
    SUPPRIMER
 ===================================================== */
@@ -1820,12 +1672,11 @@ function changeQuantity(id, amount){
 function removeItem(id){
 
     cart =
-        cart.filter(product => product.id !== id);
+        cart.filter(p => p.id !== id);
 
     updateCart();
 
 }
-
 
 
 /* =====================================================
@@ -1841,9 +1692,8 @@ function clearCart(){
 }
 
 
-
 /* =====================================================
-   PANIER
+   MISE À JOUR PANIER
 ===================================================== */
 
 function updateCart(){
@@ -1851,30 +1701,29 @@ function updateCart(){
     const list =
         document.getElementById("cartList");
 
-    const count =
-        document.getElementById("cartCount");
+    const number =
+        document.getElementById("cartNumber");
 
     const totalElement =
         document.getElementById("total");
 
 
-    const quantity =
-        cart.reduce(
-            (sum,item) =>
-            sum + item.quantity,
-            0
-        );
+    let quantity = 0;
+    let total = 0;
 
 
-    const total =
-        cart.reduce(
-            (sum,item) =>
-            sum + item.price * item.quantity,
-            0
-        );
+    cart.forEach(item => {
+
+        quantity += item.quantity;
+
+        total +=
+            item.price *
+            item.quantity;
+
+    });
 
 
-    count.textContent = quantity;
+    number.textContent = quantity;
 
     totalElement.textContent =
         formatPrice(total);
@@ -1895,21 +1744,418 @@ function updateCart(){
     }
 
 
-    list.innerHTML =
-        cart.map(item => `
+    list.innerHTML = "";
 
-            <div class="cart-item">
 
-                <div class="cart-img">
+    cart.forEach(item => {
 
-                    <img
-                        src="${item.image}"
-                        alt="${item.name}"
-                        onerror="
-                            this.style.display='none';
-                            this.nextElementSibling.style.display='block';
-                        "
-                    >
+        const element =
+            document.createElement("div");
 
-                    <span style="display:none">
-                       
+        element.className = "cart-item";
+
+
+        element.innerHTML = `
+
+            <div class="cart-item-image">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                    onerror="this.style.display='none';this.parentElement.innerHTML='${item.emoji}';"
+                >
+
+            </div>
+
+
+            <div class="cart-info">
+
+                <h4>
+                    ${item.name}
+                </h4>
+
+                <div class="cart-price">
+                    ${formatPrice(
+                        item.price *
+                        item.quantity
+                    )}
+                </div>
+
+
+                <div class="quantity">
+
+                    <button
+                        onclick="changeQuantity(
+                            ${item.id},-1
+                        )">
+
+                        −
+
+                    </button>
+
+
+                    <strong>
+                        ${item.quantity}
+                    </strong>
+
+
+                    <button
+                        onclick="changeQuantity(
+                            ${item.id},1
+                        )">
+
+                        +
+
+                    </button>
+
+
+                    <button
+                        class="delete"
+                        onclick="removeItem(
+                            ${item.id}
+                        )">
+
+                        Supprimer
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        list.appendChild(element);
+
+    });
+
+}
+
+
+/* =====================================================
+   PRIX
+===================================================== */
+
+function formatPrice(price){
+
+    return new Intl.NumberFormat("fr-FR")
+        .format(price) +
+        " FCFA";
+
+}
+
+
+/* =====================================================
+   BOUTIQUE
+===================================================== */
+
+function goToShop(){
+
+    const shop =
+        document.getElementById("boutique");
+
+    shop.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+}
+
+
+/* =====================================================
+   VOIR PRODUIT
+===================================================== */
+
+function viewProduct(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+    if(!product) return;
+
+
+    alert(
+        product.name +
+        "\n\nPrix : " +
+        formatPrice(product.price) +
+        "\n\nAjoute-le au panier pour commander."
+    );
+
+}
+
+
+/* =====================================================
+   PANIER OUVRIR
+===================================================== */
+
+function openCart(){
+
+    document
+        .getElementById("cart")
+        .classList.add("active");
+
+    document
+        .getElementById("overlay")
+        .classList.add("active");
+
+}
+
+
+/* =====================================================
+   PANIER FERMER
+===================================================== */
+
+function closeCart(){
+
+    document
+        .getElementById("cart")
+        .classList.remove("active");
+
+    document
+        .getElementById("overlay")
+        .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function orderWhatsApp(){
+
+    if(cart.length === 0){
+
+        alert(
+            "🛒 Ton panier est vide."
+        );
+
+        return;
+    }
+
+
+    let message =
+        "Bonjour Perlora 👋\n\n" +
+        "Je souhaite commander :\n\n";
+
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        const subtotal =
+            item.price *
+            item.quantity;
+
+
+        total += subtotal;
+
+
+        message +=
+            "• " +
+            item.name +
+            " x" +
+            item.quantity +
+            " = " +
+            formatPrice(subtotal) +
+            "\n";
+
+    });
+
+
+    message +=
+        "\n💰 Total : " +
+        formatPrice(total) +
+        "\n\n" +
+        "Merci Perlora 🩷";
+
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(url,"_blank");
+
+}
+
+
+/* =====================================================
+   LIVRAISON
+===================================================== */
+
+function openDelivery(){
+
+    document
+        .getElementById("deliveryModal")
+        .classList.add("active");
+
+}
+
+
+function closeDelivery(){
+
+    document
+        .getElementById("deliveryModal")
+        .classList.remove("active");
+
+}
+
+
+/* =====================================================
+   FORMULAIRE LIVRAISON
+===================================================== */
+
+function sendDelivery(event){
+
+    event.preventDefault();
+
+
+    if(cart.length === 0){
+
+        alert(
+            "🛒 Ajoute d'abord un article au panier."
+        );
+
+        closeDelivery();
+
+        openCart();
+
+        return;
+    }
+
+
+    const name =
+        document.getElementById(
+            "customerName"
+        ).value;
+
+    const phone =
+        document.getElementById(
+            "customerPhone"
+        ).value;
+
+    const city =
+        document.getElementById(
+            "customerCity"
+        ).value;
+
+    const area =
+        document.getElementById(
+            "customerArea"
+        ).value;
+
+    const place =
+        document.getElementById(
+            "customerPlace"
+        ).value;
+
+
+    let message =
+        "Bonjour Perlora 👋\n\n" +
+
+        "🚚 NOUVELLE COMMANDE\n\n" +
+
+        "👤 Nom : " +
+        name +
+
+        "\n📱 WhatsApp : " +
+        phone +
+
+        "\n🏙️ Ville : " +
+        city +
+
+        "\n📍 Quartier : " +
+        area +
+
+        "\n📌 Lieu : " +
+        place +
+
+        "\n\n🛍️ ARTICLES :\n";
+
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        const subtotal =
+            item.price *
+            item.quantity;
+
+
+        total += subtotal;
+
+
+        message +=
+            "• " +
+            item.name +
+            " x" +
+            item.quantity +
+            " = " +
+            formatPrice(subtotal) +
+            "\n";
+
+    });
+
+
+    message +=
+        "\n💰 TOTAL : " +
+        formatPrice(total) +
+
+        "\n\nMerci Perlora 🩷";
+
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(url,"_blank");
+
+}
+
+
+/* =====================================================
+   DÉMARRAGE DU SITE
+===================================================== */
+
+displayProducts([]);
+
+displayProducts(products);
+
+updateCart();
+
+
+/*
+   Après l'animation,
+   on affiche réellement le site.
+*/
+
+setTimeout(function(){
+
+    document
+        .getElementById("website")
+        .classList.add("show");
+
+},3500);
+
+
+setTimeout(function(){
+
+    document
+        .getElementById("intro")
+        .classList.add("hidden");
+
+},4000);
+
+</script>
+
+</body>
+   </html>
