@@ -4,2658 +4,1912 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PERLORA — Créations en perles</title>
+<title>PERLORA — Boutique en perles</title>
 
 <meta name="description"
-content="Perlora — créations artisanales en perles, porte-clés, bracelets, sacs, décorations et objets personnalisés.">
+content="PERLORA — Boutique en ligne de créations et objets en perles.">
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:#071d55;
-  background:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#fff7fb;
+    color:#291c23;
+    overflow-x:hidden;
 }
 
-/* =========================
-   BARRE SUPERIEURE
-========================= */
 
-.topbar{
-  background:#061c63;
-  color:white;
-  min-height:38px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:45px;
-  padding:8px 15px;
-  font-size:14px;
-  font-weight:bold;
-  flex-wrap:wrap;
+/* =====================================================
+   ANIMATION D'ENTRÉE PERLORA
+===================================================== */
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:
+        radial-gradient(circle at center,#351523 0%,#160b11 45%,#070507 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
 }
 
-.topbar span{
-  display:flex;
-  align-items:center;
-  gap:7px;
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+.intro-content{
+    position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.intro-title{
+    position:relative;
+    z-index:5;
+    color:white;
+    font-size:clamp(45px,13vw,105px);
+    font-weight:900;
+    letter-spacing:8px;
+    text-align:center;
+    opacity:0;
+    transform:scale(.3);
+    text-shadow:
+        0 0 10px #ff4f9a,
+        0 0 30px #ff4f9a,
+        0 0 70px #e93683;
+    animation:
+        logoAppear 2s cubic-bezier(.17,.67,.2,1.2) 2.4s forwards;
+}
+
+.intro-title span{
+    color:#ff72ad;
+}
+
+.intro-subtitle{
+    position:absolute;
+    z-index:5;
+    top:calc(50% + 65px);
+    color:#ffd6e7;
+    font-size:12px;
+    letter-spacing:4px;
+    opacity:0;
+    animation:subtitleAppear 1s ease 3.4s forwards;
+}
+
+.intro-glow{
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:#e93683;
+    filter:blur(80px);
+    opacity:.12;
+    animation:introGlow 4s ease-in-out infinite;
+}
+
+@keyframes logoAppear{
+
+    0%{
+        opacity:0;
+        transform:scale(.3) rotate(-5deg);
+        letter-spacing:25px;
+    }
+
+    60%{
+        opacity:1;
+        transform:scale(1.12) rotate(0);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+        letter-spacing:8px;
+    }
+}
+
+@keyframes subtitleAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes introGlow{
+
+    0%,100%{
+        transform:scale(.8);
+        opacity:.08;
+    }
+
+    50%{
+        transform:scale(1.4);
+        opacity:.18;
+    }
+}
+
+
+/* PERLES DE L'INTRO */
+
+.intro-bead{
+    position:absolute;
+    width:var(--size);
+    height:var(--size);
+    border-radius:50%;
+    left:var(--x);
+    top:var(--y);
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff,
+            #ffb7d5 22%,
+            #ff5b9e 55%,
+            #c51e65 100%
+        );
+    box-shadow:
+        0 0 8px #ff77ae,
+        0 0 20px rgba(255,82,155,.8);
+    opacity:0;
+    animation:
+        beadMove var(--duration) cubic-bezier(.2,.7,.2,1)
+        var(--delay) forwards;
+}
+
+@keyframes beadMove{
+
+    0%{
+        opacity:0;
+        transform:
+            translate(
+                var(--sx),
+                var(--sy)
+            )
+            scale(.15)
+            rotate(0deg);
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    70%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:1;
+        transform:
+            translate(0,0)
+            scale(1)
+            rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   SITE
+===================================================== */
+
+#site{
+    opacity:0;
+    transform:translateY(20px);
+    animation:siteAppear 1.2s ease 4.2s forwards;
+}
+
+@keyframes siteAppear{
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #ffd5e5;
+    box-shadow:0 5px 25px rgba(150,50,100,.08);
+}
 
 .navbar{
-  height:100px;
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 35px;
-  box-shadow:0 2px 15px rgba(0,0,0,.08);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-.menu-btn{
-  display:none;
-  border:0;
-  background:none;
-  font-size:30px;
-  color:#08256f;
+    max-width:1200px;
+    margin:auto;
+    min-height:66px;
+    padding:10px 17px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  color:#08256f;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:#e93683;
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
-.logo-icon{
-  font-size:50px;
-  color:#d59b20;
+.logo-circle{
+    width:37px;
+    height:37px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    background:linear-gradient(135deg,#ff3f91,#ff9fc7);
+    box-shadow:0 5px 15px rgba(233,54,131,.3);
 }
 
-.logo-text{
-  font-family:Georgia,serif;
-  font-size:34px;
-  font-weight:bold;
-  letter-spacing:2px;
+.nav-actions{
+    display:flex;
+    gap:8px;
 }
 
-.logo-sub{
-  display:block;
-  color:#b07a19;
-  font-size:11px;
-  letter-spacing:2px;
-  text-align:center;
+.nav-btn{
+    border:0;
+    border-radius:12px;
+    padding:10px 13px;
+    background:#fff0f6;
+    color:#d82d76;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:35px;
+.cart-btn{
+    position:relative;
+    background:#e93683;
+    color:white;
 }
 
-.nav-links a{
-  text-decoration:none;
-  color:#111;
-  font-size:16px;
-  padding:12px 0;
-  position:relative;
+.cart-count{
+    position:absolute;
+    right:-5px;
+    top:-7px;
+    min-width:20px;
+    height:20px;
+    padding:2px 5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#21141a;
+    border-radius:20px;
+    font-size:11px;
 }
 
-.nav-links a:hover,
-.nav-links a.active{
-  color:#0b36a0;
-}
 
-.nav-links a.active:after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:2px;
-  background:#0b36a0;
-}
-
-.panier-nav{
-  width:68px;
-  height:68px;
-  border-radius:50%;
-  background:#f5f3ee;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-decoration:none;
-  color:#071d55;
-  font-weight:bold;
-  position:relative;
-}
-
-.panier-nav .icone{
-  font-size:28px;
-}
-
-.badge{
-  position:absolute;
-  right:3px;
-  top:1px;
-  background:#0b2d87;
-  color:white;
-  width:25px;
-  height:25px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-  border:2px solid #dca92b;
-}
-
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero{
-  min-height:510px;
-  background:
-    radial-gradient(circle at 75% 30%,rgba(40,112,255,.35),transparent 25%),
-    radial-gradient(circle at 15% 60%,rgba(30,80,200,.3),transparent 30%),
-    linear-gradient(135deg,#03144b,#092b78 55%,#03164f);
-  color:white;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  padding:45px 6%;
+    position:relative;
+    max-width:1200px;
+    margin:auto;
+    padding:75px 18px 60px;
+    text-align:center;
+    overflow:hidden;
+}
+
+.hero:before,
+.hero:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    filter:blur(1px);
+    opacity:.5;
+    z-index:-1;
 }
 
 .hero:before{
-  content:"✦  ✧    ✦       ✧   ✦";
-  position:absolute;
-  inset:20px;
-  color:#ffd45b;
-  font-size:25px;
-  letter-spacing:55px;
-  opacity:.8;
+    width:180px;
+    height:180px;
+    background:#ffd5e7;
+    left:-80px;
+    top:30px;
 }
 
-.hero-content{
-  width:52%;
-  position:relative;
-  z-index:2;
+.hero:after{
+    width:220px;
+    height:220px;
+    background:#ffe7f1;
+    right:-100px;
+    bottom:0;
 }
 
-.hero-script{
-  color:#e9b83c;
-  font-family:cursive;
-  font-size:38px;
-  margin-bottom:5px;
+.badge{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    background:#ffe4ef;
+    color:#d82d76;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:18px;
 }
 
 .hero h1{
-  font-family:Georgia,serif;
-  font-size:70px;
-  letter-spacing:3px;
-  line-height:1;
-  margin-bottom:12px;
+    font-size:clamp(48px,12vw,90px);
+    line-height:.95;
+    color:#e93683;
+    margin-bottom:20px;
+    letter-spacing:2px;
 }
 
-.hero-title{
-  color:#eab73b;
-  font-size:21px;
-  font-weight:bold;
-  letter-spacing:2px;
-  margin-bottom:18px;
+.hero h1 span{
+    color:#281b22;
 }
 
 .hero p{
-  font-size:18px;
-  line-height:1.6;
-  max-width:550px;
+    max-width:680px;
+    margin:auto;
+    color:#75616a;
+    font-size:16px;
+    line-height:1.7;
 }
 
 .hero-buttons{
-  display:flex;
-  gap:14px;
-  margin-top:25px;
-  flex-wrap:wrap;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
 }
 
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:9px;
-  padding:14px 28px;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:.2s;
-  cursor:pointer;
+.primary,
+.secondary{
+    border:0;
+    border-radius:14px;
+    padding:14px 22px;
+    font-weight:bold;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.25s;
 }
 
-.btn:hover{
-  transform:translateY(-2px);
+.primary{
+    color:white;
+    background:#e93683;
+    box-shadow:0 8px 22px rgba(233,54,131,.25);
 }
 
-.btn-gold{
-  background:#0b48c9;
-  color:white;
-  border:1px solid #eab83d;
-  box-shadow:0 4px 15px rgba(0,0,0,.2);
+.secondary{
+    color:#d82d76;
+    background:white;
+    border:1px solid #ffd0e2;
 }
 
-.btn-outline{
-  background:transparent;
-  color:white;
-  border:1px solid #eab83d;
+.primary:hover,
+.secondary:hover{
+    transform:translateY(-3px);
 }
 
-.hero-products{
-  width:48%;
-  position:relative;
-  min-height:420px;
-}
 
-.hero-card{
-  position:absolute;
-  background:white;
-  border-radius:25px;
-  padding:10px;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
-}
-
-.hero-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:18px;
-}
-
-.hero-card.big{
-  width:250px;
-  height:270px;
-  left:25%;
-  top:65px;
-  z-index:2;
-}
-
-.hero-card.small1{
-  width:150px;
-  height:170px;
-  left:0;
-  top:210px;
-}
-
-.hero-card.small2{
-  width:160px;
-  height:180px;
-  right:0;
-  top:120px;
-}
-
-/* =========================
-   GARANTIES
-========================= */
-
-.guarantees{
-  background:white;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  padding:25px 6%;
-  gap:15px;
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
-}
-
-.guarantee{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:10px;
-  border-right:1px solid #ddd;
-}
-
-.guarantee:last-child{
-  border-right:0;
-}
-
-.guarantee-icon{
-  font-size:32px;
-}
-
-.guarantee strong{
-  display:block;
-  margin-bottom:5px;
-}
-
-/* =========================
-   SECTIONS
-========================= */
+/* =====================================================
+   SECTION
+===================================================== */
 
 .section{
-  padding:55px 5%;
+    max-width:1200px;
+    margin:auto;
+    padding:30px 18px 70px;
 }
 
 .section-title{
-  text-align:center;
-  margin-bottom:35px;
-}
-
-.section-title small{
-  color:#a66c12;
-  font-weight:bold;
-  letter-spacing:2px;
-  font-size:15px;
+    text-align:center;
+    margin-bottom:25px;
 }
 
 .section-title h2{
-  font-family:Georgia,serif;
-  color:#092878;
-  font-size:32px;
-  margin-top:8px;
+    font-size:31px;
+    margin-bottom:7px;
 }
 
-.section-title h2 span{
-  color:#1470d8;
+.section-title p{
+    color:#806c75;
 }
 
-/* =========================
-   COLLECTIONS
-========================= */
 
-.collections{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:18px;
-  max-width:1200px;
-  margin:auto;
+/* =====================================================
+   RECHERCHE
+===================================================== */
+
+.search{
+    max-width:650px;
+    margin:0 auto 30px;
+    position:relative;
 }
 
-.collection{
-  height:245px;
-  border-radius:18px;
-  overflow:hidden;
-  position:relative;
-  background:#eee;
-  box-shadow:0 4px 15px rgba(0,0,0,.1);
+.search input{
+    width:100%;
+    border:2px solid #ffd4e5;
+    border-radius:16px;
+    padding:15px 18px 15px 47px;
+    outline:none;
+    font-size:15px;
+    background:white;
 }
 
-.collection img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.3s;
+.search input:focus{
+    border-color:#e93683;
+    box-shadow:0 0 0 4px #ffe4ef;
 }
 
-.collection:hover img{
-  transform:scale(1.06);
+.search-icon{
+    position:absolute;
+    left:17px;
+    top:13px;
+    font-size:19px;
 }
 
-.collection-overlay{
-  position:absolute;
-  left:8px;
-  right:8px;
-  bottom:8px;
-  padding:13px;
-  border-radius:12px;
-  background:rgba(4,24,72,.88);
-  color:white;
-  text-align:center;
-}
 
-.collection-overlay strong{
-  display:block;
-  margin-bottom:8px;
-}
-
-.collection-overlay a{
-  color:white;
-  border:1px solid #d9a52e;
-  border-radius:20px;
-  padding:6px 15px;
-  display:inline-block;
-  text-decoration:none;
-  font-size:13px;
-}
-
-/* =========================
+/* =====================================================
    PRODUITS
-========================= */
+===================================================== */
 
 .products{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:20px;
-  max-width:1200px;
-  margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:19px;
 }
 
 .product{
-  background:white;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 5px 18px rgba(0,0,0,.1);
-  border:1px solid #eee;
+    background:white;
+    border:1px solid #ffe0eb;
+    border-radius:21px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(120,50,80,.07);
+    transition:.3s;
 }
 
-.product-img{
-  height:210px;
-  background:#f5eeee;
-  overflow:hidden;
+.product:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(120,50,80,.13);
 }
 
-.product-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.product-photo{
+    height:215px;
+    background:
+        radial-gradient(circle,#fff,#ffe7f1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.product-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.placeholder{
+    font-size:65px;
 }
 
 .product-info{
-  padding:15px;
+    padding:15px;
 }
 
 .product-info h3{
-  font-size:16px;
-  margin-bottom:10px;
-  color:#17244a;
+    font-size:16px;
+    margin-bottom:6px;
 }
 
-.product-price{
-  color:#092878;
-  font-weight:bold;
-  margin-bottom:13px;
+.product-info p{
+    color:#89757e;
+    font-size:12px;
+    line-height:1.5;
+    min-height:36px;
 }
 
-.product-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.price{
+    margin:11px 0;
+    color:#e93683;
+    font-size:18px;
+    font-weight:900;
 }
 
-.cart-add{
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:12px;
-  background:#093baf;
-  color:white;
-  font-size:19px;
-  cursor:pointer;
+.product-buttons{
+    display:flex;
+    gap:7px;
 }
 
-/* =========================
-   BLOC PANIER / WHATSAPP
-========================= */
-
-.cta{
-  margin:20px 3% 50px;
-  border-radius:25px;
-  padding:35px 5%;
-  background:
-    radial-gradient(circle at 20% 20%,rgba(45,102,220,.4),transparent 25%),
-    linear-gradient(120deg,#04174d,#0b368e);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:30px;
+.add{
+    flex:1;
+    border:0;
+    border-radius:11px;
+    padding:11px;
+    background:#e93683;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.cta h2{
-  font-size:28px;
-  margin-bottom:10px;
+.view{
+    border:0;
+    border-radius:11px;
+    padding:11px 12px;
+    background:#fff0f6;
+    color:#d82d76;
+    cursor:pointer;
 }
 
-.cta p{
-  font-size:17px;
+
+/* =====================================================
+   PROMO
+===================================================== */
+
+.promo{
+    max-width:1100px;
+    margin:0 auto 55px;
+    padding:30px 20px;
+    text-align:center;
+    color:white;
+    border-radius:25px;
+    background:linear-gradient(135deg,#d92774,#ff78b2);
+    box-shadow:0 12px 30px rgba(233,54,131,.2);
 }
 
-.cta-actions{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  min-width:280px;
+.promo h2{
+    margin-bottom:8px;
 }
 
-.btn-gold-solid{
-  background:#e5aa2e;
-  color:white;
-  text-align:center;
+
+/* =====================================================
+   PANIER
+===================================================== */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    background:rgba(25,10,18,.5);
+    display:none;
 }
 
-.btn-whatsapp{
-  background:#25d366;
-  color:white;
-  text-align:center;
+.overlay.active{
+    display:block;
 }
 
-/* =========================
-   A PROPOS
-========================= */
-
-.about{
-  background:#f8f7f3;
-  text-align:center;
-  padding:55px 10%;
+.cart{
+    position:fixed;
+    z-index:2100;
+    top:0;
+    right:0;
+    width:min(430px,94%);
+    height:100%;
+    background:white;
+    transform:translateX(110%);
+    transition:.35s;
+    display:flex;
+    flex-direction:column;
+    box-shadow:-10px 0 35px rgba(0,0,0,.18);
 }
 
-.about h2{
-  font-family:Georgia,serif;
-  color:#092878;
-  margin-bottom:15px;
-  font-size:32px;
+.cart.active{
+    transform:translateX(0);
 }
 
-.about p{
-  max-width:750px;
-  margin:auto;
-  line-height:1.8;
-  color:#444;
+.cart-header{
+    padding:19px;
+    border-bottom:1px solid #f1dce6;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-/* =========================
+.close{
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:#fff0f6;
+    color:#d82d76;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.cart-list{
+    flex:1;
+    overflow-y:auto;
+    padding:18px;
+}
+
+.empty{
+    padding:60px 20px;
+    text-align:center;
+    color:#917b85;
+}
+
+.cart-item{
+    display:flex;
+    gap:11px;
+    padding:13px 0;
+    border-bottom:1px solid #f4e2ea;
+}
+
+.cart-img{
+    width:64px;
+    height:64px;
+    flex-shrink:0;
+    border-radius:12px;
+    background:#ffe6f0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-size:28px;
+}
+
+.cart-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.cart-info h4{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.cart-price{
+    color:#e93683;
+    font-weight:bold;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:7px;
+}
+
+.qty button{
+    width:27px;
+    height:27px;
+    border:0;
+    border-radius:8px;
+    background:#ffe6f0;
+    color:#d82d76;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.delete{
+    border:0;
+    background:none;
+    color:#999;
+    cursor:pointer;
+    font-size:11px;
+}
+
+.cart-bottom{
+    padding:18px;
+    border-top:1px solid #f1dce6;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:900;
+    margin-bottom:14px;
+}
+
+.whatsapp{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:13px;
+    background:#20b954;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.clear{
+    width:100%;
+    padding:11px;
+    margin-top:8px;
+    border:0;
+    border-radius:12px;
+    background:#f5eef1;
+    color:#735d67;
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   LIVRAISON
+===================================================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:3000;
+    background:rgba(25,10,18,.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:min(500px,100%);
+    max-height:90vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:23px;
+    padding:24px;
+}
+
+.modal-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #efcadb;
+    border-radius:11px;
+    outline:none;
+    background:#fffafd;
+}
+
+.form-group textarea{
+    min-height:85px;
+}
+
+.send-order{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:14px;
+    background:#e93683;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer{
-  background:#04174d;
-  color:white;
-  padding:40px 6%;
-  text-align:center;
+    padding:40px 20px;
+    text-align:center;
+    background:#271820;
+    color:white;
 }
 
 .footer-logo{
-  font-family:Georgia,serif;
-  font-size:30px;
-  color:#e6b338;
-  margin-bottom:10px;
+    color:#ff72ad;
+    font-size:25px;
+    font-weight:900;
+    margin-bottom:10px;
 }
 
 footer p{
-  margin:7px 0;
+    color:#cbb8c1;
+    font-size:13px;
+    line-height:1.6;
 }
 
-footer a{
-  color:white;
-  text-decoration:none;
+.copy{
+    margin-top:20px;
+    color:#98858e;
+    font-size:12px;
 }
 
-.footer-bottom{
-  margin-top:25px;
-  padding-top:20px;
-  border-top:1px solid rgba(255,255,255,.2);
-  font-size:13px;
-}
 
-/* =========================
-   MESSAGE
-========================= */
-
-#message{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:white;
-  color:#092878;
-  padding:15px 20px;
-  border-radius:15px;
-  box-shadow:0 5px 25px rgba(0,0,0,.2);
-  display:none;
-  z-index:500;
-  font-weight:bold;
-}
-
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
-@media(max-width:900px){
+@media(max-width:600px){
 
-  .navbar{
-    height:75px;
-    padding:0 15px;
-  }
+    .navbar{
+        min-height:60px;
+        padding:8px 11px;
+    }
 
-  .menu-btn{
-    display:block;
-  }
+    .logo{
+        font-size:20px;
+    }
 
-  .nav-links{
-    display:none;
-    position:absolute;
-    top:75px;
-    left:0;
-    right:0;
-    background:white;
-    flex-direction:column;
-    gap:0;
-    padding:15px;
-    box-shadow:0 10px 20px rgba(0,0,0,.1);
-  }
+    .logo-circle{
+        width:32px;
+        height:32px;
+    }
 
-  .nav-links.open{
-    display:flex;
-  }
+    .nav-btn{
+        padding:9px 10px;
+        font-size:11px;
+    }
 
-  .nav-links a{
-    width:100%;
-    text-align:center;
-    padding:15px;
-  }
+    .hero{
+        padding:60px 16px 45px;
+    }
 
-  .logo-text{
-    font-size:25px;
-  }
+    .hero h1{
+        font-size:52px;
+    }
 
-  .logo-icon{
-    font-size:35px;
-  }
+    .hero p{
+        font-size:14px;
+    }
 
-  .hero{
-    padding:45px 20px;
-    display:block;
-  }
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
 
-  .hero-content{
-    width:100%;
-    text-align:center;
-  }
+    .product{
+        border-radius:17px;
+    }
 
-  .hero h1{
-    font-size:52px;
-  }
+    .product-photo{
+        height:160px;
+    }
 
-  .hero-script{
-    font-size:30px;
-  }
+    .product-info{
+        padding:11px;
+    }
 
-  .hero p{
-    margin:auto;
-  }
+    .product-info h3{
+        font-size:13px;
+    }
 
-  .hero-buttons{
-    justify-content:center;
-  }
+    .product-info p{
+        font-size:10px;
+    }
 
-  .hero-products{
-    width:100%;
-    min-height:350px;
-    margin-top:25px;
-  }
+    .price{
+        font-size:15px;
+    }
 
-  .hero-card.big{
-    left:50%;
-    transform:translateX(-50%);
-  }
+    .product-buttons{
+        flex-direction:column;
+    }
 
-  .hero-card.small1{
-    left:3%;
-  }
+    .add,
+    .view{
+        width:100%;
+    }
 
-  .hero-card.small2{
-    right:3%;
-  }
+    .promo{
+        margin-left:15px;
+        margin-right:15px;
+    }
 
-  .guarantees{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .guarantee{
-    border-right:0;
-  }
-
-  .collections{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .products{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .cta{
-    flex-direction:column;
-    text-align:center;
-  }
-
+    .intro-subtitle{
+        top:calc(50% + 60px);
+    }
 }
 
-@media(max-width:500px){
+@media(max-width:360px){
 
-  .topbar{
-    gap:10px;
-    font-size:11px;
-  }
+    .products{
+        grid-template-columns:1fr;
+    }
 
-  .topbar span:nth-child(3),
-  .topbar span:nth-child(4){
-    display:none;
-  }
-
-  .hero h1{
-    font-size:43px;
-  }
-
-  .hero-title{
-    font-size:16px;
-  }
-
-  .hero-card.big{
-    width:210px;
-    height:230px;
-  }
-
-  .hero-card.small1{
-    width:115px;
-    height:130px;
-    top:180px;
-  }
-
-  .hero-card.small2{
-    width:120px;
-    height:140px;
-    top:100px;
-  }
-
-  .guarantees{
-    grid-template-columns:1fr;
-  }
-
-  .collections{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .collection{
-    height:190px;
-  }
-
-  .products{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .product-img{
-    height:150px;
-  }
-
-  .product-info{
-    padding:10px;
-  }
-
-  .product-info h3{
-    font-size:14px;
-  }
-
-  .cta-actions{
-    width:100%;
-    min-width:0;
-  }
-
+    .product-photo{
+        height:220px;
+    }
 }
 
-</style><style>
-/* ================================
-   ANIMATION D'OUVERTURE PERLORA
-================================ */
-
-#perloraIntro {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background:
-    radial-gradient(circle at center, #173b91 0%, #071536 45%, #020817 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-#perloraIntro.hide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.perlora-intro-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Étoiles */
-.intro-star {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 10px white;
-  animation: twinkle 1.5s infinite alternate;
-}
-
-.star1 { top: 15%; left: 20%; }
-.star2 { top: 25%; left: 75%; animation-delay: .4s; }
-.star3 { top: 70%; left: 15%; animation-delay: .8s; }
-.star4 { top: 80%; left: 80%; animation-delay: .2s; }
-.star5 { top: 35%; left: 10%; animation-delay: .6s; }
-.star6 { top: 60%; left: 90%; animation-delay: 1s; }
-
-@keyframes twinkle {
-  from {
-    opacity: .2;
-    transform: scale(.7);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-}
-
-/* Logo */
-.perlora-intro-logo {
-  position: relative;
-  z-index: 5;
-  font-family: Arial, sans-serif;
-  font-size: clamp(42px, 12vw, 85px);
-  font-weight: 900;
-  letter-spacing: 5px;
-  color: white;
-  text-shadow:
-    0 0 10px #69a7ff,
-    0 0 25px #2f7cff,
-    0 0 50px #1769ff;
-  opacity: 0;
-  transform: scale(.5);
-  animation: logoAppear 1.5s ease forwards 1s;
-}
-
-@keyframes logoAppear {
-  0% {
-    opacity: 0;
-    transform: scale(.5);
-  }
-
-  60% {
-    opacity: 1;
-    transform: scale(1.12);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Cercle lumineux */
-.intro-glow {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(100,170,255,.35),
-    rgba(0,100,255,.12),
-    transparent 70%
-  );
-  animation: glowPulse 2s infinite alternate;
-}
-
-@keyframes glowPulse {
-  from {
-    transform: scale(.8);
-    opacity: .4;
-  }
-
-  to {
-    transform: scale(1.3);
-    opacity: 1;
-  }
-}
-
-/* Perles */
-.intro-bead {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  z-index: 4;
-  box-shadow:
-    inset -3px -3px 5px rgba(0,0,0,.3),
-    0 0 12px currentColor;
-}
-
-/* Couleurs */
-.bead-blue {
-  background: #2997ff;
-  color: #2997ff;
-}
-
-.bead-pink {
-  background: #ff65c7;
-  color: #ff65c7;
-}
-
-.bead-purple {
-  background: #a66cff;
-  color: #a66cff;
-}
-
-.bead-white {
-  background: #ffffff;
-  color: #ffffff;
-}
-
-/* Positions et animations */
-.bead1 {
-  left: 15%;
-  top: 20%;
-  animation: bead1 2.2s ease forwards;
-}
-
-.bead2 {
-  left: 85%;
-  top: 20%;
-  animation: bead2 2.2s ease forwards;
-}
-
-.bead3 {
-  left: 15%;
-  top: 80%;
-  animation: bead3 2.2s ease forwards;
-}
-
-.bead4 {
-  left: 85%;
-  top: 80%;
-  animation: bead4 2.2s ease forwards;
-}
-
-.bead5 {
-  left: 50%;
-  top: 10%;
-  animation: bead5 2.2s ease forwards;
-}
-
-.bead6 {
-  left: 50%;
-  top: 90%;
-  animation: bead6 2.2s ease forwards;
-}
-
-@keyframes bead1 {
-  0% {
-    transform: translate(-150px,-100px) scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(100px,100px) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bead2 {
-  0% {
-    transform: translate(150px,-100px) scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-100px,100px) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bead3 {
-  0% {
-    transform: translate(-150px,100px) scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(100px,-100px) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bead4 {
-  0% {
-    transform: translate(150px,100px) scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-100px,-100px) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bead5 {
-  0% {
-    transform: translateY(-180px) scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(100px) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bead6 {
-  0% {
-    transform: translateY(180px) scale(0);
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-100px) scale(1);
-    opacity: 1;
-  }
-}
-
-/* Ligne lumineuse */
-.intro-light {
-  position: absolute;
-  width: 0;
-  height: 3px;
-  background: white;
-  box-shadow:
-    0 0 10px white,
-    0 0 25px #4da3ff,
-    0 0 50px #4da3ff;
-  z-index: 10;
-  animation: lightSweep 1.2s ease forwards 2s;
-}
-
-@keyframes lightSweep {
-  0% {
-    width: 0;
-    transform: translateX(-150px) rotate(-8deg);
-    opacity: 0;
-  }
-
-  40% {
-    opacity: 1;
-  }
-
-  100% {
-    width: 350px;
-    transform: translateX(150px) rotate(-8deg);
-    opacity: 0;
-  }
-}
-
-/* Message */
-.intro-welcome {
-  position: absolute;
-  top: calc(50% + 70px);
-  color: rgba(255,255,255,.85);
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: welcomeAppear 1s ease forwards 1.7s;
-}
-
-@keyframes welcomeAppear {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Petit chargement */
-.intro-loading {
-  position: absolute;
-  bottom: 8%;
-  width: 100px;
-  height: 3px;
-  background: rgba(255,255,255,.2);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.intro-loading::after {
-  content: "";
-  display: block;
-  width: 40%;
-  height: 100%;
-  background: white;
-  box-shadow: 0 0 10px white;
-  animation: loading 2.8s ease forwards;
-}
-
-@keyframes loading {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: 100%;
-  }
-}
-
-/* Téléphone */
-@media (max-width: 600px) {
-
-  .perlora-intro-logo {
-    font-size: 45px;
-    letter-spacing: 3px;
-  }
-
-  .intro-glow {
-    width: 210px;
-    height: 210px;
-  }
-
-  .intro-bead {
-    width: 13px;
-    height: 13px;
-  }
-
-  .intro-welcome {
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
-}/* Animation du bouton panier Perlora */
-
-.btn-gold-solid {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn-gold-solid:active {
-  transform: scale(0.92);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-}
-
-@keyframes panierRebond {
-  0% {
-    transform: scale(1);
-  }
-
-  35% {
-    transform: scale(1.12) rotate(-2deg);
-  }
-
-  65% {
-    transform: scale(0.96) rotate(2deg);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.btn-gold-solid:hover {
-  animation: panierRebond 0.45s ease;
-  }
-  </style>
+</style>
 </head>
 
+
 <body>
-<!-- 💎 PERLES FLOTTANTES PERLORA -->
-
-<style>
-/* 💎 Conteneur des perles */
-.floating-beads {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 5;
-}
-
-/* 💎 Apparence des perles */
-.floating-beads span {
-  position: absolute;
-  display: block;
-  font-size: 22px;
-  opacity: 0;
-  animation-name: perloraFloat;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
-}
-
-/* 💎 Positions et vitesses */
-.floating-beads span:nth-child(1) {
-  left: 5%;
-  animation-duration: 9s;
-  animation-delay: 0s;
-}
-
-.floating-beads span:nth-child(2) {
-  left: 18%;
-  animation-duration: 12s;
-  animation-delay: 2s;
-}
-
-.floating-beads span:nth-child(3) {
-  left: 32%;
-  animation-duration: 10s;
-  animation-delay: 1s;
-}
-
-.floating-beads span:nth-child(4) {
-  left: 47%;
-  animation-duration: 14s;
-  animation-delay: 3s;
-}
-
-.floating-beads span:nth-child(5) {
-  left: 63%;
-  animation-duration: 11s;
-  animation-delay: 4s;
-}
-
-.floating-beads span:nth-child(6) {
-  left: 76%;
-  animation-duration: 13s;
-  animation-delay: 1.5s;
-}
-
-.floating-beads span:nth-child(7) {
-  left: 88%;
-  animation-duration: 10s;
-  animation-delay: 3.5s;
-}
-
-.floating-beads span:nth-child(8) {
-  left: 95%;
-  animation-duration: 15s;
-  animation-delay: 5s;
-}
-
-/* ✨ Animation des perles */
-@keyframes perloraFloat {
-
-  0% {
-    transform: translateY(110vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0.85;
-  }
-
-  25% {
-    transform: translateY(75vh) translateX(25px) rotate(90deg);
-  }
-
-  50% {
-    transform: translateY(50vh) translateX(-25px) rotate(180deg);
-  }
-
-  75% {
-    transform: translateY(25vh) translateX(30px) rotate(270deg);
-  }
-
-  90% {
-    opacity: 0.85;
-  }
-
-  100% {
-    transform: translateY(-15vh) translateX(-20px) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* 📱 Téléphone */
-@media (max-width: 600px) {
-
-  .floating-beads span {
-    font-size: 18px;
-  }
-
-}
-</style>
 
 
-<!-- 💎 Les perles -->
-<div class="floating-beads" aria-hidden="true">
+<!-- =====================================================
+     ANIMATION D'ENTRÉE
+===================================================== -->
 
-  <span>🔵</span>
-  <span>🩷</span>
-  <span>⚪</span>
-  <span>🟣</span>
-  <span>🔵</span>
-  <span>🩷</span>
-  <span>⚪</span>
-  <span>🟣</span>
+<div id="intro">
 
-</div><!-- ================================
-     OUVERTURE PERLORA
-================================ -->
+    <div class="intro-content">
 
-<div id="perloraIntro">
+        <div class="intro-glow"></div>
 
-  <div class="perlora-intro-content">
+        <div class="intro-bead"
+             style="--x:8%;--y:15%;--size:13px;--sx:350px;--sy:280px;--duration:2.6s;--delay:.1s;">
+        </div>
 
-    <!-- Étoiles -->
-    <span class="intro-star star1"></span>
-    <span class="intro-star star2"></span>
-    <span class="intro-star star3"></span>
-    <span class="intro-star star4"></span>
-    <span class="intro-star star5"></span>
-    <span class="intro-star star6"></span>
+        <div class="intro-bead"
+             style="--x:18%;--y:72%;--size:18px;--sx:260px;--sy:-190px;--duration:2.7s;--delay:.2s;">
+        </div>
 
-    <!-- Halo lumineux -->
-    <div class="intro-glow"></div>
+        <div class="intro-bead"
+             style="--x:30%;--y:25%;--size:11px;--sx:180px;--sy:250px;--duration:2.5s;--delay:.3s;">
+        </div>
 
-    <!-- Perles -->
-    <span class="intro-bead bead-blue bead1"></span>
-    <span class="intro-bead bead-pink bead2"></span>
-    <span class="intro-bead bead-purple bead3"></span>
-    <span class="intro-bead bead-white bead4"></span>
-    <span class="intro-bead bead-blue bead5"></span>
-    <span class="intro-bead bead-pink bead6"></span>
+        <div class="intro-bead"
+             style="--x:42%;--y:80%;--size:16px;--sx:100px;--sy:-230px;--duration:2.8s;--delay:.4s;">
+        </div>
 
-    <!-- Logo -->
-    <div class="perlora-intro-logo">
-      PERLORA
+        <div class="intro-bead"
+             style="--x:55%;--y:14%;--size:14px;--sx:-90px;--sy:280px;--duration:2.5s;--delay:.2s;">
+        </div>
+
+        <div class="intro-bead"
+             style="--x:68%;--y:76%;--size:20px;--sx:-180px;--sy:-230px;--duration:2.8s;--delay:.3s;">
+        </div>
+
+        <div class="intro-bead"
+             style="--x:82%;--y:23%;--size:12px;--sx:-290px;--sy:230px;--duration:2.6s;--delay:.15s;">
+        </div>
+
+        <div class="intro-bead"
+             style="--x:92%;--y:68%;--size:15px;--sx:-350px;--sy:-180px;--duration:2.7s;--delay:.4s;">
+        </div>
+
+        <div class="intro-bead"
+             style="--x:4%;--y:47%;--size:10px;--sx:380px;--sy:20px;--duration:2.5s;--delay:.5s;">
+        </div>
+
+        <div class="intro-bead"
+             style="--x:96%;--y:43%;--size:18px;--sx:-380px;--sy:40px;--duration:2.6s;--delay:.5s;">
+        </div>
+
+
+        <div class="intro-title">
+            PERL<span>ORA</span>
+        </div>
+
+        <div class="intro-subtitle">
+            CRÉATIONS EN PERLES
+        </div>
+
     </div>
-
-    <!-- Lumière -->
-    <div class="intro-light"></div>
-
-    <!-- Message -->
-    <div class="intro-welcome">
-      Bienvenue chez Perlora
-    </div>
-
-    <!-- Barre de chargement -->
-    <div class="intro-loading"></div>
-
-  </div>
-
-</div>
-<!-- =========================
-     BARRE SUPERIEURE
-========================= -->
-
-<div class="topbar">
-
-  <span>📞</span>
-
-  <span>
-    🟢 Commander sur WhatsApp :
-    <strong>0556074077</strong>
-  </span>
-
-  <span>🚚 Livraison rapide en Côte d’Ivoire</span>
-
-  <span>🔒 Paiement sécurisé</span>
 
 </div>
 
 
-<!-- =========================
-     NAVIGATION
-========================= -->
 
-<header class="navbar">
+<!-- =====================================================
+     SITE
+===================================================== -->
 
-  <button class="menu-btn" onclick="ouvrirMenu()">☰</button>
+<div id="site">
 
-  <a href="index.html" class="logo">
 
-    <div class="logo-icon">♛</div>
+<!-- HEADER -->
 
-    <div>
-      <div class="logo-text">PERLORA</div>
-      <span class="logo-sub">CRÉATIONS EN PERLES</span>
+<header>
+
+    <div class="navbar">
+
+        <a href="#" class="logo">
+
+            <span class="logo-circle">
+                P
+            </span>
+
+            PERLORA
+
+        </a>
+
+
+        <div class="nav-actions">
+
+            <button
+                class="nav-btn"
+                onclick="goShop()">
+
+                🛍️ Boutique
+
+            </button>
+
+
+            <button
+                class="nav-btn cart-btn"
+                onclick="openCart()">
+
+                🛒 Panier
+
+                <span
+                    class="cart-count"
+                    id="cartCount">
+
+                    0
+
+                </span>
+
+            </button>
+
+        </div>
+
     </div>
-
-  </a>
-
-  <nav class="nav-links" id="navLinks">
-
-    <a href="#accueil" class="active">Accueil</a>
-
-    <a href="boutique.html">Boutique</a>
-
-    <a href="#collections">Collections</a>
-
-    <a href="#apropos">À propos</a>
-
-    <a href="#contact">Contact</a>
-
-  </nav>
-
-  <a href="boutique.html" class="panier-nav">
-
-    <span class="icone">🛒</span>
-    <span>Panier</span>
-
-    <span class="badge" id="panierBadge">0</span>
-
-  </a>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
 
-<section class="hero" id="accueil">
+<!-- HERO -->
 
-  <div class="hero-content">
+<section class="hero">
 
-    <div class="hero-script">
-      Bienvenue chez
-    </div>
+    <span class="badge">
+        ✨ Bienvenue chez Perlora
+    </span>
 
-    <h1>PERLORA</h1>
-
-    <div class="hero-title">
-      — CRÉATIONS EN PERLES —
-    </div>
+    <h1>
+        PERL<span>ORA</span>
+    </h1>
 
     <p>
-      Découvrez l’élégance artisanale.
-      Des créations uniques en perles faites avec passion
-      pour sublimer votre quotidien.
+        Une boutique en ligne consacrée à la vente
+        d'objets en perles, réalisés avec soin et passion.
     </p>
 
     <div class="hero-buttons">
 
-      <a href="boutique.html" class="btn btn-gold">
-        🛍️ VOIR LA BOUTIQUE
-      </a>
+        <button
+            class="primary"
+            onclick="goShop()">
 
-      <a href="#apropos" class="btn btn-outline">
-        👤 À PROPOS DE NOUS
-      </a>
+            🛍️ Découvrir la boutique
+
+        </button>
+
+        <button
+            class="secondary"
+            onclick="openDelivery()">
+
+            🚚 Livraison
+
+        </button>
 
     </div>
-
-  </div>
-
-
-  <div class="hero-products">
-
-    <div class="hero-card big">
-      <img
-        src="images/produit1.jpg"
-        alt="Création Perlora"
-        onerror="imageErreur(this,'Création Perlora')"
-      >
-    </div>
-
-    <div class="hero-card small1">
-      <img
-        src="images/produit2.jpg"
-        alt="Création en perles"
-        onerror="imageErreur(this,'Perles')"
-      >
-    </div>
-
-    <div class="hero-card small2">
-      <img
-        src="images/produit3.jpg"
-        alt="Porte-clés Perlora"
-        onerror="imageErreur(this,'Porte-clés')"
-      >
-    </div>
-
-  </div>
 
 </section>
 
 
-<!-- =========================
-     GARANTIES
-========================= -->
 
-<section class="guarantees">
+<!-- PROMO -->
 
-  <div class="guarantee">
-    <div class="guarantee-icon">🤲</div>
-    <div>
-      <strong>Fait main</strong>
-      <small>Avec passion</small>
-    </div>
-  </div>
-
-  <div class="guarantee">
-    <div class="guarantee-icon">💎</div>
-    <div>
-      <strong>Qualité</strong>
-      <small>Matériaux sélectionnés</small>
-    </div>
-  </div>
-
-  <div class="guarantee">
-    <div class="guarantee-icon">⭐</div>
-    <div>
-      <strong>Unique</strong>
-      <small>Pièces originales</small>
-    </div>
-  </div>
-
-  <div class="guarantee">
-    <div class="guarantee-icon">🔒</div>
-    <div>
-      <strong>Sécurisé</strong>
-      <small>Paiement sécurisé</small>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- =========================
-     SERVICES
-========================= -->
-
-<section class="section">
-
-  <div class="guarantees">
-
-    <div class="guarantee">
-      <div class="guarantee-icon">🚚</div>
-      <div>
-        <strong>Livraison rapide</strong>
-        <small>Partout en Côte d’Ivoire</small>
-      </div>
-    </div>
-
-    <div class="guarantee">
-      <div class="guarantee-icon">💳</div>
-      <div>
-        <strong>Paiement à la livraison</strong>
-        <small>Payez quand vous recevez</small>
-      </div>
-    </div>
-
-    <div class="guarantee">
-      <div class="guarantee-icon">🎧</div>
-      <div>
-        <strong>Service client réactif</strong>
-        <small>Nous sommes là pour vous</small>
-      </div>
-    </div>
-
-    <div class="guarantee">
-      <div class="guarantee-icon">🏆</div>
-      <div>
-        <strong>Satisfaction garantie</strong>
-        <small>Votre satisfaction compte</small>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     COLLECTIONS
-========================= -->
-
-<section class="section" id="collections">
-
-  <div class="section-title">
-
-    <small>— NOS COLLECTIONS —</small>
+<div class="promo">
 
     <h2>
-      Trouvez votre bonheur 💙
-    </h2>
-
-  </div>
-
-
-  <div class="collections">
-
-    <div class="collection">
-      <img src="images/produit2.jpg"
-           alt="Porte-clés"
-           onerror="imageErreur(this,'Porte-clés')">
-
-      <div class="collection-overlay">
-        <strong>Porte-clés</strong>
-        <a href="boutique.html">Découvrir</a>
-      </div>
-    </div>
-
-
-    <div class="collection">
-      <img src="images/produit3.jpg"
-           alt="Bracelets"
-           onerror="imageErreur(this,'Bracelets')">
-
-      <div class="collection-overlay">
-        <strong>Bracelets</strong>
-        <a href="boutique.html">Découvrir</a>
-      </div>
-    </div>
-
-
-    <div class="collection">
-      <img src="images/produit4.jpg"
-           alt="Sacs et pochettes"
-           onerror="imageErreur(this,'Sacs & Pochettes')">
-
-      <div class="collection-overlay">
-        <strong>Sacs & Pochettes</strong>
-        <a href="boutique.html">Découvrir</a>
-      </div>
-    </div>
-
-
-    <div class="collection">
-      <img src="images/produit5.jpg"
-           alt="Décorations"
-           onerror="imageErreur(this,'Décorations')">
-
-      <div class="collection-overlay">
-        <strong>Décorations</strong>
-        <a href="boutique.html">Découvrir</a>
-      </div>
-    </div>
-
-
-    <div class="collection">
-      <img src="images/produit6.jpg"
-           alt="Objets personnalisés"
-           onerror="imageErreur(this,'Objets personnalisés')">
-
-      <div class="collection-overlay">
-        <strong>Objets personnalisés</strong>
-        <a href="boutique.html">Découvrir</a>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PRODUITS PHARES
-========================= -->
-
-<section class="section">
-
-  <div class="section-title">
-
-    <small>— NOS PRODUITS PHARES —</small>
-
-    <h2>
-      Nos créations <span>💙</span>
-    </h2>
-
-  </div>
-
-
-  <div class="products">
-
-
-    <div class="product">
-
-      <div class="product-img">
-        <img src="images/produit1.jpg"
-             alt="Sac en perles"
-             onerror="imageErreur(this,'Sac en perles')">
-      </div>
-
-      <div class="product-info">
-
-        <h3>Sac en perles</h3>
-
-        <div class="product-price">
-          Prix à définir
-        </div>
-
-        <div class="product-bottom">
-
-          <a href="boutique.html">
-            Voir
-          </a>
-
-          
-            
-            
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="product">
-
-      <div class="product-img">
-        <img src="images/produit2.jpg"
-             alt="Porte-clés"
-             onerror="imageErreur(this,'Porte-clés')">
-      </div>
-
-      <div class="product-info">
-
-        <h3>Porte-clés en perles</h3>
-
-        <div class="product-price">
-          Prix à définir
-        </div>
-
-        <div class="product-bottom">
-
-          <a href="boutique.html">
-            Voir
-          </a>
-
-        
-            
-            
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="product">
-
-      <div class="product-img">
-        <img src="images/produit3.jpg"
-             alt="Bracelet"
-             onerror="imageErreur(this,'Bracelet')">
-      </div>
-
-      <div class="product-info">
-
-        <h3>Bracelet en perles</h3>
-
-        <div class="product-price">
-          Prix à définir
-        </div>
-
-        <div class="product-bottom">
-
-          <a href="boutique.html">
-            Voir
-          </a>
-
-          
-            
-            
-            
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="product">
-
-      <div class="product-img">
-        <img src="images/produit4.jpg"
-             alt="Porte-clés lettre"
-             onerror="imageErreur(this,'Porte-clés lettre')">
-      </div>
-
-      <div class="product-info">
-
-        <h3>Porte-clés personnalisé</h3>
-
-        <div class="product-price">
-          Prix à définir
-        </div>
-
-        <div class="product-bottom">
-
-          <a href="boutique.html">
-            Voir
-          </a>
-
-          
-            
-            
-            
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="product">
-
-      <div class="product-img">
-        <img src="images/produit5.jpg"
-             alt="Décoration"
-             onerror="imageErreur(this,'Décoration')">
-      </div>
-
-      <div class="product-info">
-
-        <h3>Décoration en perles</h3>
-
-        <div class="product-price">
-          Prix à définir
-        </div>
-
-        <div class="product-bottom">
-
-          <a href="boutique.html">
-            Voir
-          </a>
-
-          
-            
-            
-            
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PANIER / WHATSAPP
-========================= -->
-
-<section class="cta">
-
-  <div>
-
-    <h2>
-      Ajoutez vos articles au panier
+        🩷 Trouve ton modèle préféré
     </h2>
 
     <p>
-      et passez votre commande facilement ✨
+        Ajoute tes créations préférées au panier
+        et commande directement sur WhatsApp.
     </p>
 
-  </div>
-
-
-  <div class="cta-actions">
-
-    <a href="boutique.html"
-       class="btn btn-gold-solid">
-      🛒 ALLER AU PANIER
-    </a>
-
-    <a
-      href="https://wa.me/2250556074077?text=Bonjour%20Perlora%20!%20Je%20souhaite%20passer%20une%20commande."
-      target="_blank"
-      class="btn btn-whatsapp">
-
-      📱 Commander sur WhatsApp
-
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     A PROPOS
-========================= -->
-
-<section class="about" id="apropos">
-
-  <h2>À propos de Perlora</h2>
-
-  <p>
-    Perlora est une boutique dédiée aux créations artisanales
-    réalisées avec des perles. Chaque création est pensée avec
-    soin afin de vous proposer des objets uniques, élégants
-    et personnalisables. 💎
-  </p>
-
-</section>
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section class="section" id="contact">
-
-  <div class="section-title">
-
-    <small>— CONTACT —</small>
-
-    <h2>
-      Parlons de votre projet 💙
-    </h2>
-
-  </div>
-
-  <div style="text-align:center">
-
-    <p style="margin-bottom:20px">
-      Une question ? Une création personnalisée ?
-    </p>
-
-    <a
-      href="https://wa.me/2250556074077?text=Bonjour%20Perlora%20!%20Je%20souhaite%20avoir%20plus%20d'informations."
-      target="_blank"
-      class="btn btn-whatsapp">
-
-      📱 Nous contacter sur WhatsApp
-
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  <div class="footer-logo">
-    PERLORA
-  </div>
-
-  <p>
-    ✨ Créations artisanales en perles ✨
-  </p>
-
-  <p>
-    📱 WhatsApp :
-    <a href="https://wa.me/2250556074077"
-       target="_blank">
-      0556074077
-    </a>
-  </p>
-
-  <p>
-    🚚 Livraison en Côte d'Ivoire
-  </p>
-
-  <div class="footer-bottom">
-    © 2026 Perlora — Tous droits réservés
-  </div>
-
-</footer>
-
-
-<!-- MESSAGE -->
-
-<div id="message"></div>
-
-
-<script>
-
-/* =========================
-   MENU MOBILE
-========================= */
-
-function ouvrirMenu(){
-
-  const menu = document.getElementById("navLinks");
-
-  menu.classList.toggle("open");
-
-}
-
-
-/* =========================
-   PANIER ACCUEIL
-========================= */
-
-let nombrePanier =
-  parseInt(localStorage.getItem("perloraPanier")) || 0;
-
-
-function actualiserBadge(){
-
-  document.getElementById("panierBadge")
-    .textContent = nombrePanier;
-
-}
-
-
-function ajouterAccueil(nom){
-
-  nombrePanier++;
-
-  localStorage.setItem(
-    "perloraPanier",
-    nombrePanier
-  );
-
-  actualiserBadge();
-
-  afficherMessage(
-    "💕 " + nom + " ajouté au panier !"
-  );
-
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function afficherMessage(texte){
-
-  const message =
-    document.getElementById("message");
-
-  message.textContent = texte;
-
-  message.style.display = "block";
-
-  setTimeout(function(){
-
-    message.style.display = "none";
-
-  },2500);
-
-}
-
-
-/* =========================
-   IMAGE DE SECOURS
-========================= */
-
-function imageErreur(image, texte){
-
-  image.onerror = null;
-
-  image.src =
-    "https://placehold.co/600x500/edf1fa/092878?text="
-    + encodeURIComponent(texte);
-
-}
-
-
-/* =========================
-   INITIALISATION
-========================= */
-
-actualiserBadge();
-
-</script>
-<!-- =====================================================
-     PERLORA - FORMULAIRE DE LIVRAISON
-     ===================================================== -->
-
-<style>
-/* Bouton livraison */
-#perloraDeliveryButton {
-  display: block;
-  width: min(92%, 500px);
-  margin: 25px auto;
-  padding: 16px 20px;
-  border: none;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #0757d5, #168cff);
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 8px 25px rgba(0, 80, 200, 0.25);
-  transition: 0.2s;
-}
-
-#perloraDeliveryButton:hover {
-  transform: translateY(-2px);
-}
-
-/* Fond du formulaire */
-#perloraDeliveryModal {
-  display: none;
-  position: fixed;
-  z-index: 99999;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  padding: 15px;
-  overflow-y: auto;
-}
-
-/* Boîte */
-.perlora-delivery-box {
-  width: min(100%, 520px);
-  margin: 30px auto;
-  background: white;
-  border-radius: 25px;
-  padding: 25px;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-  position: relative;
-  animation: perloraDeliveryOpen 0.25s ease;
-}
-
-@keyframes perloraDeliveryOpen {
-  from {
-    opacity: 0;
-    transform: translateY(25px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Bouton fermer */
-#perloraDeliveryClose {
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  width: 38px;
-  height: 38px;
-  border: none;
-  border-radius: 50%;
-  background: #f1f1f1;
-  color: #333;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* Titre */
-.perlora-delivery-box h2 {
-  margin: 0 35px 8px 0;
-  color: #0757d5;
-  font-size: 25px;
-}
-
-.perlora-delivery-subtitle {
-  margin-bottom: 20px;
-  color: #666;
-  font-size: 14px;
-}
-
-/* Champs */
-.perlora-field {
-  margin-bottom: 15px;
-}
-
-.perlora-field label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-  color: #222;
-}
-
-.perlora-field input,
-.perlora-field textarea,
-.perlora-field select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 13px 14px;
-  border: 1px solid #d6d6d6;
-  border-radius: 12px;
-  font-size: 15px;
-  outline: none;
-  background: #fafafa;
-}
-
-.perlora-field input:focus,
-.perlora-field textarea:focus,
-.perlora-field select:focus {
-  border-color: #168cff;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(22, 140, 255, 0.1);
-}
-
-.perlora-field textarea {
-  min-height: 85px;
-  resize: vertical;
-}
-
-/* Bouton WhatsApp */
-#perloraSendDelivery {
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 14px;
-  background: #25D366;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-#perloraSendDelivery:hover {
-  background: #1ebe5d;
-}
-
-/* Message information */
-.perlora-delivery-info {
-  background: #eef6ff;
-  border-left: 4px solid #168cff;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 18px;
-  font-size: 13px;
-  color: #333;
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .perlora-delivery-box {
-    margin: 10px auto;
-    padding: 20px;
-    border-radius: 20px;
-  }
-
-  .perlora-delivery-box h2 {
-    font-size: 22px;
-  }
-}
-</style>
-
-
-<!-- Bouton livraison -->
-<button id="perloraDeliveryButton" type="button">
-  🚚 Demander une livraison
-</button>
-
-
-<!-- Fenêtre livraison -->
-<div id="perloraDeliveryModal">
-
-  <div class="perlora-delivery-box">
-
-    <button id="perloraDeliveryClose" type="button">
-      ×
-    </button>
-
-    <h2>🚚 Livraison Perlora</h2>
-
-    <p class="perlora-delivery-subtitle">
-      Remplissez vos informations pour que nous puissions organiser votre livraison.
-    </p>
-
-    <div class="perlora-delivery-info">
-      📍 Livraison disponible en Côte d'Ivoire.<br>
-      📱 Votre demande sera envoyée directement à Perlora sur WhatsApp.
-    </div>
-
-    <form id="perloraDeliveryForm">
-
-      <!-- Nom -->
-      <div class="perlora-field">
-        <label for="perloraNom">
-          👤 Nom et prénom *
-        </label>
-
-        <input
-          type="text"
-          id="perloraNom"
-          name="nom"
-          placeholder="Exemple : Steeve Kouassi"
-          required
-        >
-      </div>
-
-
-      <!-- WhatsApp -->
-      <div class="perlora-field">
-        <label for="perloraTelephone">
-          📱 Numéro WhatsApp *
-        </label>
-
-        <input
-          type="tel"
-          id="perloraTelephone"
-          name="telephone"
-          placeholder="Exemple : 05 56 07 40 77"
-          required
-        >
-      </div>
-
-
-      <!-- Ville -->
-      <div class="perlora-field">
-        <label for="perloraVille">
-          🏙️ Ville *
-        </label>
-
-        <input
-          type="text"
-          id="perloraVille"
-          name="ville"
-          placeholder="Exemple : Abidjan"
-          required
-        >
-      </div>
-
-
-      <!-- Commune -->
-      <div class="perlora-field">
-        <label for="perloraCommune">
-          📍 Commune *
-        </label>
-
-        <input
-          type="text"
-          id="perloraCommune"
-          name="commune"
-          placeholder="Exemple : Cocody"
-          required
-        >
-      </div>
-
-
-      <!-- Quartier -->
-      <div class="perlora-field">
-        <label for="perloraQuartier">
-          🏘️ Quartier *
-        </label>
-
-        <input
-          type="text"
-          id="perloraQuartier"
-          name="quartier"
-          placeholder="Exemple : Riviera"
-          required
-        >
-      </div>
-
-
-      <!-- Lieu -->
-      <div class="perlora-field">
-        <label for="perloraLieu">
-          📌 Lieu précis de livraison *
-        </label>
-
-        <textarea
-          id="perloraLieu"
-          name="lieu"
-          placeholder="Exemple : devant la pharmacie..., près de..."
-          required
-        ></textarea>
-      </div>
-
-
-      <!-- Type de livraison -->
-      <div class="perlora-field">
-        <label for="perloraType">
-          🚚 Mode de livraison
-        </label>
-
-        <select id="perloraType" name="type">
-          <option value="Livraison à domicile">
-            🏠 Livraison à domicile
-          </option>
-
-          <option value="Point de rendez-vous">
-            📍 Point de rendez-vous
-          </option>
-
-          <option value="Autre lieu">
-            📌 Autre lieu
-          </option>
-        </select>
-      </div>
-
-
-      <!-- Informations supplémentaires -->
-      <div class="perlora-field">
-        <label for="perloraCommentaire">
-          📝 Informations supplémentaires
-        </label>
-
-        <textarea
-          id="perloraCommentaire"
-          name="commentaire"
-          placeholder="Une précision concernant votre livraison..."
-        ></textarea>
-      </div>
-
-
-      <!-- Envoi -->
-      <button id="perloraSendDelivery" type="submit">
-        📲 ENVOYER MA DEMANDE SUR WHATSAPP
-      </button>
-
-    </form>
-
-  </div>
 </div>
 
 
+
+<!-- BOUTIQUE -->
+
+<section
+    class="section"
+    id="boutique">
+
+    <div class="section-title">
+
+        <h2>
+            🩷 Notre Boutique
+        </h2>
+
+        <p>
+            Découvre nos 21 articles Perlora
+        </p>
+
+    </div>
+
+
+    <div class="search">
+
+        <span class="search-icon">
+            🔎
+        </span>
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Rechercher un article..."
+            oninput="searchProducts()">
+
+    </div>
+
+
+    <div
+        class="products"
+        id="products">
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PANIER
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeCart()">
+</div>
+
+
+<div
+    class="cart"
+    id="cart">
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 Mon panier
+        </h2>
+
+        <button
+            class="close"
+            onclick="closeCart()">
+
+            ✕
+
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-list"
+        id="cartList">
+
+    </div>
+
+
+    <div class="cart-bottom">
+
+        <div class="total">
+
+            <span>
+                Total
+            </span>
+
+            <span id="total">
+                0 FCFA
+            </span>
+
+        </div>
+
+
+        <button
+            class="whatsapp"
+            onclick="orderWhatsApp()">
+
+            📲 Commander sur WhatsApp
+
+        </button>
+
+
+        <button
+            class="clear"
+            onclick="clearCart()">
+
+            🗑️ Vider le panier
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     LIVRAISON
+===================================================== -->
+
+<div
+    class="modal"
+    id="delivery">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+
+            <h2>
+                🚚 Livraison
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeDelivery()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <form
+            onsubmit="sendDelivery(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Nom complet
+                </label>
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Votre nom"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Numéro WhatsApp
+                </label>
+
+                <input
+                    id="phone"
+                    type="tel"
+                    placeholder="Votre numéro"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Ville
+                </label>
+
+                <input
+                    id="city"
+                    type="text"
+                    placeholder="Ex : Abidjan"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Commune / Quartier
+                </label>
+
+                <input
+                    id="area"
+                    type="text"
+                    placeholder="Ex : Cocody"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Lieu de livraison
+                </label>
+
+                <textarea
+                    id="place"
+                    placeholder="Indique le lieu de livraison..."
+                    required></textarea>
+
+            </div>
+
+
+            <button
+                class="send-order"
+                type="submit">
+
+                📲 Envoyer la commande
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+        PERLORA 💎
+    </div>
+
+    <p>
+        Des créations en perles pour apporter
+        une touche unique à ton quotidien.
+    </p>
+
+    <div class="copy">
+        © 2026 Perlora — Tous droits réservés.
+    </div>
+
+</footer>
+
+</div>
+
+
+
 <script>
+
 /* =====================================================
-   PERLORA - FONCTION LIVRAISON
-   ===================================================== */
+   CONFIGURATION
+===================================================== */
 
-(function () {
+/*
+   ⚠️ REMPLACE CE NUMÉRO PAR TON NUMÉRO WHATSAPP.
 
-  const deliveryButton =
-    document.getElementById("perloraDeliveryButton");
+   Exemple Côte d'Ivoire :
+   2250700000000
+*/
 
-  const deliveryModal =
-    document.getElementById("perloraDeliveryModal");
-
-  const deliveryClose =
-    document.getElementById("perloraDeliveryClose");
-
-  const deliveryForm =
-    document.getElementById("perloraDeliveryForm");
+const WHATSAPP_NUMBER = "2250000000000";
 
 
-  /* Ouvrir le formulaire */
-  deliveryButton.addEventListener("click", function () {
 
-    deliveryModal.style.display = "block";
+/* =====================================================
+   LES 21 ARTICLES
+===================================================== */
 
-    document.body.style.overflow = "hidden";
+const products = [
 
-  });
+    {
+        id:1,
+        name:"Porte-clés Étoile en perles",
+        price:2000,
+        emoji:"⭐",
+        image:"images/porte-cles-etoile.jpg"
+    },
+
+    {
+        id:2,
+        name:"Porte-clés Perles Bleues",
+        price:3000,
+        emoji:"🔵",
+        image:"images/porte-cles-bleu.jpg"
+    },
+
+    {
+        id:3,
+        name:"Porte-clés Lettre P",
+        price:1000,
+        emoji:"🔤",
+        image:"images/porte-cles-p.jpg"
+    },
+
+    {
+        id:4,
+        name:"Porte-clés Ancre Rose",
+        price:2000,
+        emoji:"⚓",
+        image:"images/ancre-rose.jpg"
+    },
+
+    {
+        id:5,
+        name:"Porte-clés Cœur",
+        price:2000,
+        emoji:"💗",
+        image:"images/coeur.jpg"
+    },
+
+    {
+        id:6,
+        name:"Porte-clés Fleur",
+        price:2000,
+        emoji:"🌸",
+        image:"images/fleur.jpg"
+    },
+
+    {
+        id:7,
+        name:"Porte-clés Cube",
+        price:2000,
+        emoji:"🧊",
+        image:"images/cube.jpg"
+    },
+
+    {
+        id:8,
+        name:"Porte-clés Rectangle",
+        price:2000,
+        emoji:"🔳",
+        image:"images/rectangle.jpg"
+    },
+
+    {
+        id:9,
+        name:"Porte-clés Lettre S",
+        price:1500,
+        emoji:"🔤",
+        image:"images/lettre-s.jpg"
+    },
+
+    {
+        id:10,
+        name:"Porte-clés Lettre A",
+        price:1500,
+        emoji:"🔤",
+        image:"images/lettre-a.jpg"
+    },
+
+    {
+        id:11,
+        name:"Porte-clés Lettre M",
+        price:1500,
+        emoji:"🔤",
+        image:"images/lettre-m.jpg"
+    },
+
+    {
+        id:12,
+        name:"Porte-clés Papillon",
+        price:2500,
+        emoji:"🦋",
+        image:"images/papillon.jpg"
+    },
+
+    {
+        id:13,
+        name:"Porte-clés Fleur Rose",
+        price:2500,
+        emoji:"🌷",
+        image:"images/fleur-rose.jpg"
+    },
+
+    {
+        id:14,
+        name:"Porte-clés Perles Roses",
+        price:2500,
+        emoji:"🩷",
+        image:"images/perles-roses.jpg"
+    },
+
+    {
+        id:15,
+        name:"Porte-clés Perles Blanches",
+        price:2500,
+        emoji:"⚪",
+        image:"images/perles-blanches.jpg"
+    },
+
+    {
+        id:16,
+        name:"Porte-clés Arc-en-ciel",
+        price:3000,
+        emoji:"🌈",
+        image:"images/arc-en-ciel.jpg"
+    },
+
+    {
+        id:17,
+        name:"Mini-sac en perles",
+        price:5000,
+        emoji:"👜",
+        image:"images/mini-sac.jpg"
+    },
+
+    {
+        id:18,
+        name:"Bracelet en perles",
+        price:3000,
+        emoji:"📿",
+        image:"images/bracelet.jpg"
+    },
+
+    {
+        id:19,
+        name:"Porte-clés Papillon Rose",
+        price:2500,
+        emoji:"🦋",
+        image:"images/papillon-rose.jpg"
+    },
+
+    {
+        id:20,
+        name:"Porte-clés Cœur Rose",
+        price:2500,
+        emoji:"🩷",
+        image:"images/coeur-rose.jpg"
+    },
+
+    {
+        id:21,
+        name:"Porte-clés personnalisé",
+        price:3000,
+        emoji:"✨",
+        image:"images/personnalise.jpg"
+    }
+
+];
 
 
-  /* Fermer le formulaire */
-  deliveryClose.addEventListener("click", function () {
 
-    deliveryModal.style.display = "none";
+/* =====================================================
+   PANIER
+===================================================== */
 
-    document.body.style.overflow = "";
-
-  });
+let cart = [];
 
 
-  /* Fermer en cliquant à l'extérieur */
-  deliveryModal.addEventListener("click", function (event) {
 
-    if (event.target === deliveryModal) {
+/* =====================================================
+   AFFICHER LES PRODUITS
+===================================================== */
 
-      deliveryModal.style.display = "none";
+function displayProducts(list = products){
 
-      document.body.style.overflow = "";
+    const container =
+        document.getElementById("products");
+
+    if(list.length === 0){
+
+        container.innerHTML = `
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:45px;
+                color:#806b75;
+            ">
+                😔 Aucun article trouvé.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML = list.map(product => `
+
+        <article class="product">
+
+            <div class="product-photo">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    onerror="
+                        this.style.display='none';
+                        this.nextElementSibling.style.display='block';
+                    "
+                >
+
+                <div
+                    class="placeholder"
+                    style="display:none">
+
+                    ${product.emoji}
+
+                </div>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+                <p>
+                    Création en perles
+                    proposée par Perlora.
+                </p>
+
+                <div class="price">
+                    ${formatPrice(product.price)}
+                </div>
+
+
+                <div class="product-buttons">
+
+                    <button
+                        class="add"
+                        onclick="addToCart(${product.id})">
+
+                        🛒 Ajouter
+
+                    </button>
+
+
+                    <button
+                        class="view"
+                        onclick="viewProduct(${product.id})">
+
+                        👁️ Voir
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+}
+
+
+
+/* =====================================================
+   RECHERCHE
+===================================================== */
+
+function searchProducts(){
+
+    const value =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const results =
+        products.filter(product =>
+            product.name
+            .toLowerCase()
+            .includes(value)
+        );
+
+
+    displayProducts(results);
+}
+
+
+
+/* =====================================================
+   AJOUT PANIER
+===================================================== */
+
+function addToCart(id){
+
+    const product =
+        products.find(p => p.id === id);
+
+    if(!product) return;
+
+
+    const existing =
+        cart.find(item => item.id === id);
+
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            ...product,
+            quantity:1
+        });
 
     }
 
-  });
+
+    updateCart();
+
+    openCart();
+
+}
 
 
-  /* Envoi du formulaire */
-  deliveryForm.addEventListener("submit", function (event) {
 
-    event.preventDefault();
+/* =====================================================
+   QUANTITÉ
+===================================================== */
 
+function changeQuantity(id, amount){
 
-    const nom =
-      document.getElementById("perloraNom").value.trim();
+    const item =
+        cart.find(product => product.id === id);
 
-    const telephone =
-      document.getElementById("perloraTelephone").value.trim();
-
-    const ville =
-      document.getElementById("perloraVille").value.trim();
-
-    const commune =
-      document.getElementById("perloraCommune").value.trim();
-
-    const quartier =
-      document.getElementById("perloraQuartier").value.trim();
-
-    const lieu =
-      document.getElementById("perloraLieu").value.trim();
-
-    const type =
-      document.getElementById("perloraType").value;
-
-    const commentaire =
-      document.getElementById("perloraCommentaire").value.trim();
+    if(!item) return;
 
 
-    /* Message WhatsApp */
-    let message =
-      "🛍️ *NOUVELLE DEMANDE DE LIVRAISON - PERLORA*";
-
-    message += "\n\n";
-
-    message += "👤 *Client :* " + nom;
-
-    message += "\n📱 *WhatsApp :* " + telephone;
-
-    message += "\n🏙️ *Ville :* " + ville;
-
-    message += "\n📍 *Commune :* " + commune;
-
-    message += "\n🏘️ *Quartier :* " + quartier;
-
-    message += "\n📌 *Lieu précis :* " + lieu;
-
-    message += "\n🚚 *Mode :* " + type;
+    item.quantity += amount;
 
 
-    if (commentaire !== "") {
+    if(item.quantity <= 0){
 
-      message +=
-        "\n📝 *Informations supplémentaires :* "
-        + commentaire;
+        cart =
+            cart.filter(product => product.id !== id);
 
     }
 
 
-    message += "\n\n";
+    updateCart();
 
-    message +=
-      "✨ Merci d'avoir choisi Perlora !";
-
-
-    /*
-      Numéro WhatsApp Perlora
-      Côte d'Ivoire : +225
-      Numéro affiché actuellement sur la boutique :
-      0556074077
-    */
-    const whatsappNumber = "2250556074077";
+}
 
 
-    /* Encodage sécurisé du message */
-    const whatsappURL =
-      "https://wa.me/" +
-      whatsappNumber +
-      "?text=" +
-      encodeURIComponent(message);
+
+/* =====================================================
+   SUPPRIMER
+===================================================== */
+
+function removeItem(id){
+
+    cart =
+        cart.filter(product => product.id !== id);
+
+    updateCart();
+
+}
 
 
-    /* Ouvrir WhatsApp */
-    window.open(whatsappURL, "_blank");
+
+/* =====================================================
+   VIDER
+===================================================== */
+
+function clearCart(){
+
+    cart = [];
+
+    updateCart();
+
+}
 
 
-    /* Réinitialiser le formulaire */
-    deliveryForm.reset();
 
-  });
+/* =====================================================
+   PANIER
+===================================================== */
 
-})();
-  </script><script>
-window.addEventListener("load", function () {
+function updateCart(){
 
-  const intro = document.getElementById("perloraIntro");
+    const list =
+        document.getElementById("cartList");
 
-  if (!intro) return;
+    const count =
+        document.getElementById("cartCount");
 
-  setTimeout(function () {
+    const totalElement =
+        document.getElementById("total");
 
-    intro.classList.add("hide");
 
-    setTimeout(function () {
-      intro.remove();
-    }, 900);
+    const quantity =
+        cart.reduce(
+            (sum,item) =>
+            sum + item.quantity,
+            0
+        );
 
-  }, 3500);
 
-});
-  </script>
-</body>
-  </html>
+    const total =
+        cart.reduce(
+            (sum,item) =>
+            sum + item.price * item.quantity,
+            0
+        );
+
+
+    count.textContent = quantity;
+
+    totalElement.textContent =
+        formatPrice(total);
+
+
+    if(cart.length === 0){
+
+        list.innerHTML = `
+            <div class="empty">
+                🛒<br><br>
+                Ton panier est vide.
+                <br><br>
+                Ajoute une création Perlora.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML =
+        cart.map(item => `
+
+            <div class="cart-item">
+
+                <div class="cart-img">
+
+                    <img
+                        src="${item.image}"
+                        alt="${item.name}"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='block';
+                        "
+                    >
+
+                    <span style="display:none">
+                       
