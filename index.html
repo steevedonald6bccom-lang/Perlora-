@@ -1,4 +1,958 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#080b14">
+<title>Steeve OS</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:Arial,sans-serif;background:#080b14;color:white}
+
+#desktop{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,#263b73 0,#111936 30%,transparent 55%),
+    radial-gradient(circle at 80% 80%,#1c4c5b 0,#090d1d 45%),
+    linear-gradient(135deg,#070a14,#111a35);
+}
+
+#desktop:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px);
+  background-size:70px 70px;
+  opacity:.15;
+}
+
+/* Bureau */
+.logo{
+  position:absolute;
+  top:18px;
+  left:20px;
+  font-size:20px;
+  font-weight:bold;
+  letter-spacing:3px;
+  z-index:2;
+}
+
+.icons{
+  position:absolute;
+  top:70px;
+  left:15px;
+  display:grid;
+  gap:15px;
+  z-index:2;
+}
+
+.icon{
+  width:82px;
+  text-align:center;
+  cursor:pointer;
+  padding:8px 4px;
+  border-radius:10px;
+  user-select:none;
+}
+
+.icon:hover,.icon:active{
+  background:rgba(255,255,255,.13);
+}
+
+.icon span{
+  display:block;
+  font-size:34px;
+  margin-bottom:5px;
+}
+
+.icon small{
+  font-size:12px;
+  text-shadow:0 2px 5px #000;
+}
+
+/* Barre des tâches */
+#taskbar{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:58px;
+  background:rgba(7,10,20,.88);
+  backdrop-filter:blur(18px);
+  border-top:1px solid rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  padding:7px;
+  gap:8px;
+  z-index:10000;
+}
+
+.start{
+  width:45px;
+  height:45px;
+  border:0;
+  border-radius:12px;
+  background:#1b73ff;
+  color:white;
+  font-size:23px;
+  cursor:pointer;
+}
+
+.taskapps{
+  display:flex;
+  gap:6px;
+  flex:1;
+}
+
+.task{
+  min-width:42px;
+  height:42px;
+  border:0;
+  border-radius:10px;
+  background:rgba(255,255,255,.09);
+  color:white;
+  font-size:21px;
+  cursor:pointer;
+}
+
+.clock{
+  font-size:12px;
+  text-align:right;
+  padding:0 8px;
+}
+
+/* Menu démarrer */
+#startMenu{
+  position:absolute;
+  display:none;
+  bottom:66px;
+  left:8px;
+  width:290px;
+  max-height:70vh;
+  overflow:auto;
+  padding:15px;
+  background:rgba(11,15,30,.96);
+  backdrop-filter:blur(25px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:18px;
+  z-index:20000;
+  box-shadow:0 20px 60px #0008;
+}
+
+#startMenu h2{
+  margin-bottom:12px;
+  font-size:20px;
+}
+
+.startItem{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.startItem:hover{
+  background:#ffffff12;
+}
+
+.startItem b{
+  font-size:25px;
+}
+
+/* Fenêtres */
+.window{
+  position:absolute;
+  width:min(760px,92vw);
+  height:min(520px,72vh);
+  min-width:280px;
+  min-height:220px;
+  left:50%;
+  top:45%;
+  transform:translate(-50%,-50%);
+  background:#101525;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 25px 80px #0009;
+  display:none;
+  z-index:100;
+}
+
+.titlebar{
+  height:43px;
+  background:#171d30;
+  display:flex;
+  align-items:center;
+  padding:0 9px;
+  cursor:grab;
+  touch-action:none;
+}
+
+.title{
+  flex:1;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.winbtn{
+  width:34px;
+  height:30px;
+  border:0;
+  border-radius:7px;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.winbtn:hover{
+  background:#ffffff16;
+}
+
+.close:hover{
+  background:#d33;
+}
+
+.content{
+  height:calc(100% - 43px);
+  overflow:auto;
+  padding:15px;
+}
+
+/* Souris virtuelle */
+#mouse{
+  position:fixed;
+  width:20px;
+  height:20px;
+  border:2px solid white;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:50000;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 12px #fff;
+  display:none;
+}
+
+#mouseDot{
+  position:absolute;
+  width:5px;
+  height:5px;
+  background:white;
+  border-radius:50%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* Explorateur */
+.filegrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:12px;
+}
+
+.file{
+  padding:15px 8px;
+  background:#ffffff09;
+  border:1px solid #ffffff0d;
+  border-radius:10px;
+  text-align:center;
+}
+
+.file div{
+  font-size:35px;
+}
+
+/* Bloc-notes */
+textarea{
+  width:100%;
+  height:100%;
+  min-height:350px;
+  resize:none;
+  border:0;
+  outline:0;
+  padding:15px;
+  background:#080b14;
+  color:#eee;
+  font-family:monospace;
+  font-size:15px;
+}
+
+/* JavaScript */
+.editor{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  height:100%;
+}
+
+#code{
+  width:100%;
+  flex:1;
+  min-height:230px;
+  resize:none;
+  background:#070a10;
+  color:#d7e3ff;
+  border:1px solid #26304a;
+  border-radius:10px;
+  padding:13px;
+  font-family:monospace;
+  font-size:14px;
+  outline:none;
+}
+
+button.action{
+  padding:10px 15px;
+  border:0;
+  border-radius:9px;
+  background:#1769ff;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button.action.secondary{
+  background:#252c40;
+}
+
+#console{
+  background:#05070b;
+  border:1px solid #20283a;
+  border-radius:10px;
+  min-height:110px;
+  max-height:150px;
+  overflow:auto;
+  padding:10px;
+  font-family:monospace;
+  font-size:13px;
+  white-space:pre-wrap;
+}
+
+/* Calculatrice */
+.calc{
+  max-width:330px;
+  margin:auto;
+}
+
+#calcDisplay{
+  width:100%;
+  height:60px;
+  background:#070a10;
+  border:1px solid #30384d;
+  border-radius:10px;
+  color:white;
+  font-size:25px;
+  text-align:right;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+.calcgrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.calcgrid button{
+  height:55px;
+  border:0;
+  border-radius:10px;
+  background:#20283b;
+  color:white;
+  font-size:18px;
+}
+
+.calcgrid button:active{
+  transform:scale(.95);
+}
+
+/* Paramètres */
+.setting{
+  background:#ffffff08;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.status{
+  color:#68f09b;
+}
+
+/* Clavier */
+.keyboard{
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:5px;
+}
+
+.key{
+  background:#20283b;
+  border:1px solid #35405b;
+  color:white;
+  padding:10px 4px;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+.key:active{
+  background:#3566b5;
+}
+
+@media(max-width:600px){
+  .window{
+    width:95vw;
+    height:78vh;
+  }
+
+  .keyboard{
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  .icons{
+    grid-template-columns:repeat(3,82px);
+  }
+}
+</style></head><body><div id="desktop">  <div class="logo">STEEVE OS</div>  <!-- Icônes -->  <div class="icons"><div class="icon" onclick="openWindow('filesWindow')">
+  <span>📁</span>
+  <small>Fichiers</small>
+</div>
+
+<div class="icon" onclick="openWindow('notesWindow')">
+  <span>📝</span>
+  <small>Bloc-notes</small>
+</div>
+
+<div class="icon" onclick="openWindow('jsWindow')">
+  <span>🟨</span>
+  <small>JavaScript</small>
+</div>
+
+<div class="icon" onclick="openWindow('calcWindow')">
+  <span>🧮</span>
+  <small>Calculatrice</small>
+</div>
+
+<div class="icon" onclick="openWindow('keyboardWindow')">
+  <span>⌨️</span>
+  <small>Clavier</small>
+</div>
+
+<div class="icon" onclick="openWindow('settingsWindow')">
+  <span>⚙️</span>
+  <small>Paramètres</small>
+</div>
+
+  </div>  <!-- Menu démarrer -->  <div id="startMenu">
+    <h2>💻 STEEVE OS</h2><div class="startItem" onclick="openWindow('filesWindow')">
+  <b>📁</b> Explorateur de fichiers
+</div>
+
+<div class="startItem" onclick="openWindow('notesWindow')">
+  <b>📝</b> Bloc-notes
+</div>
+
+<div class="startItem" onclick="openWindow('jsWindow')">
+  <b>🟨</b> JavaScript
+</div>
+
+<div class="startItem" onclick="openWindow('calcWindow')">
+  <b>🧮</b> Calculatrice
+</div>
+
+<div class="startItem" onclick="openWindow('keyboardWindow')">
+  <b>⌨️</b> Clavier
+</div>
+
+<div class="startItem" onclick="openWindow('settingsWindow')">
+  <b>⚙️</b> Paramètres
+</div>
+
+  </div>  <!-- Fichiers -->  <div class="window" id="filesWindow">
+    <div class="titlebar">
+      <div class="title">📁 Explorateur de fichiers</div>
+      <button class="winbtn" onclick="minimize('filesWindow')">−</button>
+      <button class="winbtn close" onclick="closeWindow('filesWindow')">×</button>
+    </div><div class="content">
+  <h2>Ce téléphone</h2>
+  <br>
+
+  <div class="filegrid">
+    <div class="file">
+      <div>📂</div>
+      <small>Documents</small>
+    </div>
+
+    <div class="file">
+      <div>🖼️</div>
+      <small>Images</small>
+    </div>
+
+    <div class="file">
+      <div>🎵</div>
+      <small>Musique</small>
+    </div>
+
+    <div class="file">
+      <div>🎬</div>
+      <small>Vidéos</small>
+    </div>
+
+    <div class="file">
+      <div>📦</div>
+      <small>Téléchargements</small>
+    </div>
+
+    <div class="file">
+      <div>🌐</div>
+      <small>Internet</small>
+    </div>
+  </div>
+</div>
+
+  </div>  <!-- Bloc notes -->  <div class="window" id="notesWindow">
+    <div class="titlebar">
+      <div class="title">📝 Bloc-notes</div>
+      <button class="winbtn" onclick="minimize('notesWindow')">−</button>
+      <button class="winbtn close" onclick="closeWindow('notesWindow')">×</button>
+    </div><div class="content" style="padding:0">
+  <textarea id="notes" placeholder="Écris quelque chose ici..."></textarea>
+</div>
+
+  </div>  <!-- JavaScript -->  <div class="window" id="jsWindow">
+    <div class="titlebar">
+      <div class="title">🟨 Éditeur JavaScript</div>
+      <button class="winbtn" onclick="minimize('jsWindow')">−</button>
+      <button class="winbtn close" onclick="closeWindow('jsWindow')">×</button>
+    </div><div class="content">
+  <div class="editor">
+
+    <div>
+      <b>💻 Écris ton code JavaScript</b>
+    </div>
+
+    <textarea id="code">// Exemple :
+
+let argent = 650;
+let prix = 400;
+
+if (argent >= prix) {
+console.log("Tu peux acheter !");
+} else {
+console.log("Tu ne peux pas acheter.");
+}</textarea>
+
+    <div>
+      <button class="action" onclick="runJS()">▶ Exécuter</button>
+      <button class="action secondary" onclick="clearConsole()">🗑 Effacer</button>
+    </div>
+
+    <div id="console">Console prête...</div>
+
+  </div>
+</div>
+
+  </div>  <!-- Calculatrice -->  <div class="window" id="calcWindow">
+    <div class="titlebar">
+      <div class="title">🧮 Calculatrice</div>
+      <button class="winbtn" onclick="minimize('calcWindow')">−</button>
+      <button class="winbtn close" onclick="closeWindow('calcWindow')">×</button>
+    </div><div class="content">
+  <div class="calc">
+
+    <input id="calcDisplay" readonly>
+
+    <div class="calcgrid">
+      <button onclick="calcClear()">C</button>
+      <button onclick="calcAdd('(')">(</button>
+      <button onclick="calcAdd(')')">)</button>
+      <button onclick="calcAdd('/')">÷</button>
+
+      <button onclick="calcAdd('7')">7</button>
+      <button onclick="calcAdd('8')">8</button>
+      <button onclick="calcAdd('9')">9</button>
+      <button onclick="calcAdd('*')">×</button>
+
+      <button onclick="calcAdd('4')">4</button>
+      <button onclick="calcAdd('5')">5</button>
+      <button onclick="calcAdd('6')">6</button>
+      <button onclick="calcAdd('-')">−</button>
+
+      <button onclick="calcAdd('1')">1</button>
+      <button onclick="calcAdd('2')">2</button>
+      <button onclick="calcAdd('3')">3</button>
+      <button onclick="calcAdd('+')">+</button>
+
+      <button onclick="calcAdd('0')">0</button>
+      <button onclick="calcAdd('.')">.</button>
+      <button onclick="calcResult()" style="grid-column:span 2">=</button>
+    </div>
+
+  </div>
+</div>
+
+  </div>  <!-- Clavier -->  <div class="window" id="keyboardWindow">
+    <div class="titlebar">
+      <div class="title">⌨️ Clavier virtuel</div>
+      <button class="winbtn" onclick="minimize('keyboardWindow')">−</button>
+      <button class="winbtn close" onclick="closeWindow('keyboardWindow')">×</button>
+    </div><div class="content">
+
+  <input id="keyboardInput"
+    placeholder="Clique ici puis utilise le clavier..."
+    style="width:100%;padding:14px;border-radius:9px;border:1px solid #39445e;background:#070a10;color:white;margin-bottom:15px">
+
+  <div class="keyboard" id="keyboard"></div>
+
+</div>
+
+  </div>  <!-- Paramètres -->  <div class="window" id="settingsWindow">
+    <div class="titlebar">
+      <div class="title">⚙️ Paramètres</div>
+      <button class="winbtn" onclick="minimize('settingsWindow')">−</button>
+      <button class="winbtn close" onclick="closeWindow('settingsWindow')">×</button>
+    </div><div class="content">
+
+  <div class="setting">
+    <h3>💻 STEEVE OS</h3>
+    <p>Version 1.0</p>
+  </div>
+
+  <div class="setting">
+    <h3>📱 Appareil</h3>
+    <p id="deviceInfo"></p>
+  </div>
+
+  <div class="setting">
+    <h3>🌐 Connexion</h3>
+    <p class="status">● Application prête</p>
+  </div>
+
+  <div class="setting">
+    <h3>🖱️ Souris virtuelle</h3>
+    <p>Active le mode souris pour déplacer le curseur avec ton doigt.</p>
+    <br>
+    <button class="action" onclick="toggleMouse()">🖱️ Activer / désactiver</button>
+  </div>
+
+</div>
+
+  </div>  <!-- Souris -->  <div id="mouse">
+    <div id="mouseDot"></div>
+  </div>  <!-- Barre des tâches -->  <div id="taskbar"><button class="start" onclick="toggleStart()">⊞</button>
+
+<div class="taskapps">
+  <button class="task" onclick="openWindow('filesWindow')">📁</button>
+  <button class="task" onclick="openWindow('notesWindow')">📝</button>
+  <button class="task" onclick="openWindow('jsWindow')">🟨</button>
+  <button class="task" onclick="openWindow('calcWindow')">🧮</button>
+</div>
+
+<div class="clock">
+  <div id="time">00:00</div>
+  <div id="date">--/--/----</div>
+</div>
+
+  </div></div><script>
+/* ================================
+   STEEVE OS
+================================ */
+
+/* Fenêtres */
+let zIndex = 100;
+
+function openWindow(id){
+  const w = document.getElementById(id);
+
+  document.getElementById("startMenu").style.display="none";
+
+  w.style.display="block";
+  w.style.zIndex=++zIndex;
+}
+
+function closeWindow(id){
+  document.getElementById(id).style.display="none";
+}
+
+function minimize(id){
+  document.getElementById(id).style.display="none";
+}
+
+/* Menu */
+function toggleStart(){
+  const menu=document.getElementById("startMenu");
+
+  menu.style.display =
+    menu.style.display==="block" ? "none" : "block";
+}
+
+/* Horloge */
+function updateClock(){
+
+  const now=new Date();
+
+  document.getElementById("time").textContent =
+    now.toLocaleTimeString("fr-FR",{
+      hour:"2-digit",
+      minute:"2-digit"
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString("fr-FR");
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+/* ================================
+   JAVASCRIPT
+================================ */
+
+function runJS(){
+
+  const code=document.getElementById("code").value;
+  const consoleBox=document.getElementById("console");
+
+  consoleBox.textContent="";
+
+  const oldLog=console.log;
+
+  console.log=function(...args){
+
+    consoleBox.textContent +=
+      args.map(x =>
+        typeof x==="object"
+        ? JSON.stringify(x)
+        : String(x)
+      ).join(" ") + "\n";
+
+    oldLog(...args);
+  };
+
+  try{
+    new Function(code)();
+
+    if(consoleBox.textContent===""){
+      consoleBox.textContent="✓ Code exécuté sans message dans la console.";
+    }
+
+  }catch(error){
+
+    consoleBox.textContent =
+      "❌ Erreur : " + error.message;
+  }
+
+  console.log=oldLog;
+}
+
+function clearConsole(){
+  document.getElementById("console").textContent="";
+}
+
+/* Sauvegarde bloc-notes */
+const notes=document.getElementById("notes");
+
+notes.value=localStorage.getItem("steeve_notes") || "";
+
+notes.addEventListener("input",()=>{
+  localStorage.setItem("steeve_notes",notes.value);
+});
+
+/* ================================
+   CALCULATRICE
+================================ */
+
+function calcAdd(value){
+  document.getElementById("calcDisplay").value += value;
+}
+
+function calcClear(){
+  document.getElementById("calcDisplay").value="";
+}
+
+function calcResult(){
+
+  const display=document.getElementById("calcDisplay");
+
+  try{
+
+    const expression=display.value;
+
+    if(!/^[0-9+\-*/().\s]+$/.test(expression)){
+      throw new Error("Expression invalide");
+    }
+
+    display.value=Function(
+      "return ("+expression+")"
+    )();
+
+  }catch(e){
+    display.value="Erreur";
+  }
+}
+
+/* ================================
+   CLAVIER VIRTUEL
+================================ */
+
+const keys=[
+"1","2","3","4","5","6","7","8","9","0",
+"Q","W","E","R","T","Y","U","I","O","P",
+"A","S","D","F","G","H","J","K","L",
+"Z","X","C","V","B","N","M",
+"ESPACE","⌫","ENTER"
+];
+
+const keyboard=document.getElementById("keyboard");
+const keyboardInput=document.getElementById("keyboardInput");
+
+keys.forEach(key=>{
+
+  const button=document.createElement("button");
+
+  button.className="key";
+  button.textContent=key;
+
+  button.onclick=()=>{
+
+    if(key==="ESPACE"){
+      keyboardInput.value+=" ";
+    }
+
+    else if(key==="⌫"){
+      keyboardInput.value=
+        keyboardInput.value.slice(0,-1);
+    }
+
+    else if(key==="ENTER"){
+      keyboardInput.value+="\n";
+    }
+
+    else{
+      keyboardInput.value+=key;
+    }
+
+    keyboardInput.focus();
+  };
+
+  keyboard.appendChild(button);
+});
+
+/* ================================
+   INFORMATIONS APPAREIL
+================================ */
+
+document.getElementById("deviceInfo").textContent =
+  navigator.userAgent;
+
+/* ================================
+   SOURIS VIRTUELLE
+================================ */
+
+let mouseEnabled=false;
+
+function toggleMouse(){
+
+  mouseEnabled=!mouseEnabled;
+
+  document.getElementById("mouse").style.display =
+    mouseEnabled ? "block" : "none";
+}
+
+document.addEventListener("pointermove",e=>{
+
+  if(!mouseEnabled)return;
+
+  const mouse=document.getElementById("mouse");
+
+  mouse.style.left=e.clientX+"px";
+  mouse.style.top=e.clientY+"px";
+});
+
+/* ================================
+   FENÊTRES DÉPLAÇABLES
+================================ */
+
+document.querySelectorAll(".window").forEach(win=>{
+
+  const bar=win.querySelector(".titlebar");
+
+  let dragging=false;
+  let offsetX=0;
+  let offsetY=0;
+
+  bar.addEventListener("pointerdown",e=>{
+
+    dragging=true;
+
+    win.style.zIndex=++zIndex;
+
+    const rect=win.getBoundingClientRect();
+
+    offsetX=e.clientX-rect.left;
+    offsetY=e.clientY-rect.top;
+
+    bar.setPointerCapture(e.pointerId);
+  });
+
+  bar.addEventListener("pointermove",e=>{
+
+    if(!dragging)return;
+
+    let x=e.clientX-offsetX;
+    let y=e.clientY-offsetY;
+
+    const maxX=window.innerWidth-win.offsetWidth;
+    const maxY=window.innerHeight-win.offsetHeight-60;
+
+    x=Math.max(0,Math.min(x,maxX));
+    y=Math.max(0,Math.min(y,maxY));
+
+    win.style.left=x+"px";
+    win.style.top=y+"px";
+    win.style.transform="none";
+  });
+
+  bar.addEventListener("pointerup",()=>{
+    dragging=false;
+  });
+
+});
+
+/* Double clic sur le bureau */
+document.getElementById("desktop").addEventListener("pointerdown",e=>{
+
+  if(e.target.id==="desktop"){
+    document.getElementById("startMenu").style.display="none";
+  }
+
+});
+
+/* Raccourci clavier */
+document.addEventListener("keydown",e=>{
+
+  if(e.key==="Escape"){
+    document.getElementById("startMenu").style.display="none";
+  }
+
+});
+
+/* Message de démarrage */
+setTimeout(()=>{
+
+  const logo=document.querySelector(".logo");
+
+  logo.style.textShadow="0 0 20px #4da3ff";
+
+  setTimeout(()=>{
+    logo.style.textShadow="";
+  },1500);
+
+},500);
+</script></body>
+</html><!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
