@@ -2,1056 +2,182 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no">
 
-<title>PERLORA — Boutique</title>
+<title>STEVE OS — Ordinateur mobile</title>
 
 <style>
-
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
 }
 
-html{
-  scroll-behavior:smooth;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f7f9ff;
-  color:#182650;
+    background:linear-gradient(135deg,#07111f,#102d4a,#07111f);
+    color:white;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-header{
-  background:linear-gradient(135deg,#04164d,#0b348b);
-  color:white;
-  padding:25px 18px;
-  text-align:center;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 4px 15px rgba(0,0,0,.15);
+/* BUREAU */
+#desktop{
+    position:absolute;
+    inset:0;
+    padding:25px;
+    padding-bottom:65px;
+    overflow:hidden;
 }
 
-.logo{
-  font-family:Georgia,serif;
-  font-size:36px;
-  letter-spacing:3px;
-  color:#f0c44b;
-  margin:0;
+/* FOND */
+.wallpaper{
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(circle at 20% 20%,#164e77 0%,transparent 35%),
+      radial-gradient(circle at 80% 70%,#172554 0%,transparent 40%),
+      linear-gradient(135deg,#020617,#0f2740);
 }
 
-.slogan{
-  margin:7px 0 18px;
-  color:white;
+/* ICÔNES */
+.icons{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    width:90px;
 }
 
-.retour{
-  display:inline-block;
-  padding:10px 20px;
-  border-radius:25px;
-  background:white;
-  color:#08276d;
-  text-decoration:none;
-  font-weight:bold;
+.desktop-icon{
+    width:80px;
+    padding:8px;
+    text-align:center;
+    border-radius:10px;
+    cursor:pointer;
+    user-select:none;
 }
 
-/* =========================
-   CONTENU
-========================= */
-
-.container{
-  max-width:1250px;
-  margin:auto;
-  padding:35px 18px;
+.desktop-icon:hover{
+    background:rgba(255,255,255,.12);
 }
 
-.titre{
-  text-align:center;
-  margin-bottom:35px;
+.desktop-icon .emoji{
+    font-size:38px;
+    display:block;
 }
 
-.titre h2{
-  color:#092878;
-  font-family:Georgia,serif;
-  font-size:32px;
-  margin-bottom:8px;
+.desktop-icon span{
+    font-size:12px;
+    text-shadow:0 2px 5px black;
 }
 
-.titre p{
-  color:#555;
+/* BARRE DES TÂCHES */
+#taskbar{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:58px;
+    background:rgba(3,10,20,.90);
+    backdrop-filter:blur(15px);
+    border-top:1px solid rgba(255,255,255,.15);
+    display:flex;
+    align-items:center;
+    padding:7px;
+    gap:7px;
+    z-index:1000;
 }
 
-/* =========================
-   PRODUITS
-========================= */
-
-.produits{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:22px;
+.start{
+    width:45px;
+    height:45px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.15);
+    background:#0d2945;
+    color:white;
+    font-size:23px;
+    cursor:pointer;
 }
 
-.produit{
-  background:white;
-  border-radius:18px;
-  padding:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-  border:1px solid #edf0f7;
-  text-align:center;
-  transition:.2s;
+.start:hover{
+    background:#164a75;
 }
 
-.produit:hover{
-  transform:translateY(-4px);
+.task{
+    min-width:45px;
+    height:45px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
 }
 
-.photo{
-  width:100%;
-  height:190px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#e8edfa,#fff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  color:#8390b0;
-  font-size:50px;
+.task:hover{
+    background:rgba(255,255,255,.12);
 }
 
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.clock{
+    margin-left:auto;
+    text-align:center;
+    font-size:11px;
+    min-width:65px;
 }
 
-.produit h3{
-  font-size:17px;
-  min-height:42px;
-  margin:15px 0 10px;
-  color:#17244a;
+/* MENU DÉMARRER */
+#startMenu{
+    position:absolute;
+    bottom:65px;
+    left:8px;
+    width:270px;
+    background:rgba(5,15,28,.96);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:15px;
+    padding:15px;
+    display:none;
+    z-index:2000;
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
 
-.prix{
-  color:#a87313;
-  font-weight:bold;
-  margin-bottom:13px;
+#startMenu h2{
+    margin-bottom:15px;
 }
 
-.quantite{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  margin:10px 0 14px;
+.menu-btn{
+    width:100%;
+    padding:13px;
+    margin:5px 0;
+    border:0;
+    border-radius:9px;
+    background:#102b46;
+    color:white;
+    text-align:left;
+    cursor:pointer;
 }
 
-.quantite button{
-  width:38px;
-  height:38px;
-  border:none;
-  border-radius:50%;
-  background:#e5ebfa;
-  color:#082b78;
-  font-size:23px;
-  font-weight:bold;
-  cursor:pointer;
+.menu-btn:hover{
+    background:#164a75;
 }
 
-.quantite button:hover{
-  background:#d3ddf7;
-}
-
-.quantite span{
-  min-width:30px;
-  font-size:19px;
-  font-weight:bold;
-}
-
-.ajouter{
-  width:100%;
-  border:none;
-  padding:12px;
-  border-radius:25px;
-  background:#0a3ca8;
-  color:white;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.ajouter:hover{
-  background:#062b7d;
-}
-
-/* =========================
-   PANIER
-========================= */
-
-.panier{
-  margin-top:50px;
-  background:white;
-  border-radius:22px;
-  padding:25px;
-  box-shadow:0 5px 25px rgba(0,0,0,.08);
-}
-
-.panier h2{
-  color:#092878;
-  margin-top:0;
-}
-
-.ligne-panier{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:13px 0;
-  border-bottom:1px solid #eee;
-}
-
-.nom-panier{
-  font-weight:bold;
-}
-
-.commande-quantite{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.commande-quantite button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:50%;
-  background:#e6ebf8;
-  color:#092878;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.supprimer{
-  border:none;
-  background:none;
-  color:#d24c4c;
-  cursor:pointer;
-}
-
-.total{
-  text-align:right;
-  font-size:22px;
-  font-weight:bold;
-  color:#092878;
-  margin-top:22px;
-}
-
-.whatsapp{
-  display:block;
-  text-align:center;
-  margin-top:20px;
-  padding:15px;
-  border-radius:30px;
-  background:#25d366;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-.vider{
-  margin-top:12px;
-  width:100%;
-  padding:11px;
-  border:none;
-  border-radius:25px;
-  background:#f0f1f5;
-  color:#555;
-  cursor:pointer;
-}
-
-/* =========================
-   MESSAGE
-========================= */
-
-#message{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  max-width:320px;
-  background:white;
-  color:#092878;
-  padding:16px 20px;
-  border-radius:16px;
-  box-shadow:0 5px 25px rgba(0,0,0,.2);
-  display:none;
-  z-index:500;
-  font-weight:bold;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-  .logo{
-    font-size:29px;
-  }
-
-  .container{
-    padding:25px 12px;
-  }
-
-  .produits{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
-
-  .produit{
-    padding:10px;
-  }
-
-  .photo{
-    height:145px;
-    font-size:35px;
-  }
-
-  .produit h3{
-    font-size:14px;
-    min-height:55px;
-  }
-
-  .ajouter{
-    font-size:13px;
-    padding:10px 5px;
-  }
-
-  .ligne-panier{
-    flex-wrap:wrap;
-  }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-  <h1 class="logo">PERLORA</h1>
-
-  <p class="slogan">
-    ✨ Nos créations artisanales en perles ✨
-  </p>
-
-  <a href="index.html" class="retour">
-    ← Retour à l'accueil
-  </a>
-
-</header>
-
-
-<div class="container">
-
-  <div class="titre">
-<!-- 🔎 RECHERCHE PERLORA -->
-<div class="perlora-search">
-  <input
-    type="search"
-    id="perloraSearch"
-    placeholder="🔎 Rechercher un produit..."
-    autocomplete="off"
-  >
-</div>
-
-<style>
-.perlora-search {
-  width: 92%;
-  max-width: 600px;
-  margin: 20px auto;
-}
-
-#perloraSearch {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 15px 20px;
-  border: 2px solid #168cff;
-  border-radius: 30px;
-  font-size: 16px;
-  outline: none;
-  background: white;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-}
-
-#perloraSearch:focus {
-  border-color: #0757d5;
-  box-shadow: 0 0 0 4px rgba(22,140,255,0.12);
-}
-</style>
-    <h2>🛍️ Notre boutique</h2>
-
-    <p>
-      Choisissez vos créations et sélectionnez la quantité souhaitée.
-    </p>
-
-  </div>
-
-
-  <div class="produits" id="produits"></div>
-
-
-  <!-- PANIER -->
-
-  <div class="panier">
-
-    <h2>🛒 Mon panier</h2>
-
-    <div id="liste-panier">
-      Votre panier est vide.
-    </div>
-
-    <div class="total">
-      Total :
-      <span id="total">0</span>
-      FCFA
-    </div>
-
-    <a
-      id="whatsapp"
-      class="whatsapp"
-      href="#"
-      target="_blank">
-
-      📱 Commander sur WhatsApp
-
-    </a>
-
-    <button
-      class="vider"
-      onclick="viderPanier()">
-
-      🗑️ Vider le panier
-
-    </button>
-
-  </div>
-
-</div>
-
-
-<div id="message"></div>
-
-
-<script>
-
-/* =====================================
-   LES 25 ARTICLES PERLORA
-===================================== */
-
-const produits = [
-
-  "Porte-clés en forme de A",
-  "Porte-clés en forme de P",
-  "Porte-clés en forme de E",
-  "Porte-clés en forme de D",
-  "Porte-clés en forme de S",
-  "Porte-clés en forme de Y",
-  "Porte-clés en forme de F",
-  "Porte-clés en forme de B",
-  "Porte-clés en forme de F",
-  "Porte-clés en forme de N",
-  "Porte-clés en forme de K",
-  "Porte-clés en forme de C",
-  "Porte-clés en forme de U",
-  "Porte-clés en forme de T",
-  "Porte-clés en forme de M",
-  "Porte-clés en forme de cœur",
-  "Porte-clés en forme de cube",
-  "Porte-clés en forme de croix",
-  "Porte-clés en forme de fleur",
-  "Porte-clés en forme de I",
-  "Porte-clés en forme de W",
-  "Porte-clés en forme de rectangle",
-  "Porte-clés en forme de L",
-  "Porte-clés en forme de R",
-  "Porte-clés en forme de petit sac"
-
-];
-
-
-/* =====================================
-   PRIX TEMPORAIRES
-   0 = prix à définir plus tard
-===================================== */
-
-const prix = Array(produits.length).fill(0);
-
-
-/* =====================================
-   QUANTITÉS
-===================================== */
-
-const quantites = {};
-
-produits.forEach((nom,index)=>{
-  quantites[index] = 0;
-});
-
-
-/* =====================================
-   MESSAGES DIFFÉRENTS
-===================================== */
-
-const messages = [
-
-  "💕 Merci pour votre confiance !",
-
-  "✨ Excellent choix !",
-
-  "🥰 Merci d'avoir choisi Perlora !",
-
-  "🌸 Votre sélection est magnifique !",
-
-  "💎 Une belle création rejoint votre panier !",
-
-  "😊 Merci pour votre sélection !",
-
-  "💖 Perlora vous remercie !",
-
-  "🌷 Votre panier devient encore plus joli !",
-
-  "✨ Merci pour cette belle commande !",
-
-  "🥰 Un très joli choix !",
-
-  "💝 Merci pour votre confiance en Perlora !",
-
-  "🌟 Votre article a bien été sélectionné !",
-
-  "💫 Merci pour votre achat !",
-
-  "🌸 Perlora est heureuse de vous servir !",
-
-  "💙 Merci pour votre commande !"
-
-];
-
-
-/* =====================================
-   CRÉATION DES CARTES
-===================================== */
-
-const produitsContainer =
-  document.getElementById("produits");
-
-
-produits.forEach((nom,index)=>{
-
-  const carte =
-    document.createElement("div");
-
-  carte.className = "produit";
-
-
-  let symbole = "💎";
-
-  if(nom.includes("cœur")){
-    symbole = "❤️";
-  }
-
-  if(nom.includes("fleur")){
-    symbole = "🌸";
-  }
-
-  if(nom.includes("sac")){
-    symbole = "👜";
-  }
-
-  if(nom.includes("croix")){
-    symbole = "✝️";
-  }
-
-  if(nom.includes("cube")){
-    symbole = "🔷";
-  }
-
-
-  carte.innerHTML = `
-
-    <div class="photo">
-
-      <img
-        src="images/produit${index + 1}.jpg"
-        alt="${nom}"
-        onerror="this.style.display='none'; this.parentElement.innerHTML='<span>${symbole}</span>';"
-      >
-
-    </div>
-
-
-    <h3>
-      ${nom}
-    </h3>
-
-
-    <div class="prix">
-
-      Prix à définir
-
-    </div>
-
-
-    <div class="quantite">
-
-      <button
-        onclick="modifierQuantite(${index},-1)">
-        −
-      </button>
-
-
-      <span id="qte-${index}">
-        0
-      </span>
-
-
-      <button
-        onclick="modifierQuantite(${index},1)">
-        +
-      </button>
-
-    </div>
-
-
-    <button
-      class="ajouter"
-      onclick="ajouterPanier(${index})">
-
-      🛒 Ajouter au panier
-
-    </button>
-
-  `;
-
-
-  produitsContainer.appendChild(carte);
-
-});
-
-
-/* =====================================
-   MODIFIER QUANTITÉ
-===================================== */
-
-function modifierQuantite(index,valeur){
-
-  quantites[index] += valeur;
-
-
-  if(quantites[index] < 0){
-    quantites[index] = 0;
-  }
-
-
-  document.getElementById(
-    `qte-${index}`
-  ).textContent = quantites[index];
-
-}
-
-
-/* =====================================
-   AJOUTER AU PANIER
-===================================== */
-
-function ajouterPanier(index){
-
-  if(quantites[index] === 0){
-
-    quantites[index] = 1;
-
-    document.getElementById(
-      `qte-${index}`
-    ).textContent = 1;
-
-  }
-
-
-  afficherPanier();
-
-
-  const message =
-    messages[
-      Math.floor(
-        Math.random() * messages.length
-      )
-    ];
-
-
-  afficherMessage(
-    message + " 💕"
-  );
-
-}
-
-
-/* =====================================
-   AFFICHER MESSAGE
-===================================== */
-
-function afficherMessage(texte){
-
-  const boite =
-    document.getElementById("message");
-
-
-  boite.textContent = texte;
-
-  boite.style.display = "block";
-
-
-  setTimeout(()=>{
-
-    boite.style.display = "none";
-
-  },2500);
-
-}
-
-
-/* =====================================
-   AFFICHER PANIER
-===================================== */
-
-function afficherPanier(){
-
-  const liste =
-    document.getElementById(
-      "liste-panier"
-    );
-
-  const totalElement =
-    document.getElementById(
-      "total"
-    );
-
-
-  liste.innerHTML = "";
-
-
-  let total = 0;
-
-  let nombreArticles = 0;
-
-
-  produits.forEach((nom,index)=>{
-
-    const quantite =
-      quantites[index];
-
-
-    if(quantite > 0){
-
-      nombreArticles += quantite;
-
-
-      const sousTotal =
-        prix[index] * quantite;
-
-
-      total += sousTotal;
-
-
-      const ligne =
-        document.createElement("div");
-
-
-      ligne.className =
-        "ligne-panier";
-
-
-      ligne.innerHTML = `
-
-        <div>
-
-          <div class="nom-panier">
-            ${nom}
-          </div>
-
-          <small>
-            ${sousTotal > 0
-              ? sousTotal.toLocaleString() + " FCFA"
-              : "Prix à définir"}
-          </small>
-
-        </div>
-
-
-        <div class="commande-quantite">
-
-          <button
-            onclick="modifierPanier(${index},-1)">
-            −
-          </button>
-
-          <strong>
-            ${quantite}
-          </strong>
-
-          <button
-            onclick="modifierPanier(${index},1)">
-            +
-          </button>
-
-          <button
-            class="supprimer"
-            onclick="supprimerArticle(${index})">
-
-            🗑️
-
-          </button>
-
-        </div>
-
-      `;
-
-
-      liste.appendChild(ligne);
-
-    }
-
-  });
-
-
-  if(nombreArticles === 0){
-
-    liste.innerHTML =
-      "Votre panier est vide.";
-
-  }
-
-
-  totalElement.textContent =
-    total.toLocaleString();
-
-
-  preparerWhatsApp();
-
-}
-
-
-/* =====================================
-   MODIFIER LE PANIER
-===================================== */
-
-function modifierPanier(index,valeur){
-
-  quantites[index] += valeur;
-
-
-  if(quantites[index] <= 0){
-
-    quantites[index] = 0;
-
-  }
-
-
-  document.getElementById(
-    `qte-${index}`
-  ).textContent =
-    quantites[index];
-
-
-  afficherPanier();
-
-}
-
-
-/* =====================================
-   SUPPRIMER UN ARTICLE
-===================================== */
-
-function supprimerArticle(index){
-
-  quantites[index] = 0;
-
-
-  document.getElementById(
-    `qte-${index}`
-  ).textContent = 0;
-
-
-  afficherPanier();
-
-
-  afficherMessage(
-    "🗑️ Article retiré du panier."
-  );
-
-}
-
-
-/* =====================================
-   VIDER LE PANIER
-===================================== */
-
-function viderPanier(){
-
-  produits.forEach((nom,index)=>{
-
-    quantites[index] = 0;
-
-    document.getElementById(
-      `qte-${index}`
-    ).textContent = 0;
-
-  });
-
-
-  afficherPanier();
-
-
-  afficherMessage(
-    "🧺 Votre panier a été vidé."
-  );
-
-}
-
-
-/* =====================================
-   WHATSAPP
-===================================== */
-
-function preparerWhatsApp(){
-
-  let message =
-    "Bonjour Perlora ! 🌸%0A%0A";
-
-  message +=
-    "Je souhaite commander :%0A%0A";
-
-
-  let total = 0;
-
-  let articles = 0;
-
-
-  produits.forEach((nom,index)=>{
-
-    const quantite =
-      quantites[index];
-
-
-    if(quantite > 0){
-
-      articles += quantite;
-
-
-      const sousTotal =
-        prix[index] * quantite;
-
-
-      message +=
-        "• " +
-        nom +
-        " × " +
-        quantite;
-
-
-      if(sousTotal > 0){
-
-        message +=
-          " = " +
-          sousTotal.toLocaleString() +
-          " FCFA";
-
-        total += sousTotal;
-
-      }
-
-
-      message += "%0A";
-
-    }
-
-  });
-
-
-  if(articles === 0){
-
-    message +=
-      "%0AJe souhaite découvrir vos créations.";
-
-  }
-  else{
-
-    message +=
-      "%0A💰 Total : " +
-      total.toLocaleString() +
-      " FCFA";
-
-  }
-
-
-  const numeroWhatsApp =
-    "2250556074077";
-
-
-  document.getElementById(
-    "whatsapp"
-  ).href =
-    `https://wa.me/${numeroWhatsApp}?text=${message}`;
-
-}
-
-
-/* =====================================
-   AFFICHAGE INITIAL
-===================================== */
-
-afficherPanier();
-
-</script>
-<!-- 🔎 RECHERCHE PERLORA -->
-<script>
-(function () {
-
-  const recherche = document.getElementById("perloraSearch");
-  const produits = document.getElementById("produits");
-
-  if (!recherche || !produits) return;
-
-  recherche.addEventListener("input", function () {
-
-    const texte = this.value
-      .toLowerCase()
-      .trim();
-
-    const articles = produits.children;
-
-    for (let i = 0; i < articles.length; i++) {
-
-      const article = articles[i];
-
-      const nom = article.textContent
-        .toLowerCase();
-
-      if (texte === "" || nom.includes(texte)) {
-        article.style.display = "";
-      } else {
-        article.style.display = "none";
-      }
-
-    }
-
-  });
-
-})();
-</script>
-</body>
-  </html>
+/* FENÊTRES */
+.window{
+    position:absolute;
+    top:90px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(90%,700px);
+    height:min(70%,500px);
+    background:#f4f7fb;
+    color:#111827;
+    border-radius:14px;
+    overflow:hidden;
+    display:none;
+    z-index:500
