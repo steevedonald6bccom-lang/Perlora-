@@ -5,756 +5,1216 @@
 <meta name="viewport"
       content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>STEVE WARNERS — KING</title>
+<title>KING — Adventure Pro</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#05070b;
-  font-family:Arial,sans-serif;
-  color:white;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#05070d;
+    font-family:Arial,sans-serif;
+    color:white;
 }
 
 #game{
-  position:fixed;
-  inset:0;
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 35%,#394b62 0%,#172536 35%,#071019 75%);
 }
 
-canvas{
-  display:block;
+/* ================= SKY ================= */
+
+.sky{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(#16283d 0%,#42637b 45%,#172331 70%,#080d13 100%);
 }
 
-/* HUD */
+.sun{
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:#ffe8a0;
+    box-shadow:0 0 80px #ffe08a;
+    top:9%;
+    right:14%;
+}
+
+.moon{
+    display:none;
+}
+
+/* ================= TERRAIN ================= */
+
+.terrain{
+    position:absolute;
+    left:-15%;
+    bottom:-10%;
+    width:130%;
+    height:55%;
+    transform:perspective(500px) rotateX(57deg);
+    transform-origin:bottom;
+    background:
+      linear-gradient(90deg,transparent 49%,rgba(255,255,255,.08) 50%,transparent 51%),
+      linear-gradient(transparent 49%,rgba(255,255,255,.08) 50%,transparent 51%),
+      #14271c;
+    background-size:80px 80px;
+    box-shadow:0 -30px 100px rgba(0,0,0,.4);
+}
+
+/* ================= DECOR ================= */
+
+.tree{
+    position:absolute;
+    width:35px;
+    height:100px;
+    background:#35271d;
+    border-radius:15px;
+    bottom:30%;
+}
+
+.tree:before,
+.tree:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:#123d25;
+}
+
+.tree:before{
+    width:100px;
+    height:100px;
+    left:-32px;
+    top:-65px;
+    box-shadow:
+      45px -20px 0 #18532d,
+      75px 10px 0 #0f4826,
+      20px 35px 0 #1d5d32;
+}
+
+.t1{left:7%;transform:scale(.8)}
+.t2{left:84%;transform:scale(1.1)}
+.t3{left:68%;bottom:43%;transform:scale(.55)}
+.t4{left:24%;bottom:48%;transform:scale(.5)}
+
+/* ================= PLAYER ================= */
+
+#player{
+    position:absolute;
+    left:50%;
+    top:52%;
+    width:65px;
+    height:110px;
+    transform:translate(-50%,-50%);
+    z-index:20;
+    filter:drop-shadow(0 15px 12px rgba(0,0,0,.6));
+}
+
+.head{
+    position:absolute;
+    width:35px;
+    height:35px;
+    left:15px;
+    top:0;
+    border-radius:50%;
+    background:#a96f4c;
+    border:3px solid #151515;
+}
+
+.hair{
+    position:absolute;
+    width:38px;
+    height:19px;
+    left:13px;
+    top:-2px;
+    border-radius:50% 50% 20% 20%;
+    background:#101010;
+}
+
+.body{
+    position:absolute;
+    width:42px;
+    height:53px;
+    left:11px;
+    top:33px;
+    border-radius:12px;
+    background:linear-gradient(90deg,#182438,#385273,#121c2d);
+    border:2px solid #6c8eb4;
+}
+
+.arm{
+    position:absolute;
+    width:13px;
+    height:47px;
+    top:37px;
+    background:#27384c;
+    border-radius:10px;
+}
+
+.arm.left{left:1px;transform:rotate(15deg)}
+.arm.right{right:1px;transform:rotate(-20deg)}
+
+.leg{
+    position:absolute;
+    width:16px;
+    height:38px;
+    top:82px;
+    background:#10151e;
+    border-radius:10px;
+}
+
+.leg.left{left:13px}
+.leg.right{right:13px}
+
+.weapon{
+    position:absolute;
+    width:70px;
+    height:10px;
+    background:#111;
+    border:2px solid #596c7c;
+    right:-45px;
+    top:57px;
+    transform:rotate(-12deg);
+    border-radius:5px;
+}
+
+/* ================= HUD ================= */
 
 #hud{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
+    position:absolute;
+    inset:0;
+    z-index:50;
+    pointer-events:none;
 }
 
 .top{
-  position:absolute;
-  top:12px;
-  left:12px;
-  right:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
+    position:absolute;
+    top:12px;
+    left:12px;
+    right:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
 }
 
-.panel{
-  background:rgba(0,0,0,.58);
-  border:1px solid rgba(255,255,255,.15);
-  backdrop-filter:blur(8px);
-  border-radius:14px;
-  padding:9px 12px;
-  box-shadow:0 5px 20px rgba(0,0,0,.35);
+.playerCard{
+    background:rgba(5,10,18,.72);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:14px;
+    padding:8px 12px;
+    backdrop-filter:blur(8px);
 }
 
-#playerName{
-  font-size:17px;
-  font-weight:bold;
+.name{
+    font-weight:bold;
+    color:#ffd76a;
 }
 
 .bar{
-  width:145px;
-  height:9px;
-  background:#222;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:5px;
+    width:130px;
+    height:8px;
+    margin-top:5px;
+    border-radius:10px;
+    background:#202631;
+    overflow:hidden;
 }
 
-#healthBar{
-  height:100%;
-  width:100%;
-  background:#21e66d;
-  transition:.2s;
+.hp{
+    height:100%;
+    width:100%;
+    background:#39e078;
 }
 
-#energyBar{
-  height:100%;
-  width:100%;
-  background:#32a8ff;
-  transition:.2s;
+.energy{
+    height:100%;
+    width:85%;
+    background:#48baff;
 }
 
-#level{
-  color:#ffd84d;
-  font-weight:bold;
+.stats{
+    margin-top:5px;
+    font-size:12px;
+    color:#ccd4df;
 }
 
-#coins{
-  color:#ffd84d;
+.map{
+    width:105px;
+    height:105px;
+    border-radius:50%;
+    border:3px solid rgba(255,255,255,.7);
+    background:
+      linear-gradient(45deg,transparent 48%,#355c3c 49%,#355c3c 52%,transparent 53%),
+      #192b36;
+    position:relative;
+    box-shadow:0 5px 20px #0008;
 }
 
-/* mission */
+.playerDot{
+    position:absolute;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#55ff8c;
+    left:48%;
+    top:48%;
+}
+
+/* ================= MESSAGES ================= */
 
 #mission{
-  position:absolute;
-  top:110px;
-  left:50%;
-  transform:translateX(-50%);
-  min-width:220px;
-  text-align:center;
-  font-size:13px;
+    position:absolute;
+    top:130px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    max-width:430px;
+    padding:12px 16px;
+    text-align:center;
+    background:rgba(4,8,15,.72);
+    border:1px solid rgba(255,215,100,.3);
+    border-radius:14px;
+    backdrop-filter:blur(8px);
 }
 
-#mission strong{
-  color:#ffd84d;
+#message{
+    position:absolute;
+    top:44%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:12px 20px;
+    background:rgba(0,0,0,.7);
+    border-radius:15px;
+    opacity:0;
+    transition:.3s;
 }
 
-/* crosshair */
+/* ================= BUTTONS ================= */
 
-#crosshair{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:28px;
-  height:28px;
+.controls{
+    position:absolute;
+    inset:0;
 }
 
-#crosshair:before,
-#crosshair:after{
-  content:"";
-  position:absolute;
-  background:white;
-  opacity:.85;
+button{
+    border:0;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-#crosshair:before{
-  width:2px;
-  height:28px;
-  left:13px;
+.circle{
+    position:absolute;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:rgba(10,17,27,.72);
+    border:2px solid rgba(255,255,255,.22);
+    box-shadow:0 5px 15px #0008;
+    backdrop-filter:blur(5px);
 }
 
-#crosshair:after{
-  width:28px;
-  height:2px;
-  top:13px;
+.circle:active{
+    transform:scale(.9);
 }
 
-/* minimap */
-
-#map{
-  position:absolute;
-  right:15px;
-  top:105px;
-  width:125px;
-  height:125px;
-  border-radius:50%;
-  background:rgba(0,0,0,.65);
-  border:2px solid rgba(255,255,255,.5);
-  overflow:hidden;
-}
-
-#mapPlayer{
-  position:absolute;
-  width:9px;
-  height:9px;
-  background:#4ddcff;
-  border-radius:50%;
-  left:58px;
-  top:58px;
-  box-shadow:0 0 10px #4ddcff;
-}
-
-/* notifications */
-
-#notification{
-  position:absolute;
-  bottom:150px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:10px 18px;
-  border-radius:20px;
-  background:rgba(0,0,0,.75);
-  opacity:0;
-  transition:.3s;
-}
-
-/* Controls */
-
-#controls{
-  position:absolute;
-  inset:0;
-}
-
-#joystick{
-  position:absolute;
-  left:25px;
-  bottom:25px;
-  width:135px;
-  height:135px;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-  border:2px solid rgba(255,255,255,.18);
-  pointer-events:auto;
-}
-
-#stick{
-  position:absolute;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  left:38px;
-  top:38px;
-  background:rgba(255,255,255,.25);
-  border:2px solid rgba(255,255,255,.45);
-}
-
-.action{
-  position:absolute;
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(0,0,0,.5);
-  color:white;
-  font-size:21px;
-  pointer-events:auto;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  user-select:none;
+#shoot{
+    right:25px;
+    bottom:100px;
+    width:82px;
+    height:82px;
+    background:rgba(180,30,30,.72);
+    border-color:#ff7070;
 }
 
 #jump{
-  right:100px;
-  bottom:90px;
+    right:120px;
+    bottom:115px;
 }
 
 #run{
-  right:30px;
-  bottom:30px;
+    right:125px;
+    bottom:35px;
 }
 
-#interact{
-  right:175px;
-  bottom:25px;
+#action{
+    right:25px;
+    bottom:25px;
 }
 
-#attack{
-  right:30px;
-  bottom:165px;
+#inventory{
+    left:20px;
+    bottom:25px;
+}
+
+#mapBtn{
+    left:100px;
+    bottom:25px;
 }
 
 #menuBtn{
-  top:15px;
-  right:155px;
-  width:45px;
-  height:45px;
-  font-size:17px;
+    right:15px;
+    top:135px;
 }
 
-/* menus */
+/* ================= JOYSTICK ================= */
 
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(2,5,10,.88);
-  backdrop-filter:blur(12px);
-  z-index:20;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+#joystick{
+    position:absolute;
+    left:25px;
+    bottom:100px;
+    width:135px;
+    height:135px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+    border:2px solid rgba(255,255,255,.16);
 }
 
-.overlay.show{
-  display:flex;
+#stick{
+    position:absolute;
+    width:60px;
+    height:60px;
+    left:37px;
+    top:37px;
+    border-radius:50%;
+    background:rgba(255,255,255,.2);
+    border:2px solid rgba(255,255,255,.3);
 }
 
-.menu{
-  width:min(430px,95vw);
-  max-height:90vh;
-  overflow:auto;
-  background:#111722;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:22px;
-  padding:22px;
-  box-shadow:0 20px 70px #000;
+/* ================= MENU ================= */
+
+#menu{
+    position:absolute;
+    inset:0;
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(10px);
 }
 
-.menu h1{
-  text-align:center;
-  margin-bottom:18px;
+.menuBox{
+    width:92%;
+    max-width:440px;
+    max-height:85%;
+    overflow:auto;
+    padding:20px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#111c2c,#07101b);
+    border:1px solid #52708f;
+    box-shadow:0 20px 80px #000;
 }
 
-.menu button{
-  width:100%;
-  margin:6px 0;
-  padding:13px;
-  border:none;
-  border-radius:12px;
-  background:#1c2a3b;
-  color:white;
-  font-size:15px;
+.menuBox h1{
+    text-align:center;
+    color:#ffd66d;
+    margin-bottom:18px;
 }
 
-.menu button:hover{
-  background:#29415b;
+.options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
 }
 
-.card{
-  background:#0b1018;
-  border-radius:14px;
-  padding:13px;
-  margin:8px 0;
+.option{
+    padding:12px;
+    border-radius:12px;
+    background:#172638;
+    border:1px solid #304b64;
 }
 
-.card h3{
-  margin-bottom:6px;
-  color:#ffd84d;
+.option b{
+    display:block;
+    margin-bottom:4px;
 }
 
-/* start */
-
-#start{
-  position:fixed;
-  inset:0;
-  z-index:50;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:
-    radial-gradient(circle at center,#172943 0,#05070b 60%);
+.option span{
+    font-size:12px;
+    color:#aebdcc;
 }
 
-.startBox{
-  text-align:center;
-  padding:25px;
+.close{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border-radius:12px;
+    background:#c6932f;
 }
 
-.logo{
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:4px;
-  text-shadow:0 0 25px #35baff;
+/* ================= INVENTORY ================= */
+
+#inventoryPanel{
+    position:absolute;
+    inset:0;
+    z-index:110;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:#000b;
 }
 
-.subtitle{
-  margin:10px 0 30px;
-  color:#aab7c8;
+.inventoryBox{
+    width:90%;
+    max-width:400px;
+    background:#0c1723;
+    border:1px solid #526b82;
+    border-radius:20px;
+    padding:20px;
 }
-
-#startBtn{
-  padding:16px 38px;
-  border:none;
-  border-radius:30px;
-  font-size:17px;
-  font-weight:bold;
-  background:linear-gradient(90deg,#248cff,#6be0ff);
-  color:white;
-  box-shadow:0 0 30px rgba(50,180,255,.4);
-}
-
-/* desktop info */
-
-#tips{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  color:rgba(255,255,255,.6);
-  font-size:11px;
-}
-
-/* inventory */
 
 .item{
-  display:flex;
-  justify-content:space-between;
-  padding:9px;
-  background:#151d29;
-  margin:5px 0;
-  border-radius:9px;
+    padding:13px;
+    margin:8px 0;
+    background:#172738;
+    border-radius:10px;
 }
 
-/* responsive */
+/* ================= FLASH ================= */
 
-@media(max-width:600px){
-  #map{
-    width:105px;
-    height:105px;
-  }
+#flash{
+    position:absolute;
+    inset:0;
+    background:white;
+    opacity:0;
+    pointer-events:none;
+    z-index:200;
+}
 
-  .logo{
-    font-size:32px;
-  }
+/* ================= RESPONSIVE ================= */
 
-  #mission{
-    top:105px;
-  }
+@media(max-height:600px){
+    #joystick{
+        width:105px;
+        height:105px;
+    }
+
+    #stick{
+        width:50px;
+        height:50px;
+        left:25px;
+        top:25px;
+    }
+
+    .circle{
+        width:55px;
+        height:55px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="game"></div>
+<div id="game">
 
-<!-- START -->
+    <div class="sky"></div>
+    <div class="sun"></div>
 
-<div id="start">
-  <div class="startBox">
-    <div class="logo">STEVE WARNERS</div>
-    <div class="subtitle">
-      KING — OPEN WORLD ADVENTURE
+    <div class="terrain"></div>
+
+    <div class="tree t1"></div>
+    <div class="tree t2"></div>
+    <div class="tree t3"></div>
+    <div class="tree t4"></div>
+
+    <!-- KING -->
+    <div id="player">
+        <div class="hair"></div>
+        <div class="head"></div>
+        <div class="body"></div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+        <div class="weapon"></div>
     </div>
-    <button id="startBtn">▶ JOUER</button>
-  </div>
+
+    <!-- HUD -->
+    <div id="hud">
+
+        <div class="top">
+
+            <div class="playerCard">
+
+                <div class="name">👑 KING — NIVEAU <span id="level">1</span></div>
+
+                <div class="bar">
+                    <div class="hp" id="hp"></div>
+                </div>
+
+                <div class="bar">
+                    <div class="energy" id="energy"></div>
+                </div>
+
+                <div class="stats">
+                    ❤️ <span id="hpText">100</span>
+                    ⚡ <span id="energyText">85</span>
+                    ⭐ <span id="xp">0</span>/100
+                </div>
+
+            </div>
+
+            <div class="map">
+                <div class="playerDot"></div>
+            </div>
+
+        </div>
+
+        <div id="mission">
+            🎯 <b>MISSION :</b>
+            Explore la zone et trouve les 3 cristaux.
+            <br>
+            💎 Cristaux : <span id="crystals">0</span>/3
+        </div>
+
+        <div id="message"></div>
+
+    </div>
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+        <div id="joystick">
+            <div id="stick"></div>
+        </div>
+
+        <button class="circle" id="shoot">🔥</button>
+        <button class="circle" id="jump">⬆️</button>
+        <button class="circle" id="run">🏃</button>
+        <button class="circle" id="action">⚡</button>
+
+        <button class="circle" id="inventory">🎒</button>
+        <button class="circle" id="mapBtn">🗺️</button>
+        <button class="circle" id="menuBtn">☰</button>
+
+    </div>
+
+    <div id="flash"></div>
+
+    <!-- MENU PRO -->
+
+    <div id="menu">
+
+        <div class="menuBox">
+
+            <h1>👑 KING ADVENTURE PRO</h1>
+
+            <div class="options">
+
+                <div class="option">
+                    <b>🎮 Commandes tactiles</b>
+                    <span>Joystick + actions</span>
+                </div>
+
+                <div class="option">
+                    <b>🌍 Monde ouvert</b>
+                    <span>Exploration libre</span>
+                </div>
+
+                <div class="option">
+                    <b>🎯 Missions</b>
+                    <span>Objectifs évolutifs</span>
+                </div>
+
+                <div class="option">
+                    <b>⭐ XP</b>
+                    <span>Progression du joueur</span>
+                </div>
+
+                <div class="option">
+                    <b>👑 Niveaux</b>
+                    <span>Montée en puissance</span>
+                </div>
+
+                <div class="option">
+                    <b>💎 Cristaux</b>
+                    <span>Objets à récupérer</span>
+                </div>
+
+                <div class="option">
+                    <b>🎒 Inventaire</b>
+                    <span>Gestion des objets</span>
+                </div>
+
+                <div class="option">
+                    <b>❤️ Vie</b>
+                    <span>Système de santé</span>
+                </div>
+
+                <div class="option">
+                    <b>⚡ Énergie</b>
+                    <span>Endurance du personnage</span>
+                </div>
+
+                <div class="option">
+                    <b>🏃 Sprint</b>
+                    <span>Déplacement rapide</span>
+                </div>
+
+                <div class="option">
+                    <b>⬆️ Saut</b>
+                    <span>Mobilité verticale</span>
+                </div>
+
+                <div class="option">
+                    <b>🔥 Action</b>
+                    <span>Interaction dynamique</span>
+                </div>
+
+                <div class="option">
+                    <b>🌞 Cycle météo</b>
+                    <span>Ambiance dynamique</span>
+                </div>
+
+                <div class="option">
+                    <b>🌙 Mode nuit</b>
+                    <span>Changer l'ambiance</span>
+                </div>
+
+                <div class="option">
+                    <b>🌳 Environnement</b>
+                    <span>Forêt et terrain</span>
+                </div>
+
+                <div class="option">
+                    <b>🗺️ Mini-carte</b>
+                    <span>Navigation rapide</span>
+                </div>
+
+                <div class="option">
+                    <b>📱 Mobile</b>
+                    <span>Interface tactile</span>
+                </div>
+
+                <div class="option">
+                    <b>✨ Effets</b>
+                    <span>Flash et animations</span>
+                </div>
+
+                <div class="option">
+                    <b>🔊 Audio</b>
+                    <span>Effets sonores</span>
+                </div>
+
+                <div class="option">
+                    <b>💾 Sauvegarde</b>
+                    <span>Progression locale</span>
+                </div>
+
+                <div class="option">
+                    <b>🎒 Objets</b>
+                    <span>Collecte</span>
+                </div>
+
+                <div class="option">
+                    <b>🏆 Succès</b>
+                    <span>Défis accomplis</span>
+                </div>
+
+                <div class="option">
+                    <b>👾 Adversaires</b>
+                    <span>Zone dynamique</span>
+                </div>
+
+                <div class="option">
+                    <b>🚗 Véhicules</b>
+                    <span>Système extensible</span>
+                </div>
+
+                <div class="option">
+                    <b>🏪 Boutique</b>
+                    <span>Équipement futur</span>
+                </div>
+
+                <div class="option">
+                    <b>⚙️ Graphismes</b>
+                    <span>Mode mobile optimisé</span>
+                </div>
+
+                <div class="option">
+                    <b>🔐 Profil</b>
+                    <span>Identité du joueur</span>
+                </div>
+
+                <div class="option">
+                    <b>📊 Statistiques</b>
+                    <span>Progression</span>
+                </div>
+
+                <div class="option">
+                    <b>🌐 Monde</b>
+                    <span>Extension future</span>
+                </div>
+
+                <div class="option">
+                    <b>🚀 Mode PRO</b>
+                    <span>Architecture évolutive</span>
+                </div>
+
+            </div>
+
+            <button class="close" onclick="closeMenu()">
+                CONTINUER ▶
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- INVENTORY -->
+
+    <div id="inventoryPanel">
+
+        <div class="inventoryBox">
+
+            <h2>🎒 INVENTAIRE DE KING</h2>
+
+            <div class="item">🔫 Équipement principal — Niveau 1</div>
+            <div class="item">🧪 Potion d'énergie ×2</div>
+            <div class="item">💎 Cristaux ×<span id="invCrystal">0</span></div>
+            <div class="item">🪙 Pièces ×500</div>
+
+            <button class="close" onclick="closeInventory()">
+                FERMER
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
-
-<!-- HUD -->
-
-<div id="hud">
-
-  <div class="top">
-
-    <div class="panel">
-      <div id="playerName">KING</div>
-
-      <div>❤️ Vie</div>
-      <div class="bar">
-        <div id="healthBar"></div>
-      </div>
-
-      <div>⚡ Énergie</div>
-      <div class="bar">
-        <div id="energyBar"></div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div id="level">NIVEAU 1</div>
-      <div>⭐ XP : <span id="xp">0</span>/100</div>
-      <div>💰 <span id="coins">500</span></div>
-    </div>
-
-  </div>
-
-  <div id="mission" class="panel">
-    🎯 <strong>MISSION</strong><br>
-    Explore la ville
-  </div>
-
-  <div id="map">
-    <div id="mapPlayer"></div>
-  </div>
-
-  <div id="crosshair"></div>
-
-  <div id="notification">
-    Message
-  </div>
-
-  <div id="controls">
-
-    <div id="joystick">
-      <div id="stick"></div>
-    </div>
-
-    <div class="action" id="jump">⬆️</div>
-    <div class="action" id="run">🏃</div>
-    <div class="action" id="interact">✋</div>
-    <div class="action" id="attack">⚡</div>
-    <div class="action" id="menuBtn">☰</div>
-
-  </div>
-
-  <div id="tips">
-    Joystick = déplacement • ✋ = interaction • ⚡ = action
-  </div>
-
-</div>
-
-<!-- MENU -->
-
-<div id="menuOverlay" class="overlay">
-
-  <div class="menu">
-
-    <h1>🎮 KING</h1>
-
-    <button id="resume">▶ Reprendre</button>
-    <button id="inventoryBtn">🎒 Inventaire</button>
-    <button id="missionsBtn">🎯 Missions</button>
-    <button id="statsBtn">📊 Statistiques</button>
-    <button id="settingsBtn">⚙️ Paramètres</button>
-    <button id="saveBtn">💾 Sauvegarder</button>
-    <button id="restartBtn">🔄 Recommencer</button>
-
-  </div>
-
-</div>
-
-<!-- INVENTORY -->
-
-<div id="inventoryOverlay" class="overlay">
-
-  <div class="menu">
-
-    <h1>🎒 Inventaire</h1>
-
-    <div class="item">
-      <span>💊 Kit de soin</span>
-      <b id="medkits">3</b>
-    </div>
-
-    <div class="item">
-      <span>🔋 Batterie</span>
-      <b id="battery">2</b>
-    </div>
-
-    <div class="item">
-      <span>💎 Cristal</span>
-      <b id="crystals">0</b>
-    </div>
-
-    <button onclick="closeOverlay('inventoryOverlay')">
-      ← Retour
-    </button>
-
-  </div>
-
-</div>
-
-<!-- MISSIONS -->
-
-<div id="missionsOverlay" class="overlay">
-
-  <div class="menu">
-
-    <h1>🎯 Missions</h1>
-
-    <div class="card">
-      <h3>🌍 Explorateur</h3>
-      <p>Parcours 500 mètres.</p>
-      <p>Récompense : 100 XP</p>
-    </div>
-
-    <div class="card">
-      <h3>💎 Chasseur</h3>
-      <p>Trouve 5 cristaux.</p>
-      <p>Récompense : 250 pièces</p>
-    </div>
-
-    <div class="card">
-      <h3>🏆 Aventurier</h3>
-      <p>Atteins le niveau 5.</p>
-      <p>Récompense : 500 pièces</p>
-    </div>
-
-    <button onclick="closeOverlay('missionsOverlay')">
-      ← Retour
-    </button>
-
-  </div>
-
-</div>
-
-<!-- STATS -->
-
-<div id="statsOverlay" class="overlay">
-
-  <div class="menu">
-
-    <h1>📊 Statistiques</h1>
-
-    <div class="card">
-      <p>Distance : <b id="distance">0</b> m</p>
-      <p>XP : <b id="statXP">0</b></p>
-      <p>Niveau : <b id="statLevel">1</b></p>
-      <p>Cristaux : <b id="statCrystal">0</b></p>
-      <p>Actions : <b id="actions">0</b></p>
-    </div>
-
-    <button onclick="closeOverlay('statsOverlay')">
-      ← Retour
-    </button>
-
-  </div>
-
-</div>
-
-<!-- SETTINGS -->
-
-<div id="settingsOverlay" class="overlay">
-
-  <div class="menu">
-
-    <h1>⚙️ Paramètres</h1>
-
-    <div class="card">
-      <h3>Qualité graphique</h3>
-      <button onclick="setQuality('low')">📱 Économie</button>
-      <button onclick="setQuality('medium')">⚡ Moyenne</button>
-      <button onclick="setQuality('high')">🔥 Haute</button>
-    </div>
-
-    <div class="card">
-      <h3>Ambiance</h3>
-      <button onclick="weather('clear')">☀️ Soleil</button>
-      <button onclick="weather('rain')">🌧️ Pluie</button>
-      <button onclick="weather('night')">🌙 Nuit</button>
-    </div>
-
-    <button onclick="closeOverlay('settingsOverlay')">
-      ← Retour
-    </button>
-
-  </div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
 
 <script>
-/* =========================================================
-   STEVE WARNERS
-   KING OPEN WORLD
-   ========================================================= */
 
-let scene;
-let camera;
-let renderer;
-let clock;
+/* ======================================================
+   KING ADVENTURE PRO
+   ====================================================== */
 
-let player;
-let playerGroup;
+let player = {
+    x:0,
+    y:0,
+    level:1,
+    hp:100,
+    energy:85,
+    xp:0,
+    crystals:0,
+    coins:500,
+    running:false
+};
 
-let velocityY = 0;
-let onGround = true;
+let moving=false;
+let night=false;
 
-let health = 100;
-let energy = 100;
+/* ================= SAVE ================= */
 
-let xp = 0;
-let level = 1;
-let coins = 500;
+function saveGame(){
 
-let distance = 0;
-let actions = 0;
-let crystals = 0;
-
-let running = false;
-let paused = false;
-
-let moveX = 0;
-let moveZ = 0;
-
-let enemies = [];
-let crystalsObjects = [];
-let trees = [];
-let buildings = [];
-let cars = [];
-
-let dayTime = 0;
-
-const WORLD_SIZE = 180;
-
-/* =========================================================
-   INITIALISATION
-   ========================================================= */
-
-function init(){
-
-  scene = new THREE.Scene();
-
-  scene.background = new THREE.Color(0x75aee8);
-
-  scene.fog = new THREE.Fog(
-    0x75aee8,
-    40,
-    190
-  );
-
-  camera = new THREE.PerspectiveCamera(
-    65,
-    innerWidth / innerHeight,
-    .1,
-    500
-  );
-
-  renderer = new THREE.WebGLRenderer({
-    antialias:true,
-    powerPreference:"high-performance"
-  });
-
-  renderer.setPixelRatio(
-    Math.min(devicePixelRatio,1.5)
-  );
-
-  renderer.setSize(
-    innerWidth,
-    innerHeight
-  );
-
-  renderer.shadowMap.enabled = true;
-
-  document.getElementById("game")
-    .appendChild(renderer.domElement);
-
-  clock = new THREE.Clock();
-
-  createLights();
-  createWorld();
-  createPlayer();
-  createEnemies();
-  createCrystals();
-  createCars();
-
-  camera.position.set(
-    0,
-    5,
-    8
-  );
-
-  animate();
-}
-
-/* =========================================================
-   LUMIERES
-   ========================================================= */
-
-let sun;
-
-function createLights(){
-
-  sun = new THREE.DirectionalLight(
-    0xffffff,
-    2
-  );
-
-  sun.position.set(
-    40,
-    80,
-    30
-  );
-
-  sun.castShadow = true;
-
-  sun.shadow.mapSize.width = 1024;
-  sun.shadow.mapSize.height = 1024;
-
-  scene.add(sun);
-
-  const ambient =
-    new THREE.HemisphereLight(
-      0xbddcff,
-      0x26351e,
-      1.2
+    localStorage.setItem(
+        "KING_ADVENTURE_SAVE",
+        JSON.stringify(player)
     );
 
-  scene.add(ambient
+}
+
+function loadGame(){
+
+    const save=localStorage.getItem("KING_ADVENTURE_SAVE");
+
+    if(save){
+
+        player=JSON.parse(save);
+
+    }
+
+}
+
+loadGame();
+
+/* ================= HUD ================= */
+
+function updateHUD(){
+
+    document.getElementById("level").textContent=player.level;
+
+    document.getElementById("hp").style.width=
+        Math.max(0,player.hp)+"%";
+
+    document.getElementById("energy").style.width=
+        Math.max(0,player.energy)+"%";
+
+    document.getElementById("hpText").textContent=
+        Math.round(player.hp);
+
+    document.getElementById("energyText").textContent=
+        Math.round(player.energy);
+
+    document.getElementById("xp").textContent=
+        player.xp;
+
+    document.getElementById("crystals").textContent=
+        player.crystals;
+
+    document.getElementById("invCrystal").textContent=
+        player.crystals;
+
+}
+
+updateHUD();
+
+/* ================= MESSAGE ================= */
+
+function message(text){
+
+    const box=document.getElementById("message");
+
+    box.textContent=text;
+    box.style.opacity=1;
+
+    setTimeout(()=>{
+        box.style.opacity=0;
+    },1800);
+
+}
+
+/* ================= XP ================= */
+
+function addXP(amount){
+
+    player.xp+=amount;
+
+    if(player.xp>=100){
+
+        player.xp-=100;
+        player.level++;
+
+        player.hp=100;
+        player.energy=100;
+
+        message("🎉 NIVEAU "+player.level+" !");
+
+    }
+
+    updateHUD();
+    saveGame();
+
+}
+
+/* ================= SHOOT EFFECT ================= */
+
+document.getElementById("shoot").addEventListener("click",()=>{
+
+    const flash=document.getElementById("flash");
+
+    flash.style.opacity=.75;
+
+    setTimeout(()=>{
+        flash.style.opacity=0;
+    },80);
+
+    addXP(5);
+
+    message("🔥 Action réussie +5 XP");
+
+});
+
+/* ================= JUMP ================= */
+
+document.getElementById("jump").addEventListener("click",()=>{
+
+    const p=document.getElementById("player");
+
+    p.style.transition=".25s";
+
+    p.style.transform=
+        "translate(-50%,-100%) scale(1.05)";
+
+    setTimeout(()=>{
+
+        p.style.transform=
+            "translate(-50%,-50%) scale(1)";
+
+    },250);
+
+    player.energy=Math.max(0,player.energy-3);
+
+    updateHUD();
+
+});
+
+/* ================= RUN ================= */
+
+document.getElementById("run").addEventListener("click",()=>{
+
+    player.running=!player.running;
+
+    message(
+        player.running
+        ?"🏃 SPRINT ACTIVÉ"
+        :"🚶 SPRINT DÉSACTIVÉ"
+    );
+
+});
+
+/* ================= ACTION ================= */
+
+document.getElementById("action").addEventListener("click",()=>{
+
+    if(player.crystals<3){
+
+        player.crystals++;
+
+        addXP(20);
+
+        message(
+            "💎 Cristal trouvé ! "+
+            player.crystals+"/3"
+        );
+
+        if(player.crystals===3){
+
+            message("🏆 MISSION TERMINÉE !");
+
+            addXP(50);
+
+        }
+
+    }else{
+
+        message("✨ Zone explorée");
+
+    }
+
+    updateHUD();
+    saveGame();
+
+});
+
+/* ================= MENU ================= */
+
+document.getElementById("menuBtn").onclick=()=>{
+
+    document.getElementById("menu").style.display="flex";
+
+};
+
+function closeMenu(){
+
+    document.getElementById("menu").style.display="none";
+
+}
+
+/* ================= INVENTORY ================= */
+
+document.getElementById("inventory").onclick=()=>{
+
+    document.getElementById("inventoryPanel").style.display="flex";
+
+};
+
+function closeInventory(){
+
+    document.getElementById("inventoryPanel").style.display="none";
+
+}
+
+/* ================= DAY / NIGHT ================= */
+
+document.getElementById("mapBtn").onclick=()=>{
+
+    night=!night;
+
+    const sky=document.querySelector(".sky");
+    const sun=document.querySelector(".sun");
+
+    if(night){
+
+        sky.style.background=
+            "linear-gradient(#02050d,#0b1830,#020409)";
+
+        sun.style.background="#d9e7ff";
+        sun.style.boxShadow="0 0 60px #bcd5ff";
+
+        message("🌙 MODE NUIT");
+
+    }else{
+
+        sky.style.background=
+            "linear-gradient(#16283d,#42637b,#172331,#080d13)";
+
+        sun.style.background="#ffe8a0";
+        sun.style.boxShadow="0 0 80px #ffe08a";
+
+        message("☀️ MODE JOUR");
+
+    }
+
+};
+
+/* ======================================================
+   JOYSTICK
+   ====================================================== */
+
+const joystick=document.getElementById("joystick");
+const stick=document.getElementById("stick");
+
+let active=false;
+let center={x:0,y:0};
+
+function moveStick(x,y){
+
+    const rect=joystick.getBoundingClientRect();
+
+    center.x=rect.left+rect.width/2;
+    center.y=rect.top+rect.height/2;
+
+    let dx=x-center.x;
+    let dy=y-center.y;
+
+    const max=42;
+    const distance=Math.sqrt(dx*dx+dy*dy);
+
+    if(distance>max){
+
+        dx=dx/distance*max;
+        dy=dy/distance*max;
+
+    }
+
+    stick.style.transform=
+        `translate(${dx}px,${dy}px)`;
+
+    player.x+=dx*.025*(player.running?2:1);
+    player.y+=dy*.025*(player.running?2:1);
+
+}
+
+function resetStick(){
+
+    stick.style.transform="translate(0,0)";
+}
+
+joystick.addEventListener("touchstart",e=>{
+
+    active=true;
+
+});
+
+joystick.addEventListener("touchmove",e=>{
+
+    if(!active)return;
+
+    const t=e.touches[0];
+
+    moveStick(t.clientX,t.clientY);
+
+});
+
+joystick.addEventListener("touchend",()=>{
+
+    active=false;
+    resetStick();
+
+});
+
+/* ================= KEYBOARD ================= */
+
+document.addEventListener("keydown",e=>{
+
+    const speed=player.running?4:2;
+
+    if(e.key==="w"||e.key==="ArrowUp")
+        player.y-=speed;
+
+    if(e.key==="s"||e.key==="ArrowDown")
+        player.y+=speed;
+
+    if(e.key==="a"||e.key==="ArrowLeft")
+        player.x-=speed;
+
+    if(e.key==="d"||e.key==="ArrowRight")
+        player.x+=speed;
+
+    if(e.key===" ")
+        document.getElementById("jump").click();
+
+});
+
+/* ================= AUTO ENERGY ================= */
+
+setInterval(()=>{
+
+    if(player.running){
+
+        player.energy-=1;
+
+        if(player.energy<=0){
+
+            player.energy=0;
+            player.running=false;
+
+            message("⚡ ÉNERGIE ÉPUISÉE");
+
+        }
+
+    }else{
+
+        player.energy=Math.min(
+            100,
+            player.energy+.3
+        );
+
+    }
+
+    updateHUD();
+
+},1000);
+
+/* ================= RANDOM EVENTS ================= */
+
+setInterval(()=>{
+
+    const events=[
+        "🌿 Tu entends quelque chose dans la forêt...",
+        "💨 Le vent se lève...",
+        "🦅 Un oiseau traverse le ciel...",
+        "✨ Une lumière apparaît au loin...",
+        "🌲 La zone semble calme..."
+    ];
+
+    message(
+        events[Math.floor(Math.random()*events.length)]
+    );
+
+},12000);
+
+/* ================= WELCOME ================= */
+
+setTimeout(()=>{
+
+    message("👑 Bienvenue KING !");
+
+},700);
+
+/* ================= SAVE ================= */
+
+setInterval(saveGame,5000);
+
+</script>
+
+</body>
+      </html>
